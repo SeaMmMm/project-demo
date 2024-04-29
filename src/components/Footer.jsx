@@ -1,15 +1,18 @@
+import { useRef, useState } from 'react'
 import styled from 'styled-components'
 import info from '../assets/icons/info.svg'
-import getFilledNumber from '../utils/common/getFilledNumber'
-import { useRef, useState } from 'react'
 import useClickOutside from '../hooks/useClickOutside'
+import getFilledNumber from '../utils/common/getFilledNumber'
 
 const Footer = ({ index, data }) => {
   const [showDialog, setShowDialog] = useState(false)
   const [initial, setInitial] = useState(true)
   const ref = useRef(null)
+  const infoRef = useRef(null)
 
-  useClickOutside(ref, () => {
+  useClickOutside(ref, (e) => {
+    if (e.target === infoRef.current) return
+
     setShowDialog(false)
   })
 
@@ -23,8 +26,7 @@ const Footer = ({ index, data }) => {
       <div className='current'>
         <p>{getFilledNumber(index, 3)}</p>
       </div>
-      <Info src={info} onClick={toggleDialog}></Info>
-
+      <Info src={info} onClick={toggleDialog} ref={infoRef} />
       <Content $isShow={showDialog} $initial={initial} ref={ref}>
         <p>{data.description}</p>
         <h1>
