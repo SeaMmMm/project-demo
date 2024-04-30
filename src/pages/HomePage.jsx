@@ -16,11 +16,7 @@ const HomePage = () => {
         <p>Demo projects</p>
         <Projects>
           {elements.map((project, idx) => (
-            <div
-              key={idx}
-              className='project'
-              onClick={() => changeMade(project)}
-            >
+            <div key={idx} className='project' onClick={() => changeMade(project)}>
               <span className='project-idx'>{getFilledNumber(idx + 1, 3)}</span>
               <span className='project-name'>{project.name}</span>
             </div>

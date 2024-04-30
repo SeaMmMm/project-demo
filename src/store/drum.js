@@ -5,7 +5,7 @@ const useDrumInfo = create((set) => ({
   description,
   setDrumInfo: (infoObj) => set((state) => ({ ...state, ...infoObj })),
   removeDrumInfo: () => set(() => {}),
-  resetDrumInfo: () => set(() => description),
+  resetDrumInfo: () => set(() => ({ ...description })),
 }))
 
 export default useDrumInfo
