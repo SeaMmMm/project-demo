@@ -30,7 +30,7 @@ const Wrapper = styled.div`
 
   .show {
     transform: scale(1.1);
-    color: #a5b4fc;
+    color: #9ca3af;
   }
 `
 

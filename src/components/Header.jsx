@@ -33,18 +33,12 @@ const Head = styled.header`
     font-weight: lighter;
     cursor: pointer;
     border-radius: 10px;
-    transition: all 0.3s ease-in-out;
-    border: 1px solid rgba(255, 255, 255, 0.18);
+    transition: all 0.1s ease-in-out;
+    border: 1px solid gray;
 
     &:hover {
-      box-shadow: 0 2px 8px 0 rgba(31, 38, 135, 0.37);
-      background: rgba(255, 255, 255, 0.2);
-      backdrop-filter: blur(4px);
-      -webkit-backdrop-filter: blur(4px);
+      filter: brightness(1.3) contrast(1.1) saturate(1.1) hue-rotate(10deg);
     }
-  }
-
-  h1 {
   }
 `
 
