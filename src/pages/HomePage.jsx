@@ -3,8 +3,13 @@ import { useNavigate } from 'react-router-dom'
 import styled from 'styled-components'
 import getFilledNumber from '../utils/common/getFilledNumber'
 
+const PROJECTS = [
+  { name: 'drums', url: 'drum' },
+  { name: 'clock', url: 'clock' },
+]
+
 const HomePage = () => {
-  const [elements] = useState([{ name: 'drums', url: 'drum' }])
+  const [elements] = useState(PROJECTS)
   const navigate = useNavigate()
   const changeMade = (project) => {
     navigate(project.url)
@@ -51,7 +56,7 @@ const Content = styled.div`
 const Projects = styled.div`
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 32px;
+  gap: 120px;
   color: #d1d5db;
 
   * {
