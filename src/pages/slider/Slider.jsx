@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import Footer from '../../components/Footer'
 import Header from '../../components/Header'
 import useHrefTitle from '../../hooks/useHrefTitle'
-import RangeSlider from './components/RangeSlicer'
+import RangeSlider from './components/RangeSlider'
 import description from './data/description'
 
 const Slider = () => {
