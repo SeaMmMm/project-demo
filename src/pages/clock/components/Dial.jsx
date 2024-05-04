@@ -2,10 +2,10 @@ import styled from 'styled-components'
 import useTimeRotate from '../../../hooks/useTimeRotate'
 
 const Dial = () => {
-  const timeRotate = useTimeRotate()
+  const { timeRotate, shouldTransition } = useTimeRotate()
 
   return (
-    <Wrapper $timeRotate={timeRotate}>
+    <Wrapper $timeRotate={timeRotate} $shouldTransition={shouldTransition}>
       <HourHand className='hour' />
       <MinuteHand className='minute' />
       <SecondHand className='second' />
@@ -34,12 +34,17 @@ const Wrapper = styled.div`
   .second {
     ${({ $timeRotate }) => `rotate: ${$timeRotate.secondRotate}deg;`}
   }
+
+  * {
+    ${({ $shouldTransition }) =>
+      $shouldTransition ? 'transition: all 0.3s ease-in-out;' : ''}
+  }
 `
 
 const HourHand = styled.div`
   position: absolute;
   width: 120px;
-  height: 2px;
+  height: 3px;
   background-color: #000;
   top: 50%;
   left: 50%;
@@ -49,8 +54,8 @@ const HourHand = styled.div`
 
 const MinuteHand = styled.div`
   position: absolute;
-  width: 180px;
-  height: 1px;
+  width: 160px;
+  height: 2px;
   background-color: #000;
   top: 50%;
   left: 50%;
@@ -61,7 +66,7 @@ const MinuteHand = styled.div`
 const SecondHand = styled.div`
   position: absolute;
   width: 240px;
-  height: 0.5px;
+  height: 1px;
   background-color: #000;
   top: 50%;
   left: 50%;

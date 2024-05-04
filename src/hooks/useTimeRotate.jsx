@@ -21,19 +21,26 @@ const useTimeRotate = () => {
   }
 
   const [timeRotate, setTimeRotate] = useState(getTimesRotate(getTime()))
+  const [shouldTransition, setShouldTransition] = useState(true)
 
   useEffect(() => {
     const interval = setInterval(() => {
       const time = getTime()
-      const timeRotate = getTimesRotate(time)
 
+      if (time.seconds === 0) {
+        setShouldTransition(false)
+      } else {
+        setShouldTransition(true)
+      }
+
+      const timeRotate = getTimesRotate(time)
       setTimeRotate(timeRotate)
     }, 1000)
 
     return () => clearInterval(interval)
   }, [])
 
-  return timeRotate
+  return { timeRotate, shouldTransition }
 }
 
 export default useTimeRotate

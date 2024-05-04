@@ -29,7 +29,7 @@ const usePopupKey = () => {
     }
   })
 
-  return showNum
+  return { showNum }
 }
 
 export default usePopupKey

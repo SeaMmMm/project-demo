@@ -2,8 +2,8 @@ import styled from 'styled-components'
 import Footer from '../../components/Footer'
 import Header from '../../components/Header'
 import useHrefTitle from '../../hooks/useHrefTitle'
-import clockInfo from './data/description'
 import Dial from './components/Dial'
+import clockInfo from './data/description'
 
 const Clock = () => {
   const date = { year: 2024, month: 4, day: 30 }
@@ -11,8 +11,8 @@ const Clock = () => {
 
   return (
     <>
+      <Header title={title} date={date} />
       <Wrapper>
-        <Header title={title} date={date} />
         <Dial />
       </Wrapper>
       <Footer index={2} data={clockInfo} />

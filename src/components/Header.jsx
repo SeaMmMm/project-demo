@@ -30,12 +30,11 @@ const Head = styled.header`
 
   span {
     padding: 4px 8px;
-    font-size: 16px;
+    font-size: 18px;
     font-weight: lighter;
     cursor: pointer;
     border-radius: 10px;
     transition: all 0.1s ease-in-out;
-    border: 1px solid gray;
 
     &:hover {
       filter: brightness(1.3) contrast(1.1) saturate(1.1) hue-rotate(10deg);
