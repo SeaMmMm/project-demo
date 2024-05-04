@@ -38,12 +38,14 @@ const Footer = ({ index, data }) => {
         <Info src={info} onClick={toggleDialog} ref={infoRef} />
         <Content $isShow={showDialog} $initial={isInitial} ref={ref}>
           <p>{data.description}</p>
-          <h1>
-            source:{' '}
-            <a href={data.codeurl} target='_blank'>
-              source
-            </a>
-          </h1>
+          {data.codeurl && (
+            <h1>
+              source:{' '}
+              <a href={data.codeurl} target='_blank'>
+                source
+              </a>
+            </h1>
+          )}
         </Content>
       </Wrapper>
     </>

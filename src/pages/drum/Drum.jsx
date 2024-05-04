@@ -11,12 +11,12 @@ const Drum = () => {
   const date = { year: 2024, month: 4, day: 29 }
   const title = useHrefTitle()
   const drumsInfo = useDrumInfo((state) => state.description)
-  const showNum = usePopupKey()
+  const { showNum } = usePopupKey()
 
   return (
     <>
+      <Header title={title} date={date} />
       <Wrapper>
-        <Header title={title} date={date} />
         {drums.map((drum, idx) => (
           <DrumButton
             key={idx}

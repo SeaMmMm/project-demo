@@ -14,7 +14,6 @@ const Wrapper = styled.div`
   flex-direction: column;
   align-items: center;
   gap: 20px;
-  transition: all 0.1s ease-in-out;
 
   h1 {
     font-size: 100px;
