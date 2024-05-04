@@ -1,19 +1,19 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import styled from 'styled-components'
+import { projects } from '../routes'
 import getFilledNumber from '../utils/common/getFilledNumber'
 
-const PROJECTS = [
-  { name: 'drums', url: 'drum' },
-  { name: 'clock', url: 'clock' },
-]
-
 const HomePage = () => {
-  const [elements] = useState(PROJECTS)
+  const [elements, setElements] = useState(projects)
   const navigate = useNavigate()
   const changeMade = (project) => {
-    navigate(project.url)
+    navigate(project.path)
   }
+
+  useEffect(() => {
+    setElements(projects)
+  }, [])
 
   return (
     <Wrapper>
@@ -56,7 +56,8 @@ const Content = styled.div`
 const Projects = styled.div`
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 120px;
+  column-gap: 120px;
+  row-gap: 20px;
   color: #d1d5db;
 
   * {

@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types'
 import { useRef, useState } from 'react'
 import styled from 'styled-components'
 import info from '../assets/icons/info.svg'
@@ -39,17 +40,22 @@ const Footer = ({ index, data }) => {
         <Content $isShow={showDialog} $initial={isInitial} ref={ref}>
           <p>{data.description}</p>
           {data.codeurl && (
-            <h1>
-              source:{' '}
-              <a href={data.codeurl} target='_blank'>
-                source
-              </a>
-            </h1>
+            <a href={data.codeurl} target='_blank'>
+              source
+            </a>
           )}
         </Content>
       </Wrapper>
     </>
   )
+}
+
+Footer.prototype = {
+  index: PropTypes.number.isRequired,
+  data: {
+    description: PropTypes.string.isRequired,
+    codeurl: PropTypes.string,
+  },
 }
 
 const Wrapper = styled.div`
@@ -141,7 +147,7 @@ const Content = styled.div`
     if ($isShow) {
       return `animation: moveUp 0.3s forwards;`
     } else if (!$initial) {
-      return `animation: moveDown 0.3s forwards`
+      return `animation: moveDown 0.3s forwards;`
     }
   }}
 `

@@ -1,4 +1,3 @@
-import { describe, expect, it } from '@jest/globals'
 import removeSplash from '../common/removeSplash'
 describe('removeSplash', () => {
   it('should remove the first splash', () => {

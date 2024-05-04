@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types'
 import { useNavigate } from 'react-router-dom'
 import styled from 'styled-components'
 import getFormattedDate from '../utils/common/getFormatedDate'
@@ -17,6 +18,15 @@ const Header = ({ title, date }) => {
   )
 }
 
+Header.prototype = {
+  title: PropTypes.string.isRequired,
+  date: {
+    year: PropTypes.number.isRequired,
+    month: PropTypes.number.isRequired,
+    day: PropTypes.number.isRequired,
+  },
+}
+
 const Head = styled.header`
   position: absolute;
   z-index: 10;
@@ -30,14 +40,15 @@ const Head = styled.header`
 
   span {
     padding: 4px 8px;
+    color: #374151d2;
     font-size: 18px;
     font-weight: lighter;
     cursor: pointer;
     border-radius: 10px;
-    transition: all 0.1s ease-in-out;
+    transition: all 0.2s ease-in-out;
 
     &:hover {
-      filter: brightness(1.3) contrast(1.1) saturate(1.1) hue-rotate(10deg);
+      color: #9ca3af;
     }
   }
 `

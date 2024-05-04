@@ -1,4 +1,3 @@
-import { describe, expect, it } from '@jest/globals'
 import getFormatedData from '../common/getFormatedDate'
 
 describe('getFormatedData', () => {
