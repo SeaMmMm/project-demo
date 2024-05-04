@@ -125,11 +125,8 @@ input {
   outline: none;
 }
 * {
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
   box-sizing: border-box;
-  font-family: 'Fira Code', Menlo, Monaco, Consolas, 'Liberation Mono',
-    'Courier New', monospace !important;
+  font-family: 'Fira Code', Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New',
+    monospace !important;
+  user-select: none;
 }

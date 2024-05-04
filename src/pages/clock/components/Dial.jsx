@@ -43,7 +43,7 @@ const Wrapper = styled.div`
 
 const HourHand = styled.div`
   position: absolute;
-  width: 120px;
+  width: 140px;
   height: 3px;
   background-color: #000;
   top: 50%;
@@ -54,7 +54,7 @@ const HourHand = styled.div`
 
 const MinuteHand = styled.div`
   position: absolute;
-  width: 160px;
+  width: 190px;
   height: 2px;
   background-color: #000;
   top: 50%;

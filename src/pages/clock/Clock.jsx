@@ -22,7 +22,6 @@ const Clock = () => {
 
 const Wrapper = styled.div`
   display: flex;
-  justify-content: center;
   align-items: center;
   justify-content: space-evenly;
   padding: 0 80px;
