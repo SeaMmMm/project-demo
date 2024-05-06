@@ -59,7 +59,6 @@ const RangeSlider = styled.input`
   appearance: none;
   background: none;
   cursor: pointer;
-  z-index: 10;
   overflow: hidden;
 
   &::-webkit-slider-thumb {

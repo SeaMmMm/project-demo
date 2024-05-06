@@ -2,8 +2,9 @@ import { useState } from 'react'
 import styled from 'styled-components'
 import Footer from '../../components/Footer'
 import Header from '../../components/Header'
+import useDebouncedFn from '../../hooks/useDebouncedFn'
 import useHrefTitle from '../../hooks/useHrefTitle'
-import RangeSlicer from '../slider/components/RangeSlider'
+import Controler from './components/Controler'
 import frameInfo from './data/description'
 
 const Frame = () => {
@@ -12,21 +13,10 @@ const Frame = () => {
   const [spacing, setSpacing] = useState(0)
   const [blur, setBlur] = useState(0)
   const [color, setColor] = useState('#000000')
+  const debouncedSetColor = useDebouncedFn(setColor, 100)
 
-  const debounce = (fn, delay) => {
-    let timer = null
-
-    return function () {
-      clearTimeout(timer)
-      timer = setTimeout(() => {
-        fn.apply(this, arguments)
-      }, delay)
-    }
-  }
-
-  const debouncedColorChange = debounce(setColor, 100)
   const handleColorChange = (e) => {
-    debouncedColorChange(e.target.value)
+    debouncedSetColor(e.target.value)
   }
 
   return (
@@ -37,33 +27,21 @@ const Frame = () => {
           Update CSS Variables with <span>JS</span>
         </p>
         <Content>
-          <Div>
-            Spacing:
-            <RangeSlicer
-              value={spacing}
-              width={100}
-              size='small'
-              max={80}
-              callback={(e) => {
-                setSpacing(e.target.value)
-              }}
-            />
-          </Div>
-          <Div>
-            Blur:
-            <RangeSlicer
-              value={blur}
-              width={100}
-              size='small'
-              max={20}
-              callback={(e) => {
-                setBlur(e.target.value)
-              }}
-            />
-          </Div>
-          Base color:
-          {/* 确认后再修改颜色 */}
-          <input type='color' value={color} onChange={handleColorChange} />
+          <Controler
+            label='Spacing:'
+            value={spacing}
+            callback={(e) => {
+              setSpacing(e.target.value)
+            }}
+          />
+          <Controler
+            label='Blur:'
+            value={blur}
+            callback={(e) => {
+              setBlur(e.target.value)
+            }}
+          />
+          Base color: <input type='color' value={color} onChange={handleColorChange} />
         </Content>
         <img
           src='https://opendoodles.s3-us-west-1.amazonaws.com/running.svg'
@@ -76,12 +54,16 @@ const Frame = () => {
 }
 
 const Wrapper = styled.div`
+  position: absolute;
+  width: 100%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
   display: grid;
-  height: 100vh;
   align-content: center;
   justify-items: center;
   gap: 30px;
-  padding: 0 300px;
 
   span {
     color: ${({ $color }) => $color};
@@ -91,6 +73,7 @@ const Wrapper = styled.div`
     width: 500px;
     border: ${({ $spacing }) => $spacing}px solid ${({ $color }) => $color};
     filter: blur(${({ $blur }) => $blur}px);
+    pointer-events: none;
   }
 `
 
@@ -98,16 +81,6 @@ const Content = styled.div`
   display: flex;
   gap: 30px;
   align-items: center;
-  z-index: 10;
-`
-
-const Div = styled.div`
-  display: flex;
-  gap: 10px;
-  align-items: center;
-  span {
-    color: var(--main-color);
-  }
 `
 
 export default Frame

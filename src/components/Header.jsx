@@ -28,11 +28,10 @@ Header.prototype = {
 }
 
 const Head = styled.header`
-  position: absolute;
-  z-index: 10;
+  /* position: absolute;
   top: 0;
   left: 0;
-  width: 100%;
+  width: 100%; */
   padding: 20px;
   display: flex;
   align-items: center;
