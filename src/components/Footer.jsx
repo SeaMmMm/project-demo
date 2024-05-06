@@ -82,7 +82,6 @@ const Wrapper = styled.div`
   left: 0;
   padding: 10px;
   align-items: center;
-  z-index: 5;
 
   .current {
     display: flex;
@@ -108,7 +107,6 @@ const Info = styled.img`
   padding: 5px;
   width: 30px;
   cursor: pointer;
-  z-index: 100;
 `
 
 const Content = styled.div`
@@ -116,7 +114,7 @@ const Content = styled.div`
   overflow-y: hidden;
   position: fixed;
   bottom: 0;
-  left: 50% !important;
+  left: 50%;
   transition: all 0.3s ease-in-out;
   transform: translateX(-50%) translateY(100%);
   border: 1px solid black;
@@ -176,15 +174,13 @@ const Mosk = styled.div`
   left: 0;
   width: 100%;
   height: 100%;
-  z-index: 1;
-  opacity: 0.3;
   background: rgba(0, 0, 0, 0.5);
-  opacity: 0;
+  display: none;
   transition: all 0.2s ease-in-out;
 
   ${({ $isShow, $initial }) => {
     if ($isShow) {
-      return `animation: showUp 0.2s forwards;`
+      return `animation: showUp 0.2s forwards; display: block;`
     } else if (!$initial) {
       return `animation: showDown 0.2s forwards;`
     }

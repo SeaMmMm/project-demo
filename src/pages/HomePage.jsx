@@ -33,18 +33,18 @@ const HomePage = () => {
 }
 
 const Wrapper = styled.div`
-  background-color: #ffffff;
-  height: 100vh;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 `
 
 const Content = styled.div`
-  width: auto;
   display: grid;
   align-items: center;
   justify-items: start;
   grid-template-columns: 2 auto;
   gap: 20px;
-  padding: 150px 300px;
   text-align: center;
 
   p {
@@ -55,9 +55,9 @@ const Content = styled.div`
 
 const Projects = styled.div`
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  column-gap: 120px;
-  row-gap: 20px;
+  grid-template-columns: repeat(3, auto);
+  column-gap: 60px;
+  row-gap: 10px;
   color: #d1d5db;
 
   * {
@@ -71,7 +71,7 @@ const Projects = styled.div`
   .project {
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: 4px;
     cursor: pointer;
 
     &:hover {

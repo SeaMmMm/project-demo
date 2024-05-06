@@ -34,8 +34,13 @@ const Slider = () => {
 }
 
 const Wrapper = styled.div`
+  position: absolute;
+  width: 100%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
   display: grid;
-  height: 100vh;
   justify-items: center;
   align-content: center;
   gap: 30px;
