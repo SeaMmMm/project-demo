@@ -1,3 +1,4 @@
+/* eslint-disable react/display-name */
 import PropTypes from 'prop-types'
 import { useRef, useState } from 'react'
 import styled from 'styled-components'
@@ -175,14 +176,17 @@ const Mosk = styled.div`
   width: 100%;
   height: 100%;
   background: rgba(0, 0, 0, 0.5);
-  display: none;
   transition: all 0.2s ease-in-out;
+  z-index: -1;
+  opacity: 0;
 
   ${({ $isShow, $initial }) => {
     if ($isShow) {
-      return `animation: showUp 0.2s forwards; display: block;`
+      // 同时使用两个动画, 一个是显示, 一个是改变display
+      return 'animation: showUp 0.2s forwards;'
     } else if (!$initial) {
-      return `animation: showDown 0.2s forwards;`
+      // 延迟0.2s
+      return 'animation: showDown 0.2s forwards;'
     }
   }}
 `

@@ -18,8 +18,10 @@ import NotFound from '../pages/404'
 import HomePage from '../pages/HomePage'
 import Cardio from '../pages/cardio/Cardio'
 import Clock from '../pages/clock/Clock'
+import CssTopicPage from '../pages/css-topics'
 import Drum from '../pages/drum/Drum'
 import Frame from '../pages/frame/Frame'
+import Panel from '../pages/panel/Panel'
 import Slider from '../pages/slider/Slider'
 
 export const projects = [
@@ -28,6 +30,8 @@ export const projects = [
   { path: '/slider', element: <Slider />, name: 'slider' },
   { path: '/frame', element: <Frame />, name: 'frame' },
   { path: '/cardio', element: <Cardio />, name: 'cardio' },
+  { path: '/panel', element: <Panel />, name: 'panel' },
+  { path: '/css', element: <CssTopicPage />, name: 'css', childern: [] },
 ]
 
 const routes = [

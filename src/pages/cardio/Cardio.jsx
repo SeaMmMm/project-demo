@@ -4,7 +4,6 @@ import Footer from '../../components/Footer'
 import Header from '../../components/Header'
 import useDebouncedFn from '../../hooks/useDebouncedFn'
 import useHrefTitle from '../../hooks/useHrefTitle'
-import Button from './components/Button'
 import Card from './components/Card'
 import { inventors } from './data/array-cardio'
 import description from './data/description'
@@ -52,10 +51,10 @@ const Cardio = () => {
             <div className='not-found'>
               <p>No Inventor Found</p>
               <h1 onClick={reset}>clear</h1>
+              <h2 onClick={reset}>clear</h2>
             </div>
           )}
         </Cards>
-        <Button />
       </Wrapper>
       <Footer index={5} data={description} />
     </>
@@ -97,16 +96,25 @@ const Cards = styled.div`
       font-weight: 500;
     }
 
-    h1 {
+    h1,
+    h2 {
       border: 1px solid #9ca3af;
       margin-top: 20px;
       color: #9ca3af;
       cursor: pointer;
       transition: all 0.2s ease-in-out;
+      border-bottom: none;
+      padding: 2px;
 
       &:hover {
         color: #d1d5db;
       }
+    }
+
+    h2 {
+      border: 1px solid #9ca3af;
+      margin-top: 10px;
+      border-top: none;
     }
   }
 `
