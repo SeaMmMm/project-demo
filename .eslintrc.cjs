@@ -19,5 +19,6 @@ module.exports = {
     'no-console': 'warn',
     'no-undef': 'warn',
     semi: 'off',
+    'react/no-children-prop': 'off',
   },
 }

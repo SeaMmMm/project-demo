@@ -175,17 +175,15 @@ const Mosk = styled.div`
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.5);
+  background: rgba(0, 0, 0, 0.4);
   transition: all 0.2s ease-in-out;
-  z-index: -1;
   opacity: 0;
+  display: none;
 
   ${({ $isShow, $initial }) => {
     if ($isShow) {
-      // 同时使用两个动画, 一个是显示, 一个是改变display
-      return 'animation: showUp 0.2s forwards;'
+      return 'animation: showUp 0.2s forwards; display: block; backdrop-filter: blur(5px);'
     } else if (!$initial) {
-      // 延迟0.2s
       return 'animation: showDown 0.2s forwards;'
     }
   }}
