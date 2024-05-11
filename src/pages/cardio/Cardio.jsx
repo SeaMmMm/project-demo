@@ -76,6 +76,19 @@ const Wrapper = styled.div`
     font-size: 1.1rem;
     font-weight: 500;
   }
+
+  @media (max-width: 768px) {
+    padding: 50px 20px;
+
+    input {
+      width: 100%;
+      &::placeholder {
+        font-size: 0.9rem;
+      }
+      font-size: 1rem;
+      padding: 10px;
+    }
+  }
 `
 
 const Cards = styled.div`
@@ -115,6 +128,22 @@ const Cards = styled.div`
       border: 1px solid #9ca3af;
       margin-top: 10px;
       border-top: none;
+    }
+  }
+
+  @media (max-width: 768px) {
+    grid-template-columns: repeat(2, 1fr);
+    row-gap: 20px;
+    column-gap: 10px;
+
+    .not-found {
+      p {
+        font-size: 1.5rem;
+      }
+      h1,
+      h2 {
+        font-size: 1rem;
+      }
     }
   }
 `

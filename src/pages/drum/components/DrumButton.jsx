@@ -31,6 +31,16 @@ const Wrapper = styled.div`
     transform: scale(1.1);
     color: #9ca3af;
   }
+
+  @media (max-width: 768px) {
+    h1 {
+      font-size: 60px;
+    }
+
+    span {
+      font-size: 15px;
+    }
+  }
 `
 
 export default DrumButton

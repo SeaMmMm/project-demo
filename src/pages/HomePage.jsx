@@ -37,6 +37,12 @@ const Wrapper = styled.div`
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+
+  @media (max-width: 768px) {
+    top: 20%;
+    left: 20%;
+    transform: translate(-20%, -20%);
+  }
 `
 
 const Content = styled.div`
@@ -82,6 +88,11 @@ const Projects = styled.div`
         color: #374151d2;
       }
     }
+  }
+
+  @media (max-width: 768px) {
+    grid-template-columns: auto;
+    row-gap: 20px;
   }
 `
 

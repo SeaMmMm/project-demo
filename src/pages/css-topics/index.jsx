@@ -17,6 +17,7 @@ const CssTopicPage = () => {
   const [num, setNum] = useState(1)
 
   const handleAdd = () => {
+    if (isError) return
     setNum(num + 1)
   }
 

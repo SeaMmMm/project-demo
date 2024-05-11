@@ -41,7 +41,9 @@ const Frame = () => {
               setBlur(e.target.value)
             }}
           />
-          Base color: <input type='color' value={color} onChange={handleColorChange} />
+          <div>
+            Base color: <input type='color' value={color} onChange={handleColorChange} />
+          </div>
         </Content>
         <img
           src='https://opendoodles.s3-us-west-1.amazonaws.com/running.svg'
@@ -75,12 +77,29 @@ const Wrapper = styled.div`
     filter: blur(${({ $blur }) => $blur}px);
     pointer-events: none;
   }
+
+  @media (max-width: 768px) {
+    img {
+      width: 300px;
+    }
+
+    p,
+    span {
+      font-size: 20px;
+    }
+  }
 `
 
 const Content = styled.div`
   display: flex;
   gap: 30px;
   align-items: center;
+
+  @media (max-width: 768px) {
+    display: grid;
+    place-items: center;
+    gap: 20px;
+  }
 `
 
 export default Frame
