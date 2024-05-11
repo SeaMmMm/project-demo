@@ -34,6 +34,11 @@ const Wrapper = styled.div`
   grid-template-columns: repeat(5, 1fr);
   justify-content: center;
   align-items: center;
+
+  @media (max-width: 768px) {
+    grid-template-columns: repeat(2, 1fr);
+    height: ${(props) => `calc(${props.$height}px - 60px)`};
+  }
 `
 
 export default Panel

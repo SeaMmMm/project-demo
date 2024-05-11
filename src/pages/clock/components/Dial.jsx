@@ -39,6 +39,11 @@ const Wrapper = styled.div`
     ${({ $shouldTransition }) =>
       $shouldTransition ? 'transition: all 0.3s ease-in-out;' : ''}
   }
+
+  @media (max-width: 768px) {
+    width: 300px;
+    height: 300px;
+  }
 `
 
 const HourHand = styled.div`
@@ -50,6 +55,11 @@ const HourHand = styled.div`
   left: 50%;
   transform-origin: left;
   transform: rotate(-90deg);
+
+  @media (max-width: 768px) {
+    width: 100px;
+    height: 2px;
+  }
 `
 
 const MinuteHand = styled.div`
@@ -61,6 +71,11 @@ const MinuteHand = styled.div`
   left: 50%;
   transform-origin: left;
   transform: rotate(-90deg);
+
+  @media (max-width: 768px) {
+    width: 120px;
+    height: 1px;
+  }
 `
 
 const SecondHand = styled.div`
@@ -72,6 +87,11 @@ const SecondHand = styled.div`
   left: 50%;
   transform-origin: left;
   transform: rotate(-90deg);
+
+  @media (max-width: 768px) {
+    width: 140px;
+    height: 1px;
+  }
 `
 
 export default Dial
