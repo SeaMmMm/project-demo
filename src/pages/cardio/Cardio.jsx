@@ -66,6 +66,7 @@ const Wrapper = styled.div`
   display: grid;
   align-items: center;
   justify-items: center;
+  justify-content: center;
   gap: 20px;
 
   input {

@@ -101,23 +101,28 @@ const Wrapper = styled.div`
   }
 
   .header {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    background: #cce1eb2b;
-    border-radius: 0 0 20px 20px;
-    backdrop-filter: blur(2px);
+    @media (max-width: 768px) {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      border-radius: 0 0 20px 20px;
+      backdrop-filter: blur(2px);
+    }
   }
 `
 
 const Content = styled.div`
-  padding: 1rem;
   line-height: 1.5;
   color: #333;
   max-width: 800px;
-  margin: 100px auto;
   overflow-x: hidden;
+  padding: 1rem;
+  margin: 0 auto;
+
+  @media (max-width: 768px) {
+    padding: 80px 20px;
+  }
 
   * {
     user-select: text;

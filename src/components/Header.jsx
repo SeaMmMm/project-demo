@@ -50,6 +50,13 @@ const Head = styled.header`
       color: #9ca3af;
     }
   }
+
+  @media (max-width: 768px) {
+    p,
+    h1 {
+      font-size: 12px;
+    }
+  }
 `
 
 export default Header

@@ -149,6 +149,26 @@ const Content = styled.div`
       return `animation: moveDown 0.3s forwards;`
     }
   }}
+
+  @media (max-width: 768px) {
+    min-width: 300px;
+    min-height: 100px;
+    padding: 20px 10px;
+
+    a {
+      font-size: 0.8rem;
+    }
+
+    p {
+      font-size: 0.8rem;
+    }
+
+    .current {
+      p {
+        font-size: 1.2rem;
+      }
+    }
+  }
 `
 
 const Mosk = styled.div`

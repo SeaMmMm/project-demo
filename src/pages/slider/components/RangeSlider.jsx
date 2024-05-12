@@ -61,6 +61,10 @@ const RangeSlider = styled.input`
   cursor: pointer;
   overflow: hidden;
 
+  @media (max-width: 768px) {
+    width: 200px;
+  }
+
   &::-webkit-slider-thumb {
     height: var(--s);
     aspect-ratio: 1; // 用来设置宽高比，这里是1:1
