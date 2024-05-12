@@ -64,31 +64,12 @@ const Div = styled.div`
   }
 
   @media (max-width: 768px) {
-    grid-template-rows: 1fr 1fr 1fr;
-    gap: 5px;
-    padding: 10px;
     border: 1px solid black;
 
     h1,
     p,
     h3 {
       font-size: 1rem;
-    }
-
-    p {
-      font-size: 1rem;
-    }
-
-    &:last-child {
-      border-top: none;
-    }
-    &:first-child {
-      border-bottom: none;
-      border-right: none;
-    }
-    &:nth-child(4) {
-      border-top: none;
-      border-left: none;
     }
   }
 `

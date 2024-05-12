@@ -42,6 +42,16 @@ const Wrapper = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-evenly;
+
+  @media (max-width: 768px) {
+    display: grid;
+    grid-template-columns: repeat(3, auto);
+    row-gap: 10px;
+    justify-items: center;
+    align-items: center;
+    justify-content: space-around;
+    align-content: center;
+  }
 `
 
 export default Drum

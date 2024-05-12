@@ -44,6 +44,12 @@ const Wrapper = styled.div`
   justify-items: center;
   align-content: center;
   gap: 30px;
+  justify-content: center;
+  align-items: center;
+
+  @media (max-width: 768px) {
+    gap: 20px;
+  }
 `
 
 export default Slider
