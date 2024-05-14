@@ -24,8 +24,9 @@ const Wrapper = styled.div`
 
 const Back = styled(Link)`
   position: absolute;
-  top: 5px;
-  right: 5px;
+  top: 2;
+  left: 50%;
+  transform: translate(-50%, 0);
   padding: 10px;
   text-decoration: none;
   font-weight: bold;

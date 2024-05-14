@@ -31,7 +31,7 @@ export const projects = [
   { path: '/frame', element: <Frame />, name: 'frame' },
   { path: '/cardio', element: <Cardio />, name: 'cardio' },
   { path: '/panel', element: <Panel />, name: 'panel' },
-  { path: '/css', element: <CssTopicPage />, name: 'css', childern: [] },
+  { path: '/css', element: <CssTopicPage />, name: 'css' },
 ]
 
 const routes = [
