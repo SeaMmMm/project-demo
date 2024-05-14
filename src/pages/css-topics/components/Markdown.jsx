@@ -7,7 +7,7 @@ import remarkGfm from 'remark-gfm'
 const MarkdownContent = ({ markdown }) => {
   return (
     <Markdown
-      remarkPlugins={[[remarkGfm, { singleTilde: false }]]}
+      remarkPlugins={[remarkGfm]}
       children={markdown}
       rehypePlugins={[rehypeRaw]}
       components={{

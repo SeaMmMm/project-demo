@@ -92,12 +92,12 @@ const Wrapper = styled.div`
   }
 
   .add {
-    ${({ $isError }) => $isError && 'cursor: not-allowed; background: #ccc;'}
+    ${({ $isError }) => $isError && ' background: #ccc;cursor:default;'}
   }
 
   .delete {
     right: 4rem;
-    ${({ $num }) => $num === 1 && 'cursor: not-allowed; background: #ccc;'}
+    ${({ $num }) => $num === 1 && 'background: #ccc;cursor:default;'}
   }
 
   .header {

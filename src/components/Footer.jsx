@@ -202,7 +202,7 @@ const Mosk = styled.div`
 
   ${({ $isShow, $initial }) => {
     if ($isShow) {
-      return 'animation: showUp 0.2s forwards; display: block; backdrop-filter: blur(5px);'
+      return 'animation: showUp 0.2s forwards; display: block;'
     } else if (!$initial) {
       return 'animation: showDown 0.2s forwards;'
     }
