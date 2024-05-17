@@ -85,7 +85,7 @@ const Console = () => {
   }, [width])
 
   return (
-    <Wrapper>
+    <>
       <Header title={title} date={date} />
       <Content $isPhone={isPhone}>
         <span>CONSOLE.LOG</span>
@@ -98,15 +98,13 @@ const Console = () => {
           ))}
       </Content>
       <Footer index={9} data={consoleInfo} />
-    </Wrapper>
+    </>
   )
 }
 
-const Wrapper = styled.div``
-
 const Content = styled.div`
-  width: 400px;
-  height: 400px;
+  width: 340px;
+  height: 340px;
   position: absolute;
   top: 50%;
   left: 50%;
