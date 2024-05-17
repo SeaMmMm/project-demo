@@ -1,7 +1,6 @@
 const canvasInfo = {
-  description:
-    'HTML5 Canvas is a powerful tool for creating graphics and visual effects on the web',
-  codeurl: '',
+  description: 'Drag mouse to draw on canvas. ',
+  codeurl: 'https://github.com/SeaMmMm/project-demo/blob/main/src/pages/canvas/Canvas.jsx',
 }
 
 export default canvasInfo
