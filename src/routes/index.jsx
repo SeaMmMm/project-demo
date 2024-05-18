@@ -17,6 +17,7 @@ import Cardio from '../pages/cardio/Cardio'
 import Clock from '../pages/clock/Clock'
 import Console from '../pages/consoles/Console'
 import CssTopicPage from '../pages/css-topics'
+import Draft from '../pages/draft/Draft'
 import Drum from '../pages/drum/Drum'
 import Frame from '../pages/frame/Frame'
 import Panel from '../pages/panel/Panel'
@@ -37,6 +38,7 @@ export const projects = [
 const routes = [
   { path: '/', element: <HomePage /> },
   { path: '*', element: <NotFound /> },
+  { path: '/test', element: <Draft /> },
   ...projects,
 ]
 
