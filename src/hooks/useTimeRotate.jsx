@@ -1,5 +1,10 @@
 import { useEffect, useState } from 'react'
 
+/**
+ * 自定义 Hook：用于获取当前时间并计算时钟旋转角度
+ *
+ * @returns {{timeRotate: Number, shouldTransition: Boolean}} 返回包含时间旋转角度和过渡状态的对象
+ */
 const useTimeRotate = () => {
   const getTime = () => {
     const date = new Date()

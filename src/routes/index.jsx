@@ -1,18 +1,14 @@
-// import { lazy, Suspense } from 'react'
-// 使用懒加载组件,部署后会出现问题,暂时不使用
-// /**
-//  * @description: 懒加载组件
-//  * @param {string} path
-//  * @return {JSX.Element}
-//  */
-// const lazyLoad = (path) => {
-//   const Moudle = lazy(() => import(/* @vite-ignore */ `../pages/${path}`))
-//   return (
-//     <Suspense fallback={<div>loading...</div>}>
-//       <Moudle />
-//     </Suspense>
-//   )
-// }
+/* 懒加载会出现问题，先不用这个
+import { lazy, Suspense } from 'react'
+const lazyLoad = (path) => {
+  const Moudle = lazy(() => import( `../pages/${path}`))
+  return (
+    <Suspense fallback={<div>loading...</div>}>
+      <Moudle />
+    </Suspense>
+  )
+} 
+*/
 
 import NotFound from '../pages/404'
 import HomePage from '../pages/HomePage'
