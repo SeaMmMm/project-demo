@@ -1,9 +1,11 @@
 import PropTypes from 'prop-types'
 import { useNavigate } from 'react-router-dom'
 import styled from 'styled-components'
+import useHrefTitle from '../hooks/useHrefTitle'
 import getFormattedDate from '../utils/common/getFormatedDate'
 
-const Header = ({ title, date }) => {
+const Header = ({ date }) => {
+  const title = useHrefTitle()
   const navigate = useNavigate()
   const goHome = () => {
     navigate('/')

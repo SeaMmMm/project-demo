@@ -3,13 +3,11 @@ import styled from 'styled-components'
 import Footer from '../../components/Footer'
 import Header from '../../components/Header'
 import useDebouncedFn from '../../hooks/useDebouncedFn'
-import useHrefTitle from '../../hooks/useHrefTitle'
 import Card from './components/Card'
 import { inventors } from './data/array-cardio'
 import description from './data/description'
 
 const Cardio = () => {
-  const title = useHrefTitle()
   const date = { year: 2024, month: 5, day: 6 }
   const [people, setPeople] = useState(inventors)
 
@@ -39,7 +37,7 @@ const Cardio = () => {
 
   return (
     <>
-      <Header title={title} date={date} />
+      <Header date={date} />
       <Wrapper>
         <input type='text' placeholder='Search Name' onChange={debouncedHandleSeearchName} />
         <Cards>

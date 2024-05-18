@@ -3,12 +3,10 @@ import styled from 'styled-components'
 import Footer from '../../components/Footer'
 import Header from '../../components/Header'
 import useDebouncedFn from '../../hooks/useDebouncedFn'
-import useHrefTitle from '../../hooks/useHrefTitle'
 import Controler from './components/Controler'
 import frameInfo from './data/description'
 
 const Frame = () => {
-  const title = useHrefTitle()
   const date = { year: 2024, month: 5, day: 5 }
   const [spacing, setSpacing] = useState(0)
   const [blur, setBlur] = useState(0)
@@ -21,7 +19,7 @@ const Frame = () => {
 
   return (
     <>
-      <Header title={title} date={date} />
+      <Header date={date} />
       <Wrapper $color={color} $spacing={spacing} $blur={blur}>
         <p>
           Update CSS Variables with <span>JS</span>

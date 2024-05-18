@@ -6,10 +6,12 @@ import info from '../assets/icons/info.svg'
 import useClickOutside from '../hooks/useClickOutside'
 import useLayer from '../store/layer'
 import getFilledNumber from '../utils/common/getFilledNumber'
+import useHrefTitle from '../hooks/useHrefTitle'
 
-const Footer = ({ index, data }) => {
+const Footer = ({ index, data, children }) => {
   const [showDialog, setShowDialog] = useState(false)
   const [isInitial, setIsInitial] = useState(true)
+  const title = useHrefTitle()
   const ref = useRef(null)
   const infoRef = useRef(null)
 
@@ -35,11 +37,12 @@ const Footer = ({ index, data }) => {
       <Mosk $isShow={isShowLayer} $initial={isInitial} />
       <Wrapper>
         <div className='current'>
-          <p>{getFilledNumber(index, 3)}</p>
+          <p>{index ? getFilledNumber(index, 3) : title}</p>
         </div>
         <Info src={info} onClick={toggleDialog} ref={infoRef} />
         <Content $isShow={showDialog} $initial={isInitial} ref={ref}>
           <p>{data.description}</p>
+          {children}
           {data.codeurl && (
             <a href={data.codeurl} target='_blank'>
               source
@@ -52,7 +55,7 @@ const Footer = ({ index, data }) => {
 }
 
 Footer.prototype = {
-  index: PropTypes.number.isRequired,
+  index: PropTypes.number,
   data: {
     description: PropTypes.string.isRequired,
     codeurl: PropTypes.string,

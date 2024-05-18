@@ -3,14 +3,17 @@
 import { useEffect, useRef } from 'react'
 import styled from 'styled-components'
 import { mouseEnterAndLeave, mouseOverAndOut } from './scripts/mouseHover'
+import Header from '../../components/Header'
+import Footer from '../../components/Footer'
+import draftInfo from './data/description'
 
 const Draft = () => {
+  const date = { year: 2024, month: 5, day: 18 }
   const parentRef = useRef(null)
   const childRef = useRef(null)
 
   useEffect(() => {
     // mouseenter和mouseleave事件不会冒泡，只有mouseover和mouseout事件会冒泡
-
     // const removeLisener = mouseOverAndOut(parentRef, childRef)
     const removeLisener2 = mouseEnterAndLeave(parentRef, childRef)
 
@@ -21,14 +24,18 @@ const Draft = () => {
   }, [])
 
   return (
-    <Wrapper>
-      <div className='parent' ref={parentRef}>
-        parent
-        <div className='child' ref={childRef}>
-          child
+    <>
+      <Header date={date} />
+      <Wrapper>
+        <div className='parent' ref={parentRef}>
+          parent
+          <div className='child' ref={childRef}>
+            child
+          </div>
         </div>
-      </div>
-    </Wrapper>
+      </Wrapper>
+      <Footer data={draftInfo} />
+    </>
   )
 }
 

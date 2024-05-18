@@ -3,14 +3,12 @@ import { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import Footer from '../../components/Footer'
 import Header from '../../components/Header'
-import useHrefTitle from '../../hooks/useHrefTitle'
 import getFilledNumber from '../../utils/common/getFilledNumber'
 import markdown from './articals/001.md'
 import MarkdownContent from './components/Markdown'
 import cssInfo from './data/cssInfo'
 
 const CssTopicPage = () => {
-  const title = useHrefTitle()
   const date = { year: 2024, month: 5, day: 11 }
   const [content, setContent] = useState(markdown)
   const [isError, setIsError] = useState(false)
@@ -46,7 +44,7 @@ const CssTopicPage = () => {
   return (
     <Wrapper $isError={isError} $num={num}>
       <div className='header'>
-        <Header title={title} date={date} />
+        <Header date={date} />
       </div>
       <Content className='markdown-body'>
         <MarkdownContent markdown={content} />
