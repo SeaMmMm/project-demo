@@ -1,7 +1,7 @@
 import Lottie from 'lottie-react'
+import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 import Animation from '../assets/404.json'
-import { Link } from 'react-router-dom'
 
 const NotFound = () => {
   return (

@@ -1,10 +1,11 @@
 import { useCallback, useRef } from 'react'
 
 /**
- *  函数防抖
- * @param {Function} fn
- * @param {number} delay
- * @returns
+ * 使用防抖函数的自定义钩子
+ *
+ * @param {Function} fn - 要防抖的函数
+ * @param {number} delay - 防抖延迟时间（毫秒）
+ * @returns {Function} - 防抖后的函数
  */
 const useDebouncedFn = (fn, delay) => {
   const timeout = useRef(null)
