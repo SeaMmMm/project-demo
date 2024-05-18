@@ -1,6 +1,12 @@
 import { useEffect, useState } from 'react'
 import useWindowSize from './useWindowSize'
 
+/**
+ * 在给定的画布上绘制功能的自定义Hook。
+ *
+ * @param {React.RefObject} ref - 画布的引用。
+ * @returns {{size: Number, reset: Function, isDrawing: Boolean, startX: Number, startY: Number, handleMouseDown: Function, handleMouseMove: Function, handleMouseClear: Function}} - 包含绘制功能的对象。
+ */
 const useDrawCanvas = (ref) => {
   const [size, setSize] = useState(600)
   const [isDrawing, setIsDrawing] = useState(false)

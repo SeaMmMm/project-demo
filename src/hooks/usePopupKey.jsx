@@ -1,6 +1,11 @@
 import { useEffect, useState } from 'react'
 import drums from '../pages/drum/data/drums'
 
+/**
+ * 自定义 Hook：用于处理弹出键盘的逻辑
+ *
+ * @returns {{showNum: Number}} 返回一个包含 showNum 属性的对象
+ */
 const usePopupKey = () => {
   const [showNum, setShowNum] = useState(-1)
   const findDrum = (letter) => drums.find((drum) => drum.letter.toLowerCase() === letter)
