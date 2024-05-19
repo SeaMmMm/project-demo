@@ -2,9 +2,9 @@ import { useRef } from 'react'
 import styled from 'styled-components'
 import Footer from '../../components/Footer'
 import Header from '../../components/Header'
+import useDragEvent from '../../hooks/useDragEvent'
 import useWindowSize from '../../hooks/useWindowSize'
 import scopeInfo from './data/description'
-import useDragEvent from '../../hooks/useDragEvent'
 
 const Scope = () => {
   const date = { year: 2024, month: 5, day: 19 }
@@ -68,6 +68,7 @@ const Scope = () => {
           odit saepe, veniam atque reiciendis possimus provident consequatur?
         </Text>
       </Box>
+      <Error>Please view on your computer</Error>
       <Footer index={10} data={scopeInfo} />
     </>
   )
@@ -81,6 +82,26 @@ const Box = styled.div`
   z-index: 10;
   overflow: hidden;
   background: white;
+
+  @media (max-width: 768px) {
+    display: none;
+  }
+`
+
+const Error = styled.div`
+  position: absolute;
+  width: 300px;
+  height: 300px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-family: 'Input', sans-serif;
+  font-size: 1.5rem;
+  text-align: center;
+
+  @media (min-width: 768px) {
+    display: none;
+  }
 `
 
 const Text = styled.div`
