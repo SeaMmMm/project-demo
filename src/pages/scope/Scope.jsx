@@ -1,18 +1,23 @@
+import { useRef } from 'react'
 import styled from 'styled-components'
 import Footer from '../../components/Footer'
 import Header from '../../components/Header'
 import useWindowSize from '../../hooks/useWindowSize'
 import scopeInfo from './data/description'
+import useDragEvent from '../../hooks/useDragEvent'
 
 const Scope = () => {
   const date = { year: 2024, month: 5, day: 19 }
   const { width, height } = useWindowSize()
+  const boxRef = useRef(null)
+  const txtRef = useRef(null)
+  const { endX, endY } = useDragEvent(boxRef)
 
   return (
     <>
       <Header date={date} isFixed={true} />
-      <Box>
-        <Text $width={width} $height={height}>
+      <Box ref={boxRef}>
+        <Text $width={width} $height={height} $x={endX} $y={endY} ref={txtRef}>
           Lorem ipsum dolor sit amet consectetur, adipisicing elit. Sint repellat labore esse
           reiciendis debitis perferendis minus molestias consequuntur laboriosam voluptatum,
           culpa distinctio! Eligendi unde laborum, libero vel soluta accusamus omnis? Corrupti
@@ -85,9 +90,12 @@ const Text = styled.div`
   font-family: 'Input', sans-serif;
   line-height: 1.5;
   font-size: 1.2rem;
-  padding: 2.5rem 20px;
+  padding: 2.5rem 2rem;
   text-align: justify;
   overflow-y: hidden;
+
+  top: ${({ $y }) => -$y}px;
+  left: ${({ $x }) => -$x}px;
 `
 
 export default Scope
