@@ -114,7 +114,7 @@ const Content = styled.div`
   line-height: 1.5;
   color: #333;
   max-width: 800px;
-  overflow-x: hidden;
+  min-height: 100vh;
   padding: 1rem;
   margin: 0 auto;
 

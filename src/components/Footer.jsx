@@ -4,9 +4,9 @@ import { useRef, useState } from 'react'
 import styled from 'styled-components'
 import info from '../assets/icons/info.svg'
 import useClickOutside from '../hooks/useClickOutside'
+import useHrefTitle from '../hooks/useHrefTitle'
 import useLayer from '../store/layer'
 import getFilledNumber from '../utils/common/getFilledNumber'
-import useHrefTitle from '../hooks/useHrefTitle'
 
 const Footer = ({ index, data, children }) => {
   const [showDialog, setShowDialog] = useState(false)

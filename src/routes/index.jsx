@@ -21,6 +21,7 @@ import Draft from '../pages/draft/Draft'
 import Drum from '../pages/drum/Drum'
 import Frame from '../pages/frame/Frame'
 import Panel from '../pages/panel/Panel'
+import Scope from '../pages/scope/Scope'
 import Slider from '../pages/slider/Slider'
 
 export const projects = [
@@ -33,6 +34,7 @@ export const projects = [
   { path: '/css', element: <CssTopicPage />, name: 'css' },
   { path: '/canvas', element: <Canvas />, name: 'canvas' },
   { path: '/console', element: <Console />, name: 'console' },
+  { path: 'scope', element: <Scope />, name: 'scope' },
 ]
 
 const routes = [

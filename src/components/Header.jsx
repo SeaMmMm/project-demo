@@ -4,7 +4,7 @@ import styled from 'styled-components'
 import useHrefTitle from '../hooks/useHrefTitle'
 import getFormattedDate from '../utils/common/getFormatedDate'
 
-const Header = ({ date }) => {
+const Header = ({ date, isFixed }) => {
   const title = useHrefTitle()
   const navigate = useNavigate()
   const goHome = () => {
@@ -12,7 +12,7 @@ const Header = ({ date }) => {
   }
 
   return (
-    <Head>
+    <Head $isFixed={isFixed}>
       <span onClick={goHome}>{'<'}</span>
       <p>{title}</p>
       <h1>{getFormattedDate(date.year, date.month, date.day)}</h1>
@@ -21,7 +21,7 @@ const Header = ({ date }) => {
 }
 
 Header.prototype = {
-  title: PropTypes.string.isRequired,
+  isFixed: PropTypes.bool,
   date: {
     year: PropTypes.number.isRequired,
     month: PropTypes.number.isRequired,
@@ -30,14 +30,12 @@ Header.prototype = {
 }
 
 const Head = styled.header`
-  /* position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%; */
   padding: 20px;
   display: flex;
   align-items: center;
   justify-content: space-between;
+
+  ${({ $isFixed }) => $isFixed && 'position: fixed; top: 0; left: 0; width: 100%;'}
 
   span {
     padding: 4px 8px;
