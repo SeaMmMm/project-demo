@@ -31,13 +31,11 @@ const Back = styled(Link)`
   text-decoration: none;
   font-weight: bold;
   color: #d1d5db;
-  border: 1px solid #d1d5db;
   border-radius: 5px;
   transition: all 0.3s ease-in-out;
 
   &:hover {
     color: #9ca3af;
-    border-color: #374151d2;
   }
 `
 

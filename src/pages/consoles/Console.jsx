@@ -3,13 +3,11 @@ import { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import Footer from '../../components/Footer'
 import Header from '../../components/Header'
-import useHrefTitle from '../../hooks/useHrefTitle'
 import useWindowSize from '../../hooks/useWindowSize'
 import consoleInfo from './data/description'
 import logFunc from './scripts/logFunc'
 
 const Console = () => {
-  const title = useHrefTitle()
   const date = { year: 2024, month: 5, day: 16 }
   const [logs, setLogs] = useState([])
   const [isPhone, setIsPhone] = useState(false)
@@ -42,7 +40,7 @@ const Console = () => {
 
   return (
     <>
-      <Header title={title} date={date} />
+      <Header date={date} />
       <Content $isPhone={isPhone}>
         <span>CONSOLE.LOG</span>
         <p>{isPhone ? '' : 'Open the console to view the output'}</p>

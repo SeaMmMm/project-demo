@@ -3,11 +3,9 @@ import styled from 'styled-components'
 import Footer from '../../components/Footer'
 import Header from '../../components/Header'
 import useDrawCanvas from '../../hooks/useDrawCanvas'
-import useHrefTitle from '../../hooks/useHrefTitle'
 import canvasInfo from './data/description'
 
 const Canvas = () => {
-  const title = useHrefTitle()
   const date = { year: 2024, month: 5, day: 15 }
   const canvasRef = useRef(null)
   const { size, handleMouseDown, handleMouseMove, handleMouseClear, reset } =
@@ -15,7 +13,7 @@ const Canvas = () => {
 
   return (
     <>
-      <Header title={title} date={date} />
+      <Header date={date} />
       <Canva
         ref={canvasRef}
         onMouseDown={handleMouseDown}

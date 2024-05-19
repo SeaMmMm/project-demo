@@ -2,13 +2,11 @@ import { useState } from 'react'
 import styled from 'styled-components'
 import Footer from '../../components/Footer'
 import Header from '../../components/Header'
-import useHrefTitle from '../../hooks/useHrefTitle'
 import RangeSlider from './components/RangeSlider'
 import description from './data/description'
 
 const Slider = () => {
   const date = { year: 2024, month: 5, day: 4 }
-  const title = useHrefTitle()
   const [value, setValue] = useState(0)
 
   const handleChange = (e) => {
@@ -17,7 +15,7 @@ const Slider = () => {
 
   return (
     <>
-      <Header date={date} title={title} />
+      <Header date={date} />
       <Wrapper>
         <RangeSlider
           value={value}

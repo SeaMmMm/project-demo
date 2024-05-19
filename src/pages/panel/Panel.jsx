@@ -1,20 +1,18 @@
 import styled from 'styled-components'
 import Footer from '../../components/Footer'
 import Header from '../../components/Header'
-import useHrefTitle from '../../hooks/useHrefTitle'
 import useWindowSize from '../../hooks/useWindowSize'
 import Card from './components/Card'
 import cardsInfo from './data/cards'
 import description from './data/description'
 
 const Panel = () => {
-  const title = useHrefTitle()
   const date = { year: 2024, month: 5, day: 8 }
   const { height } = useWindowSize()
 
   return (
     <>
-      <Header title={title} date={date} />
+      <Header date={date} />
       <Wrapper $height={height}>
         {cardsInfo.map((info, index) => (
           <Card key={index} info={info} />
