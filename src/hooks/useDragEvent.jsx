@@ -58,6 +58,20 @@ const useDragEvent = (ref, contentRef = null) => {
     box.ondragstart = () => false
   }, [width, height, ref, contentRef])
 
+  useEffect(() => {
+    const initialCenter = () => {
+      ref.current.style.left = (width - ref.current.offsetWidth) / 2 + 'px'
+      ref.current.style.top = (height - ref.current.offsetHeight) / 2 + 'px'
+      contentRef.current
+        ? (contentRef.current.style.left = -(width - ref.current.offsetWidth) / 2 + 'px')
+        : null
+      contentRef.current
+        ? (contentRef.current.style.top = -(height - ref.current.offsetHeight) / 2 + 'px')
+        : null
+    }
+    initialCenter()
+  }, [ref, contentRef, width, height])
+
   return { endX, endY }
 }
 
