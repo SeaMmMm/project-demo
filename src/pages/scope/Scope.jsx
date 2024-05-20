@@ -33,7 +33,6 @@ const Box = styled.div`
   width: 300px;
   height: 300px;
   border: 1px solid #000;
-  z-index: 10;
   overflow: hidden;
   background: white;
 
