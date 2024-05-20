@@ -34,7 +34,6 @@
     "@babel/preset-react": "^7.24.1",
     "@types/react": "^18.2.66",
     "@types/react-dom": "^18.2.22",
-    "@vitejs/plugin-legacy": "^5.4.0",
     "@vitejs/plugin-react": "^4.2.1",
     "babel-jest": "^29.7.0",
     "eslint": "^8.57.0",
