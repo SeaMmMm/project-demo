@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import styled from 'styled-components'
 import useHrefTitle from '../hooks/useHrefTitle'
 import getFormattedDate from '../utils/common/getFormatedDate'
+import { useEffect } from 'react'
 
 const Header = ({ date, isFixed }) => {
   const title = useHrefTitle()
@@ -10,6 +11,10 @@ const Header = ({ date, isFixed }) => {
   const goHome = () => {
     navigate('/')
   }
+
+  useEffect(() => {
+    document.title = title
+  }, [title])
 
   return (
     <Head $isFixed={isFixed}>

@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import styled from 'styled-components'
+import demo from '../assets/icons/demo.svg'
 import { projects } from '../routes'
 import getFilledNumber from '../utils/common/getFilledNumber'
 
@@ -18,7 +19,10 @@ const HomePage = () => {
   return (
     <Wrapper>
       <Content>
-        <p>Demo projects</p>
+        <p>
+          <span>Demo projects </span>
+          <img src={demo} alt='icon' />
+        </p>
         <Projects>
           {elements.map((project, idx) => (
             <div key={idx} className='project' onClick={() => changeMade(project)}>
@@ -56,6 +60,20 @@ const Content = styled.div`
   p {
     font-size: 20px;
     font-weight: 800;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+  }
+  img {
+    /* 适配其他浏览器 */
+    -webkit-user-drag: none;
+    -moz-window-dragging: no-drag;
+    -webkit-user-select: none;
+    /* 禁止选中文本 */
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
   }
 `
 
