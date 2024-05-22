@@ -8,7 +8,7 @@ import useHrefTitle from '../hooks/useHrefTitle'
 import useLayer from '../store/layer'
 import getFilledNumber from '../utils/common/getFilledNumber'
 
-const Footer = ({ index, data, children }) => {
+const Footer = ({ index, data, children = null }) => {
   const [showDialog, setShowDialog] = useState(false)
   const [isInitial, setIsInitial] = useState(true)
   const title = useHrefTitle()
