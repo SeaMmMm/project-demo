@@ -43,7 +43,7 @@ const Wrapper = styled.div`
 
   @media (max-width: 768px) {
     display: grid;
-    grid-template-columns: repeat(3, auto);
+    grid-template-columns: repeat(3, 1fr);
     row-gap: 10px;
     justify-items: center;
     align-items: center;

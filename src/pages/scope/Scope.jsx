@@ -6,6 +6,7 @@ import useDragEvent from '../../hooks/useDragEvent'
 import useWindowSize from '../../hooks/useWindowSize'
 import scopeInfo from './data/description'
 import txt from './data/txt'
+import { isMobile } from 'react-device-detect'
 
 const Scope = () => {
   const date = { year: 2024, month: 5, day: 19 }
@@ -17,12 +18,14 @@ const Scope = () => {
   return (
     <>
       <Header date={date} isFixed={true} />
-      <Box ref={boxRef}>
-        <Text $width={width} $height={height} ref={txtRef}>
-          {txt}
-        </Text>
-      </Box>
-      <Error>Please view on your computer</Error>
+      {!isMobile && (
+        <Box ref={boxRef}>
+          <Text $width={width} $height={height} ref={txtRef}>
+            {txt}
+          </Text>
+        </Box>
+      )}
+      {isMobile && <Error>Please view on your computer</Error>}
       <Footer index={10} data={scopeInfo} />
     </>
   )
@@ -35,10 +38,6 @@ const Box = styled.div`
   border: 1px solid #000;
   overflow: hidden;
   background: white;
-
-  @media (max-width: 768px) {
-    display: none;
-  }
 `
 
 const Error = styled.div`

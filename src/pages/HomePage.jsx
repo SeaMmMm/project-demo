@@ -64,6 +64,7 @@ const Content = styled.div`
     align-items: center;
     justify-content: center;
     gap: 10px;
+    position: relative;
   }
   img {
     /* 适配其他浏览器 */
@@ -74,6 +75,11 @@ const Content = styled.div`
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
+
+    position: absolute;
+    top: 50%;
+    right: -0.7rem;
+    transform: translateY(-50%);
   }
 `
 

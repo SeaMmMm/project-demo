@@ -15,6 +15,7 @@ const useDragEvent = (ref, contentRef = null) => {
 
   useEffect(() => {
     const box = ref.current
+    let movelistener, uplistener
 
     box.onmousedown = (e) => {
       const shiftX = e.clientX - box.getBoundingClientRect().left
@@ -47,15 +48,19 @@ const useDragEvent = (ref, contentRef = null) => {
         moveAt(e.pageX, e.pageY)
       }
 
-      document.addEventListener('mousemove', onMouseMove)
-
-      box.onmouseup = () => {
+      movelistener = document.addEventListener('mousemove', onMouseMove)
+      uplistener = document.addEventListener('mouseup', () => {
         document.removeEventListener('mousemove', onMouseMove)
         box.onmouseup = null
-      }
+      })
     }
 
     box.ondragstart = () => false
+
+    return () => {
+      document.removeEventListener('mousemove', movelistener)
+      document.removeEventListener('mouseup', uplistener)
+    }
   }, [width, height, ref, contentRef])
 
   useEffect(() => {
