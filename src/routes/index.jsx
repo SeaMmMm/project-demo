@@ -12,6 +12,7 @@ const lazyLoad = (path) => {
 
 import NotFound from '../pages/404'
 import HomePage from '../pages/HomePage'
+import Animate from '../pages/animate/Animate'
 import Canvas from '../pages/canvas/Canvas'
 import Cardio from '../pages/cardio/Cardio'
 import Clock from '../pages/clock/Clock'
@@ -34,7 +35,8 @@ export const projects = [
   { path: '/css', element: <CssTopicPage />, name: 'css' },
   { path: '/canvas', element: <Canvas />, name: 'canvas' },
   { path: '/console', element: <Console />, name: 'console' },
-  { path: 'scope', element: <Scope />, name: 'scope' },
+  { path: '/scope', element: <Scope />, name: 'scope' },
+  { path: '/svg', element: <Animate />, name: 'svg' },
 ]
 
 const routes = [

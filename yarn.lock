@@ -5781,6 +5781,11 @@ vite@^5.2.0:
   optionalDependencies:
     fsevents "~2.3.3"
 
+vivus@^0.4.6:
+  version "0.4.6"
+  resolved "https://mirrors.huaweicloud.com/repository/npm/vivus/-/vivus-0.4.6.tgz#60661b43d08aaa70efc1854dfd2f1583f2066608"
+  integrity sha512-q6cDPTGqw/bq9sKF2h2T6GJ9PlwAFncHq7MdaK95WTSyd/7gz//UHTZbJ3B+r8f7AhcISPTC3sv9+u65BmmFbw==
+
 walker@^1.0.8:
   version "1.0.8"
   resolved "https://mirrors.huaweicloud.com/repository/npm/walker/-/walker-1.0.8.tgz#bd498db477afe573dc04185f011d3ab8a8d7653f"
