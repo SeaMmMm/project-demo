@@ -1,13 +1,15 @@
 import PropTypes from 'prop-types'
+import { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import styled from 'styled-components'
+import useCurrentTime from '../hooks/useCurrentTime'
 import useHrefTitle from '../hooks/useHrefTitle'
 import getFormattedDate from '../utils/common/getFormatedDate'
-import { useEffect } from 'react'
 
-const Header = ({ date, isFixed }) => {
+const Header = ({ date = null, isFixed }) => {
   const title = useHrefTitle()
   const navigate = useNavigate()
+  const currentTime = useCurrentTime()
   const goHome = () => {
     navigate('/')
   }
@@ -20,7 +22,11 @@ const Header = ({ date, isFixed }) => {
     <Head $isFixed={isFixed}>
       <span onClick={goHome}>{'<'}</span>
       <p>{title}</p>
-      <h1>{getFormattedDate(date.year, date.month, date.day)}</h1>
+      <h1>
+        {date
+          ? getFormattedDate(date.year, date.month, date.day)
+          : getFormattedDate(currentTime?.year, currentTime?.month, currentTime?.day)}
+      </h1>
     </Head>
   )
 }
@@ -28,9 +34,9 @@ const Header = ({ date, isFixed }) => {
 Header.prototype = {
   isFixed: PropTypes.bool,
   date: {
-    year: PropTypes.number.isRequired,
-    month: PropTypes.number.isRequired,
-    day: PropTypes.number.isRequired,
+    year: PropTypes.number,
+    month: PropTypes.number,
+    day: PropTypes.number,
   },
 }
 

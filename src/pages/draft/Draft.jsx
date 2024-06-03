@@ -2,10 +2,10 @@
 /* eslint-disable no-console */
 import { useEffect, useRef } from 'react'
 import styled from 'styled-components'
-import { mouseEnterAndLeave, mouseOverAndOut } from './scripts/mouseHover'
-import Header from '../../components/Header'
 import Footer from '../../components/Footer'
+import Header from '../../components/Header'
 import draftInfo from './data/description'
+import { mouseEnterAndLeave } from './scripts/mouseHover'
 
 const Draft = () => {
   const date = { year: 2024, month: 5, day: 18 }
