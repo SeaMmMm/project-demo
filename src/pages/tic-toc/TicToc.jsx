@@ -2,6 +2,7 @@ import {
   AlertDialog,
   AlertDialogAction,
   AlertDialogContent,
+  AlertDialogDescription,
   AlertDialogFooter,
   AlertDialogHeader,
   AlertDialogTitle,
@@ -25,6 +26,7 @@ const winnerSets = [
 
 const TicToc = () => {
   const [board, setBoard] = useState(Array(9).fill(null))
+  const [isTie, setIsTie] = useState(false)
   const [isOpen, setIsOpen] = useState(false)
   const [user, setUser] = useState('X')
 
@@ -35,7 +37,13 @@ const TicToc = () => {
       setBoard(newBoard)
 
       if (isWin(user, newBoard)) {
-        showDiolog(user)
+        showDiolog()
+        return
+      }
+
+      if (newBoard.filter((item) => item === null).length === 0) {
+        setIsTie(true)
+        showDiolog()
         return
       }
     }
@@ -83,7 +91,12 @@ const TicToc = () => {
         <AlertDialog open={isOpen}>
           <AlertDialogContent>
             <AlertDialogHeader>
-              <AlertDialogTitle>玩家 {user} 获胜</AlertDialogTitle>
+              <AlertDialogTitle>
+                {isTie ? '平局' : `玩家 ${user} 获胜`}
+              </AlertDialogTitle>
+              <AlertDialogDescription>
+                {isTie ? '🤔' : 'Congradulations!'}
+              </AlertDialogDescription>
             </AlertDialogHeader>
             <AlertDialogFooter>
               <AlertDialogAction onClick={reset}>再来一局</AlertDialogAction>

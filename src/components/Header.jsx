@@ -1,4 +1,5 @@
 import PropTypes from 'prop-types'
+import back from '@/assets/svg/back.svg'
 import { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import styled from 'styled-components'
@@ -20,7 +21,7 @@ const Header = ({ date = null, isFixed }) => {
 
   return (
     <Head $isFixed={isFixed}>
-      <span onClick={goHome}>{'<'}</span>
+      <img src={back} alt='back' onClick={goHome} />
       <p>{title}</p>
       <h1>
         {date
@@ -53,7 +54,7 @@ const Head = styled.header`
   ${({ $isFixed }) =>
     $isFixed && 'position: fixed; top: 0; left: 0; width: 100%;'}
 
-  span {
+  img {
     padding: 4px 8px;
     color: #374151d2;
     font-size: 18px;
@@ -63,7 +64,7 @@ const Head = styled.header`
     transition: all 0.2s ease-in-out;
 
     &:hover {
-      color: #9ca3af;
+      background-color: #f9fafb;
     }
   }
 
