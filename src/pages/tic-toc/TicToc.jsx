@@ -7,6 +7,8 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
 } from '@/components/ui/alert-dialog'
+import { Button } from '@/components/ui/button'
+import { ChevronLeftIcon } from '@radix-ui/react-icons'
 import { useState } from 'react'
 import styled from 'styled-components'
 import Footer from '../../components/Footer'
@@ -23,31 +25,36 @@ const winnerSets = [
   [0, 4, 8],
   [2, 4, 6],
 ]
+let history = []
 
 const TicToc = () => {
   const [board, setBoard] = useState(Array(9).fill(null))
   const [isTie, setIsTie] = useState(false)
   const [isOpen, setIsOpen] = useState(false)
+  const [isBegin, setIsBegin] = useState(false)
   const [user, setUser] = useState('X')
 
   const handleBoardClick = (index) => {
-    if (board[index] === null) {
-      const newBoard = [...board]
-      newBoard[index] = user
-      setBoard(newBoard)
+    if (board[index] !== null) return
 
-      if (isWin(user, newBoard)) {
-        showDiolog()
-        return
-      }
+    const newBoard = [...board]
+    newBoard[index] = user
+    setBoard(newBoard)
+    history.push(newBoard)
 
-      if (newBoard.filter((item) => item === null).length === 0) {
-        setIsTie(true)
-        showDiolog()
-        return
-      }
+    if (isWin(user, newBoard)) {
+      showDiolog()
+      return
     }
+
+    if (newBoard.filter((item) => item === null).length === 0) {
+      setIsTie(true)
+      showDiolog()
+      return
+    }
+
     setUser(user === 'X' ? 'O' : 'X')
+    setIsBegin(true)
   }
 
   const isWin = (user, board) => {
@@ -71,6 +78,19 @@ const TicToc = () => {
     setBoard(Array(9).fill(null))
     setIsOpen(false)
     setUser('X')
+    setIsBegin(false)
+    history = []
+  }
+
+  const backStep = () => {
+    if (history.length === 1) {
+      reset()
+      return
+    } else {
+      history.pop()
+      setBoard(history[history.length - 1])
+      setUser(user === 'X' ? 'O' : 'X')
+    }
   }
 
   return (
@@ -88,6 +108,14 @@ const TicToc = () => {
             </div>
           ))}
         </div>
+        <Button
+          variant='outline'
+          disabled={!isBegin}
+          size='icon'
+          onClick={backStep}
+        >
+          <ChevronLeftIcon className='h-4 w-4' />
+        </Button>
         <AlertDialog open={isOpen}>
           <AlertDialogContent>
             <AlertDialogHeader>
