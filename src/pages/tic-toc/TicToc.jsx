@@ -79,6 +79,7 @@ const TicToc = () => {
     setIsOpen(false)
     setUser('X')
     setIsBegin(false)
+    setIsTie(false)
     history = []
   }
 
