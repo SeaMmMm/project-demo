@@ -1,3 +1,11 @@
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogContent,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+} from '@/components/ui/alert-dialog'
 import { useState } from 'react'
 import styled from 'styled-components'
 import Footer from '../../components/Footer'
@@ -17,6 +25,7 @@ const winnerSets = [
 
 const TicToc = () => {
   const [board, setBoard] = useState(Array(9).fill(null))
+  const [isOpen, setIsOpen] = useState(false)
   const [user, setUser] = useState('X')
 
   const handleBoardClick = (index) => {
@@ -27,6 +36,7 @@ const TicToc = () => {
 
       if (isWin(user, newBoard)) {
         showDiolog(user)
+        return
       }
     }
     setUser(user === 'X' ? 'O' : 'X')
@@ -45,8 +55,14 @@ const TicToc = () => {
     return result
   }
 
-  const showDiolog = (user) => {
-    console.log(user + ' is winner')
+  const showDiolog = () => {
+    setIsOpen(true)
+  }
+
+  const reset = () => {
+    setBoard(Array(9).fill(null))
+    setIsOpen(false)
+    setUser('X')
   }
 
   return (
@@ -64,6 +80,16 @@ const TicToc = () => {
             </div>
           ))}
         </div>
+        <AlertDialog open={isOpen}>
+          <AlertDialogContent>
+            <AlertDialogHeader>
+              <AlertDialogTitle>玩家 {user} 获胜</AlertDialogTitle>
+            </AlertDialogHeader>
+            <AlertDialogFooter>
+              <AlertDialogAction onClick={reset}>再来一局</AlertDialogAction>
+            </AlertDialogFooter>
+          </AlertDialogContent>
+        </AlertDialog>
       </Wrapper>
       <Footer index={12} data={description} />
     </>

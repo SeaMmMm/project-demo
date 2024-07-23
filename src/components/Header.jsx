@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom'
 import styled from 'styled-components'
 import useCurrentTime from '../hooks/useCurrentTime'
 import useHrefTitle from '../hooks/useHrefTitle'
-import getFormattedDate from '../lib/utils/common/getFormatedDate'
+import getFormattedDate from '../utils/getFormatedDate'
 
 const Header = ({ date = null, isFixed }) => {
   const title = useHrefTitle()

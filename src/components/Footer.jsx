@@ -6,7 +6,7 @@ import info from '../assets/icons/info.svg'
 import useClickOutside from '../hooks/useClickOutside'
 import useHrefTitle from '../hooks/useHrefTitle'
 import useLayer from '../store/layer'
-import getFilledNumber from '../lib/utils/common/getFilledNumber'
+import getFilledNumber from '../utils/getFilledNumber'
 
 const Footer = ({ index, data, children = null }) => {
   const [showDialog, setShowDialog] = useState(false)

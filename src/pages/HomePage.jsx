@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import styled from 'styled-components'
 import demo from '../assets/icons/demo.svg'
 import { projects } from '../routes'
-import getFilledNumber from '../lib/utils/common/getFilledNumber'
+import getFilledNumber from '../utils/getFilledNumber'
 
 const HomePage = () => {
   const [elements, setElements] = useState(projects)
