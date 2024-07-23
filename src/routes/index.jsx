@@ -24,6 +24,7 @@ import Frame from '../pages/frame/Frame'
 import Panel from '../pages/panel/Panel'
 import Scope from '../pages/scope/Scope'
 import Slider from '../pages/slider/Slider'
+import TicToc from '../pages/tic-toc/TicToc'
 
 export const projects = [
   { path: '/drum', element: <Drum />, name: 'drum' },
@@ -37,6 +38,7 @@ export const projects = [
   { path: '/console', element: <Console />, name: 'console' },
   { path: '/scope', element: <Scope />, name: 'scope' },
   { path: '/svg', element: <Animate />, name: 'svg' },
+  { path: '/tic-toc', element: <TicToc />, name: 'tic-toc' },
 ]
 
 const routes = [

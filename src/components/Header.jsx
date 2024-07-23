@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom'
 import styled from 'styled-components'
 import useCurrentTime from '../hooks/useCurrentTime'
 import useHrefTitle from '../hooks/useHrefTitle'
-import getFormattedDate from '../utils/common/getFormatedDate'
+import getFormattedDate from '../lib/utils/common/getFormatedDate'
 
 const Header = ({ date = null, isFixed }) => {
   const title = useHrefTitle()
@@ -25,7 +25,11 @@ const Header = ({ date = null, isFixed }) => {
       <h1>
         {date
           ? getFormattedDate(date.year, date.month, date.day)
-          : getFormattedDate(currentTime?.year, currentTime?.month, currentTime?.day)}
+          : getFormattedDate(
+              currentTime?.year,
+              currentTime?.month,
+              currentTime?.day
+            )}
       </h1>
     </Head>
   )
@@ -46,7 +50,8 @@ const Head = styled.header`
   align-items: center;
   justify-content: space-between;
 
-  ${({ $isFixed }) => $isFixed && 'position: fixed; top: 0; left: 0; width: 100%;'}
+  ${({ $isFixed }) =>
+    $isFixed && 'position: fixed; top: 0; left: 0; width: 100%;'}
 
   span {
     padding: 4px 8px;

@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import styled from 'styled-components'
 import demo from '../assets/icons/demo.svg'
 import { projects } from '../routes'
-import getFilledNumber from '../utils/common/getFilledNumber'
+import getFilledNumber from '../lib/utils/common/getFilledNumber'
 
 const HomePage = () => {
   const [elements, setElements] = useState(projects)
@@ -25,7 +25,11 @@ const HomePage = () => {
         </p>
         <Projects>
           {elements.map((project, idx) => (
-            <div key={idx} className='project' onClick={() => changeMade(project)}>
+            <div
+              key={idx}
+              className='project'
+              onClick={() => changeMade(project)}
+            >
               <span className='project-idx'>{getFilledNumber(idx + 1, 3)}</span>
               <span className='project-name'>{project.name}</span>
             </div>
