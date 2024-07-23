@@ -1,13 +1,16 @@
 import PropTypes from 'prop-types'
+import back from '@/assets/svg/back.svg'
+import { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import styled from 'styled-components'
+import useCurrentTime from '../hooks/useCurrentTime'
 import useHrefTitle from '../hooks/useHrefTitle'
-import getFormattedDate from '../utils/common/getFormatedDate'
-import { useEffect } from 'react'
+import getFormattedDate from '../utils/getFormatedDate'
 
-const Header = ({ date, isFixed }) => {
+const Header = ({ date = null, isFixed }) => {
   const title = useHrefTitle()
   const navigate = useNavigate()
+  const currentTime = useCurrentTime()
   const goHome = () => {
     navigate('/')
   }
@@ -18,9 +21,17 @@ const Header = ({ date, isFixed }) => {
 
   return (
     <Head $isFixed={isFixed}>
-      <span onClick={goHome}>{'<'}</span>
+      <img src={back} alt='back' onClick={goHome} />
       <p>{title}</p>
-      <h1>{getFormattedDate(date.year, date.month, date.day)}</h1>
+      <h1>
+        {date
+          ? getFormattedDate(date.year, date.month, date.day)
+          : getFormattedDate(
+              currentTime?.year,
+              currentTime?.month,
+              currentTime?.day
+            )}
+      </h1>
     </Head>
   )
 }
@@ -28,9 +39,9 @@ const Header = ({ date, isFixed }) => {
 Header.prototype = {
   isFixed: PropTypes.bool,
   date: {
-    year: PropTypes.number.isRequired,
-    month: PropTypes.number.isRequired,
-    day: PropTypes.number.isRequired,
+    year: PropTypes.number,
+    month: PropTypes.number,
+    day: PropTypes.number,
   },
 }
 
@@ -40,9 +51,10 @@ const Head = styled.header`
   align-items: center;
   justify-content: space-between;
 
-  ${({ $isFixed }) => $isFixed && 'position: fixed; top: 0; left: 0; width: 100%;'}
+  ${({ $isFixed }) =>
+    $isFixed && 'position: fixed; top: 0; left: 0; width: 100%;'}
 
-  span {
+  img {
     padding: 4px 8px;
     color: #374151d2;
     font-size: 18px;
@@ -52,7 +64,7 @@ const Head = styled.header`
     transition: all 0.2s ease-in-out;
 
     &:hover {
-      color: #9ca3af;
+      background-color: #f9fafb;
     }
   }
 

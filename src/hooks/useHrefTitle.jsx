@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { useHref } from 'react-router-dom'
-import removeSplash from '../utils/common/removeSplash'
+import removeSplash from '../utils/removeSplash'
 
 /**
  * @description: 获取当前路由的标题的hook, 会自动去除路径中的斜杠

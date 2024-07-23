@@ -1,4 +1,5 @@
 import { useRef } from 'react'
+import { isMobile } from 'react-device-detect'
 import styled from 'styled-components'
 import Footer from '../../components/Footer'
 import Header from '../../components/Header'
@@ -6,7 +7,6 @@ import useDragEvent from '../../hooks/useDragEvent'
 import useWindowSize from '../../hooks/useWindowSize'
 import scopeInfo from './data/description'
 import txt from './data/txt'
-import { isMobile } from 'react-device-detect'
 
 const Scope = () => {
   const date = { year: 2024, month: 5, day: 19 }

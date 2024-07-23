@@ -45,7 +45,7 @@ const useTimeRotate = () => {
     return () => clearInterval(interval)
   }, [])
 
-  return { timeRotate, shouldTransition }
+  return { timeRotate, shouldTransition, getTime }
 }
 
 export default useTimeRotate
