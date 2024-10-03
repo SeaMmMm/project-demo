@@ -12,8 +12,8 @@ const App = () => {
 }
 
 const Wrapper = styled.div`
-  font-family: 'JetBrains Mono', 'Fira Code', Menlo, Monaco, Consolas, 'Liberation Mono',
-    'Courier New', monospace;
+  font-family: 'JetBrains Mono', 'Fira Code', Menlo, Monaco, Consolas,
+    'Liberation Mono', 'Courier New', monospace;
 `
 
 export default App

@@ -1,9 +1,10 @@
-import { useState } from 'react'
+import { Suspense, useState } from 'react'
 import styled from 'styled-components'
 import Footer from '../../components/Footer'
 import Header from '../../components/Header'
 import useDebouncedFn from '../../hooks/useDebouncedFn'
 import Controler from './components/Controler'
+import Loading from './components/Loading'
 import frameInfo from './data/description'
 
 const Frame = () => {
@@ -40,13 +41,16 @@ const Frame = () => {
             }}
           />
           <div>
-            Base color: <input type='color' value={color} onChange={handleColorChange} />
+            Base color:{' '}
+            <input type='color' value={color} onChange={handleColorChange} />
           </div>
         </Content>
-        <img
-          src='https://opendoodles.s3-us-west-1.amazonaws.com/running.svg'
-          alt='woman-run'
-        />
+        <Suspense fallback={<Loading />}>
+          <img
+            src='https://opendoodles.s3-us-west-1.amazonaws.com/running.svg'
+            alt='woman-run'
+          />
+        </Suspense>
       </Wrapper>
       <Footer index={4} data={frameInfo} />
     </>
