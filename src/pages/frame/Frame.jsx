@@ -1,22 +1,22 @@
-import { Suspense, useState } from 'react'
-import styled from 'styled-components'
-import Footer from '../../components/Footer'
-import Header from '../../components/Header'
-import useDebouncedFn from '../../hooks/useDebouncedFn'
-import Controler from './components/Controler'
-import Loading from './components/Loading'
-import frameInfo from './data/description'
+import { Suspense, useState } from "react";
+import styled from "styled-components";
+import Footer from "../../components/Footer";
+import Header from "../../components/Header";
+import useDebouncedFn from "../../hooks/useDebouncedFn";
+import Controler from "./Controler";
+import frameInfo from "./description";
+import Loading from "./Loading";
 
 const Frame = () => {
-  const date = { year: 2024, month: 5, day: 5 }
-  const [spacing, setSpacing] = useState(0)
-  const [blur, setBlur] = useState(0)
-  const [color, setColor] = useState('#000000')
-  const debouncedSetColor = useDebouncedFn(setColor, 100)
+  const date = { year: 2024, month: 5, day: 5 };
+  const [spacing, setSpacing] = useState(0);
+  const [blur, setBlur] = useState(0);
+  const [color, setColor] = useState("#000000");
+  const debouncedSetColor = useDebouncedFn(setColor, 100);
 
   const handleColorChange = (e) => {
-    debouncedSetColor(e.target.value)
-  }
+    debouncedSetColor(e.target.value);
+  };
 
   return (
     <>
@@ -27,35 +27,31 @@ const Frame = () => {
         </p>
         <Content>
           <Controler
-            label='Spacing:'
+            label="Spacing:"
             value={spacing}
             callback={(e) => {
-              setSpacing(e.target.value)
+              setSpacing(e.target.value);
             }}
           />
           <Controler
-            label='Blur:'
+            label="Blur:"
             value={blur}
             callback={(e) => {
-              setBlur(e.target.value)
+              setBlur(e.target.value);
             }}
           />
           <div>
-            Base color:{' '}
-            <input type='color' value={color} onChange={handleColorChange} />
+            Base color: <input type="color" value={color} onChange={handleColorChange} />
           </div>
         </Content>
         <Suspense fallback={<Loading />}>
-          <img
-            src='https://opendoodles.s3-us-west-1.amazonaws.com/running.svg'
-            alt='woman-run'
-          />
+          <img src="https://opendoodles.s3-us-west-1.amazonaws.com/running.svg" alt="woman-run" />
         </Suspense>
       </Wrapper>
       <Footer index={4} data={frameInfo} />
     </>
-  )
-}
+  );
+};
 
 const Wrapper = styled.div`
   position: absolute;
@@ -90,7 +86,7 @@ const Wrapper = styled.div`
       font-size: 20px;
     }
   }
-`
+`;
 
 const Content = styled.div`
   display: flex;
@@ -102,6 +98,6 @@ const Content = styled.div`
     place-items: center;
     gap: 20px;
   }
-`
+`;
 
-export default Frame
+export default Frame;

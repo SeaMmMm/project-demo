@@ -1,7 +1,7 @@
-import Lottie from 'lottie-react'
-import { Link } from 'react-router-dom'
-import styled from 'styled-components'
-import Animation from '../assets/404.json'
+import Lottie from "lottie-react";
+import { Link } from "react-router-dom";
+import styled from "styled-components";
+import Animation from "../assets/404.json";
 
 const NotFound = () => {
   return (
@@ -9,10 +9,10 @@ const NotFound = () => {
       <Wrapper>
         <Lottie animationData={Animation} />
       </Wrapper>
-      <Back to='/'>cd ../</Back>
+      <Back to="/">cd ../</Back>
     </>
-  )
-}
+  );
+};
 
 const Wrapper = styled.div`
   position: fixed;
@@ -20,7 +20,7 @@ const Wrapper = styled.div`
   left: 50%;
   transform: translate(-50%, -50%) scaleY(0.7);
   width: 100%;
-`
+`;
 
 const Back = styled(Link)`
   position: absolute;
@@ -37,6 +37,6 @@ const Back = styled(Link)`
   &:hover {
     color: #9ca3af;
   }
-`
+`;
 
-export default NotFound
+export default NotFound;

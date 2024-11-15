@@ -1,13 +1,13 @@
-import { useState } from 'react'
-import styled from 'styled-components'
+import { useState } from "react";
+import styled from "styled-components";
 
 const Card = ({ info }) => {
-  const { head, content, foot } = info
-  const [show, setShow] = useState(false)
+  const { head, content, foot } = info;
+  const [show, setShow] = useState(false);
 
   const handleClick = () => {
-    setShow(!show)
-  }
+    setShow(!show);
+  };
 
   return (
     <Div onClick={handleClick} $show={show}>
@@ -15,8 +15,8 @@ const Card = ({ info }) => {
       <p>{content}</p>
       <h3>{foot}</h3>
     </Div>
-  )
-}
+  );
+};
 
 const Div = styled.div`
   height: 100%;
@@ -30,7 +30,7 @@ const Div = styled.div`
   border: 1px solid black;
   border-right: none;
   overflow: hidden;
-  transform: ${(props) => (props.$show ? 'scaleX(1.1)' : 'scaleX(1)')};
+  transform: ${(props) => (props.$show ? "scaleX(1.1)" : "scaleX(1)")};
 
   &:last-child {
     border-right: 1px solid black;
@@ -45,17 +45,17 @@ const Div = styled.div`
     font-size: 1.2rem;
     font-weight: bold;
 
-    ${(props) => props.$show && 'font-size: 1.5rem;'}
+    ${(props) => props.$show && "font-size: 1.5rem;"}
   }
 
   h1 {
     transform: translateY(-15vh);
-    ${(props) => props.$show && 'transform: translateY(0);'}
+    ${(props) => props.$show && "transform: translateY(0);"}
   }
 
   h3 {
     transform: translateY(15vh);
-    ${(props) => props.$show && 'transform: translateY(0);'}
+    ${(props) => props.$show && "transform: translateY(0);"}
   }
 
   h1,
@@ -72,6 +72,6 @@ const Div = styled.div`
       font-size: 1rem;
     }
   }
-`
+`;
 
-export default Card
+export default Card;

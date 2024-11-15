@@ -1,52 +1,50 @@
-import { useState } from 'react'
-import styled from 'styled-components'
-import Footer from '../../components/Footer'
-import Header from '../../components/Header'
-import useDebouncedFn from '../../hooks/useDebouncedFn'
-import Card from './components/Card'
-import { inventors } from './data/array-cardio'
-import description from './data/description'
+import { useState } from "react";
+import styled from "styled-components";
+import Footer from "../../components/Footer";
+import Header from "../../components/Header";
+import useDebouncedFn from "../../hooks/useDebouncedFn";
+import Card from "./Card";
+import { inventors } from "./array-cardio";
+import description from "./description";
 
 const Cardio = () => {
-  const date = { year: 2024, month: 5, day: 6 }
-  const [people, setPeople] = useState(inventors)
+  const date = { year: 2024, month: 5, day: 6 };
+  const [people, setPeople] = useState(inventors);
 
   const handleSearchName = (e) => {
-    const name = e.target.value
+    const name = e.target.value;
 
-    if (name === '') {
-      setPeople(inventors)
-      return
+    if (name === "") {
+      setPeople(inventors);
+      return;
     }
 
     const filteredPeople = inventors.filter((inventor) => {
-      const { first, last } = inventor
+      const { first, last } = inventor;
       return (
         first.toLowerCase().includes(name.toLowerCase()) ||
         last.toLowerCase().includes(name.toLowerCase())
-      )
-    })
+      );
+    });
 
-    setPeople(filteredPeople)
-  }
-  const debouncedHandleSeearchName = useDebouncedFn(handleSearchName, 500)
+    setPeople(filteredPeople);
+  };
+  const debouncedHandleSeearchName = useDebouncedFn(handleSearchName, 500);
 
   const reset = () => {
-    setPeople(inventors)
-  }
+    setPeople(inventors);
+  };
 
   return (
     <>
       <Header date={date} />
       <Wrapper>
-        <input type='text' placeholder='Search Name' onChange={debouncedHandleSeearchName} />
+        <input type="text" placeholder="Search Name" onChange={debouncedHandleSeearchName} />
         <Cards>
           {people.length ? (
-            people.map((inventor, index) => (
-              <Card key={index} inventor={inventor} num={index} />
-            ))
+            people.map((inventor, index) => <Card key={index} inventor={inventor} num={index} />)
           ) : (
-            <div className='not-found'>
+            <div className="not-found">
               <p>No Inventor Found</p>
               <h1 onClick={reset}>clear</h1>
               <h2 onClick={reset}>clear</h2>
@@ -56,8 +54,8 @@ const Cardio = () => {
       </Wrapper>
       <Footer index={5} data={description} />
     </>
-  )
-}
+  );
+};
 
 const Wrapper = styled.div`
   padding: 50px 100px;
@@ -88,7 +86,7 @@ const Wrapper = styled.div`
       padding: 10px;
     }
   }
-`
+`;
 
 const Cards = styled.div`
   margin-top: 20px;
@@ -145,6 +143,6 @@ const Cards = styled.div`
       }
     }
   }
-`
+`;
 
-export default Cardio
+export default Cardio;

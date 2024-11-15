@@ -1,43 +1,43 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-console */
-import { useEffect, useRef } from 'react'
-import styled from 'styled-components'
-import Footer from '../../components/Footer'
-import Header from '../../components/Header'
-import draftInfo from './data/description'
-import { mouseEnterAndLeave } from './scripts/mouseHover'
+import { useEffect, useRef } from "react";
+import styled from "styled-components";
+import Footer from "../../components/Footer";
+import Header from "../../components/Header";
+import draftInfo from "./description";
+import { mouseEnterAndLeave } from "./mouseHover";
 
 const Draft = () => {
-  const date = { year: 2024, month: 5, day: 18 }
-  const parentRef = useRef(null)
-  const childRef = useRef(null)
+  const date = { year: 2024, month: 5, day: 18 };
+  const parentRef = useRef(null);
+  const childRef = useRef(null);
 
   useEffect(() => {
     // mouseenter和mouseleave事件不会冒泡，只有mouseover和mouseout事件会冒泡
     // const removeLisener = mouseOverAndOut(parentRef, childRef)
-    const removeLisener2 = mouseEnterAndLeave(parentRef, childRef)
+    const removeLisener2 = mouseEnterAndLeave(parentRef, childRef);
 
     return () => {
       // removeLisener()
-      removeLisener2()
-    }
-  }, [])
+      removeLisener2();
+    };
+  }, []);
 
   return (
     <>
       <Header date={date} />
       <Wrapper>
-        <div className='parent' ref={parentRef}>
+        <div className="parent" ref={parentRef}>
           parent
-          <div className='child' ref={childRef}>
+          <div className="child" ref={childRef}>
             child
           </div>
         </div>
       </Wrapper>
       <Footer data={draftInfo} />
     </>
-  )
-}
+  );
+};
 
 const Wrapper = styled.div`
   position: absolute;
@@ -65,5 +65,5 @@ const Wrapper = styled.div`
     left: 50%;
     transform: translate(-50%, -50%);
   }
-`
-export default Draft
+`;
+export default Draft;

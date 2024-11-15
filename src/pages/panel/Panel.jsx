@@ -1,14 +1,14 @@
-import styled from 'styled-components'
-import Footer from '../../components/Footer'
-import Header from '../../components/Header'
-import useWindowSize from '../../hooks/useWindowSize'
-import Card from './components/Card'
-import cardsInfo from './data/cards'
-import description from './data/description'
+import styled from "styled-components";
+import Footer from "../../components/Footer";
+import Header from "../../components/Header";
+import useWindowSize from "../../hooks/useWindowSize";
+import Card from "./Card";
+import cardsInfo from "./cards";
+import description from "./description";
 
 const Panel = () => {
-  const date = { year: 2024, month: 5, day: 8 }
-  const { height } = useWindowSize()
+  const date = { year: 2024, month: 5, day: 8 };
+  const { height } = useWindowSize();
 
   return (
     <>
@@ -20,8 +20,8 @@ const Panel = () => {
       </Wrapper>
       <Footer index={6} data={description} />
     </>
-  )
-}
+  );
+};
 
 const Wrapper = styled.div`
   width: 100%;
@@ -37,6 +37,6 @@ const Wrapper = styled.div`
     grid-template-columns: repeat(2, 1fr);
     height: ${(props) => `calc(${props.$height}px - 60px)`};
   }
-`
+`;
 
-export default Panel
+export default Panel;

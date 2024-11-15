@@ -1,44 +1,40 @@
-import { useEffect, useState } from 'react'
-import { useNavigate } from 'react-router-dom'
-import styled from 'styled-components'
-import demo from '../assets/icons/demo.svg'
-import { projects } from '../routes'
-import getFilledNumber from '../utils/getFilledNumber'
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import styled from "styled-components";
+import demo from "../assets/icons/demo.svg";
+import { projects } from "../routes";
+import getFilledNumber from "../utils/getFilledNumber";
 
 const HomePage = () => {
-  const [elements, setElements] = useState(projects)
-  const navigate = useNavigate()
+  const [elements, setElements] = useState(projects);
+  const navigate = useNavigate();
   const changeMade = (project) => {
-    navigate(project.path)
-  }
+    navigate(project.path);
+  };
 
   useEffect(() => {
-    setElements(projects)
-  }, [])
+    setElements(projects);
+  }, []);
 
   return (
     <Wrapper>
       <Content>
         <p>
           <span>Demo projects </span>
-          <img src={demo} alt='icon' />
+          <img src={demo} alt="icon" />
         </p>
         <Projects>
           {elements.map((project, idx) => (
-            <div
-              key={idx}
-              className='project'
-              onClick={() => changeMade(project)}
-            >
-              <span className='project-idx'>{getFilledNumber(idx + 1, 3)}</span>
-              <span className='project-name'>{project.name}</span>
+            <div key={idx} className="project" onClick={() => changeMade(project)}>
+              <span className="project-idx">{getFilledNumber(idx + 1, 3)}</span>
+              <span className="project-name">{project.name}</span>
             </div>
           ))}
         </Projects>
       </Content>
     </Wrapper>
-  )
-}
+  );
+};
 
 const Wrapper = styled.div`
   position: absolute;
@@ -51,7 +47,7 @@ const Wrapper = styled.div`
     left: 20%;
     transform: translate(-20%, -20%);
   }
-`
+`;
 
 const Content = styled.div`
   display: grid;
@@ -85,7 +81,7 @@ const Content = styled.div`
     right: -0.7rem;
     transform: translateY(-50%);
   }
-`
+`;
 
 const Projects = styled.div`
   display: grid;
@@ -122,6 +118,6 @@ const Projects = styled.div`
     grid-template-columns: auto;
     row-gap: 20px;
   }
-`
+`;
 
-export default HomePage
+export default HomePage;

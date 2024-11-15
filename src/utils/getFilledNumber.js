@@ -5,7 +5,7 @@
  * @returns
  */
 const getFilledNumber = (number, length) => {
-  return number.toString().padStart(length, '0')
-}
+  return number.toString().padStart(length, "0");
+};
 
-export default getFilledNumber
+export default getFilledNumber;

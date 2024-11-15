@@ -1,26 +1,26 @@
-import styled from 'styled-components'
-import Footer from '../../components/Footer'
-import Header from '../../components/Header'
-import usePopupKey from '../../hooks/usePopupKey'
-import useDrumInfo from '../../store/drum'
-import DrumButton from './components/DrumButton'
+import styled from "styled-components";
+import Footer from "../../components/Footer";
+import Header from "../../components/Header";
+import usePopupKey from "../../hooks/usePopupKey";
+import useDrumInfo from "../../store/drum";
+import DrumButton from "./DrumButton";
 
 const drums = [
-  { index: 0, letter: 'A', description: 'CLAP' },
-  { index: 1, letter: 'S', description: 'HIHAT' },
-  { index: 2, letter: 'D', description: 'KICK' },
-  { index: 3, letter: 'F', description: 'OPENHAT' },
-  { index: 4, letter: 'G', description: 'BOOM' },
-  { index: 5, letter: 'H', description: 'RIDE' },
-  { index: 6, letter: 'J', description: 'SNARE' },
-  { index: 7, letter: 'K', description: 'TINK' },
-  { index: 8, letter: 'L', description: 'TOM' },
-]
+  { index: 0, letter: "A", description: "CLAP" },
+  { index: 1, letter: "S", description: "HIHAT" },
+  { index: 2, letter: "D", description: "KICK" },
+  { index: 3, letter: "F", description: "OPENHAT" },
+  { index: 4, letter: "G", description: "BOOM" },
+  { index: 5, letter: "H", description: "RIDE" },
+  { index: 6, letter: "J", description: "SNARE" },
+  { index: 7, letter: "K", description: "TINK" },
+  { index: 8, letter: "L", description: "TOM" },
+];
 
 const Drum = () => {
-  const date = { year: 2024, month: 4, day: 29 }
-  const drumsInfo = useDrumInfo((state) => state.description)
-  const { showNum } = usePopupKey()
+  const date = { year: 2024, month: 4, day: 29 };
+  const drumsInfo = useDrumInfo((state) => state.description);
+  const { showNum } = usePopupKey();
 
   return (
     <>
@@ -38,8 +38,8 @@ const Drum = () => {
       </Wrapper>
       <Footer index={1} data={drumsInfo} />
     </>
-  )
-}
+  );
+};
 
 const Wrapper = styled.div`
   position: absolute;
@@ -61,6 +61,6 @@ const Wrapper = styled.div`
     justify-content: space-around;
     align-content: center;
   }
-`
+`;
 
-export default Drum
+export default Drum;

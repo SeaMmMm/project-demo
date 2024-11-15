@@ -1,15 +1,15 @@
-import { useRef } from 'react'
-import styled from 'styled-components'
-import Footer from '../../components/Footer'
-import Header from '../../components/Header'
-import useDrawCanvas from '../../hooks/useDrawCanvas'
-import canvasInfo from './data/description'
+import { useRef } from "react";
+import styled from "styled-components";
+import Footer from "../../components/Footer";
+import Header from "../../components/Header";
+import useDrawCanvas from "../../hooks/useDrawCanvas";
+import canvasInfo from "./description";
 
 const Canvas = () => {
-  const date = { year: 2024, month: 5, day: 15 }
-  const canvasRef = useRef(null)
+  const date = { year: 2024, month: 5, day: 15 };
+  const canvasRef = useRef(null);
   const { size, handleMouseDown, handleMouseMove, handleMouseClear, reset } =
-    useDrawCanvas(canvasRef)
+    useDrawCanvas(canvasRef);
 
   return (
     <>
@@ -27,8 +27,8 @@ const Canvas = () => {
       <Reload onClick={reset}>⟲</Reload>
       <Footer index={8} data={canvasInfo} />
     </>
-  )
-}
+  );
+};
 
 const Canva = styled.canvas`
   position: absolute;
@@ -36,7 +36,7 @@ const Canva = styled.canvas`
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
-`
+`;
 
 const Reload = styled.div`
   position: absolute;
@@ -49,6 +49,6 @@ const Reload = styled.div`
   cursor: pointer;
   background-color: #d1d5db;
   padding: 5px 8px;
-`
+`;
 
-export default Canvas
+export default Canvas;

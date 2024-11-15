@@ -1,49 +1,49 @@
 /* eslint-disable no-console */
-import { useEffect, useState } from 'react'
-import styled from 'styled-components'
-import Footer from '../../components/Footer'
-import Header from '../../components/Header'
-import useWindowSize from '../../hooks/useWindowSize'
-import consoleInfo from './data/description'
-import logFunc from './scripts/logFunc'
+import { useEffect, useState } from "react";
+import styled from "styled-components";
+import Footer from "../../components/Footer";
+import Header from "../../components/Header";
+import useWindowSize from "../../hooks/useWindowSize";
+import consoleInfo from "./description";
+import logFunc from "./logFunc";
 
 const Console = () => {
-  const date = { year: 2024, month: 5, day: 16 }
-  const [logs, setLogs] = useState([])
-  const [isPhone, setIsPhone] = useState(false)
-  const { width } = useWindowSize()
+  const date = { year: 2024, month: 5, day: 16 };
+  const [logs, setLogs] = useState([]);
+  const [isPhone, setIsPhone] = useState(false);
+  const { width } = useWindowSize();
 
   useEffect(() => {
-    const originalConsoleLog = console.log
+    const originalConsoleLog = console.log;
 
     if (width < 768) {
-      setIsPhone(true)
+      setIsPhone(true);
       console.log = (...args) => {
-        const [message, style] = args
+        const [message, style] = args;
 
-        originalConsoleLog('message', args)
+        originalConsoleLog("message", args);
         if (style) {
-          setLogs((prevLogs) => [...prevLogs, { message, style }])
+          setLogs((prevLogs) => [...prevLogs, { message, style }]);
         } else {
-          setLogs((prevLogs) => [...prevLogs, { message, style: '' }])
+          setLogs((prevLogs) => [...prevLogs, { message, style: "" }]);
         }
-        originalConsoleLog.apply(console, args)
-      }
-    } else setIsPhone(false)
+        originalConsoleLog.apply(console, args);
+      };
+    } else setIsPhone(false);
 
-    logFunc()
+    logFunc();
 
     return () => {
-      console.log = originalConsoleLog
-    }
-  }, [width])
+      console.log = originalConsoleLog;
+    };
+  }, [width]);
 
   return (
     <>
       <Header date={date} />
       <Content $isPhone={isPhone}>
         <span>CONSOLE.LOG</span>
-        <p>{isPhone ? '' : 'Open the console to view the output'}</p>
+        <p>{isPhone ? "" : "Open the console to view the output"}</p>
         {isPhone &&
           logs.map((log, index) => (
             <P key={index} $styles={log.style}>
@@ -53,8 +53,8 @@ const Console = () => {
       </Content>
       <Footer index={9} data={consoleInfo} />
     </>
-  )
-}
+  );
+};
 
 const Content = styled.div`
   width: 340px;
@@ -67,7 +67,7 @@ const Content = styled.div`
   overflow-y: scroll;
 
   display: flex;
-  justify-content: ${({ $isPhone }) => ($isPhone ? 'flex-start' : 'center')};
+  justify-content: ${({ $isPhone }) => ($isPhone ? "flex-start" : "center")};
   align-items: center;
   flex-direction: column;
   text-align: center;
@@ -75,10 +75,10 @@ const Content = styled.div`
 
   font-size: 2rem;
   font-weight: bold;
-`
+`;
 
 const P = styled.p`
   ${({ $styles }) => $styles};
-`
+`;
 
-export default Console
+export default Console;

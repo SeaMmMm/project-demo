@@ -1,35 +1,29 @@
-import { useState } from 'react'
-import styled from 'styled-components'
-import Footer from '../../components/Footer'
-import Header from '../../components/Header'
-import RangeSlider from './components/RangeSlider'
-import description from './data/description'
+import { useState } from "react";
+import styled from "styled-components";
+import Footer from "../../components/Footer";
+import Header from "../../components/Header";
+import RangeSlider from "./RangeSlider";
+import description from "./description";
 
 const Slider = () => {
-  const date = { year: 2024, month: 5, day: 4 }
-  const [value, setValue] = useState(0)
+  const date = { year: 2024, month: 5, day: 4 };
+  const [value, setValue] = useState(0);
 
   const handleChange = (e) => {
-    setValue(e.target.value)
-  }
+    setValue(e.target.value);
+  };
 
   return (
     <>
       <Header date={date} />
       <Wrapper>
-        <RangeSlider
-          value={value}
-          max={200}
-          callback={handleChange}
-          width={400}
-          size='medium'
-        />
+        <RangeSlider value={value} max={200} callback={handleChange} width={400} size="medium" />
         <p>value: {value}</p>
       </Wrapper>
       <Footer index={3} data={description} />
     </>
-  )
-}
+  );
+};
 
 const Wrapper = styled.div`
   position: absolute;
@@ -48,6 +42,6 @@ const Wrapper = styled.div`
   @media (max-width: 768px) {
     gap: 20px;
   }
-`
+`;
 
-export default Slider
+export default Slider;

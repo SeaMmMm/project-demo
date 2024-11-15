@@ -45,6 +45,6 @@ voluptates minus repudiandae consequuntur, asperiores enim optio tempora perfere
 illum esse, consectetur eos. Vitae id laudantium architecto quis eum laborum nulla
 voluptatum? Adipisci voluptatem autem incidunt fugiat, laboriosam, iusto, harum quasi
 ipsum quisquam impedit culpa laborum neque! Iste aperiam nobis minus fugiat nemo illo
-odit saepe, veniam atque reiciendis possimus provident consequatur?`
+odit saepe, veniam atque reiciendis possimus provident consequatur?`;
 
-export default txt
+export default txt;

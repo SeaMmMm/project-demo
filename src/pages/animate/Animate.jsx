@@ -1,28 +1,28 @@
-import { useEffect, useState } from 'react'
-import styled from 'styled-components'
-import Vivus from 'vivus'
-import Footer from '../../components/Footer'
-import Header from '../../components/Header'
-import svgInfo from './data/description'
-import Svg from './components/Svg'
+import { useEffect, useState } from "react";
+import styled from "styled-components";
+import Vivus from "vivus";
+import Footer from "../../components/Footer";
+import Header from "../../components/Header";
+import svgInfo from "./description";
+import Svg from "./Svg";
 
 const Animate = () => {
-  const date = { year: 2024, month: 5, day: 22 }
-  const [camera, setCamera] = useState(null)
+  const date = { year: 2024, month: 5, day: 22 };
+  const [camera, setCamera] = useState(null);
 
   useEffect(() => {
-    const rect = new Vivus('polaroid', {
-      type: 'oneByOne',
+    const rect = new Vivus("polaroid", {
+      type: "oneByOne",
       duration: 250,
       forceRender: false,
-    })
+    });
 
-    setCamera(rect)
-  }, [])
+    setCamera(rect);
+  }, []);
 
   const handleClick = () => {
-    camera.reset().play()
-  }
+    camera.reset().play();
+  };
   return (
     <>
       <Header date={date} />
@@ -31,8 +31,8 @@ const Animate = () => {
       </Content>
       <Footer index={11} data={svgInfo} />
     </>
-  )
-}
+  );
+};
 
 const Content = styled.div`
   position: absolute;
@@ -52,6 +52,6 @@ const Content = styled.div`
     stroke-linejoin: round;
     stroke-miterlimit: 10;
   }
-`
+`;
 
-export default Animate
+export default Animate;
