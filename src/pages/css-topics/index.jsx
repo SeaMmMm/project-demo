@@ -6,7 +6,7 @@ import markdown from "./articals/001.md";
 import MarkdownContent from "./Markdown";
 
 const CssTopicPage = () => {
-  const [content, setContent] = useState(markdown);
+  const [content, setContent] = useState(() => markdown);
   const [isError, setIsError] = useState(false);
   const [num, setNum] = useState(1);
 

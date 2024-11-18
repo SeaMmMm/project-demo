@@ -1,25 +1,14 @@
 import styled from "styled-components";
 import usePopupKey from "../../hooks/usePopupKey";
 import DrumButton from "./DrumButton";
-
-const drums = [
-  { index: 0, letter: "A", description: "CLAP" },
-  { index: 1, letter: "S", description: "HIHAT" },
-  { index: 2, letter: "D", description: "KICK" },
-  { index: 3, letter: "F", description: "OPENHAT" },
-  { index: 4, letter: "G", description: "BOOM" },
-  { index: 5, letter: "H", description: "RIDE" },
-  { index: 6, letter: "J", description: "SNARE" },
-  { index: 7, letter: "K", description: "TINK" },
-  { index: 8, letter: "L", description: "TOM" },
-];
+import drumsData from "./drums";
 
 const Drum = () => {
   const { showNum } = usePopupKey();
   return (
     <>
       <Wrapper>
-        {drums.map((drum, idx) => (
+        {drumsData.map((drum, idx) => (
           <DrumButton
             key={idx}
             index={idx}

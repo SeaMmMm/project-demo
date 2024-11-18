@@ -58,7 +58,10 @@ const TicToc = () => {
     winnerSets.some((set) => set.every((index) => board[index] === user));
   const toggleUser = (user) => (user === "X" ? "O" : "X");
   const showDialog = (tie) => handleGameStateUpdate({ isOpen: true, isTie: tie });
-  const reset = () => setGameState({ ...initializeState() });
+  const reset = () => {
+    setGameState({ ...initializeState() });
+    setHistory([]);
+  };
 
   const backStep = () => {
     if (history.length <= 1) {

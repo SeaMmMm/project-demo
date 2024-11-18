@@ -1,5 +1,5 @@
+import Loading from "@/components/Loading";
 import ContentPage from "@/pages/ContentPage";
-import Loading from "@/pages/Loading";
 import { Suspense } from "react";
 import NotFound from "../pages/404";
 import HomePage from "../pages/HomePage";
