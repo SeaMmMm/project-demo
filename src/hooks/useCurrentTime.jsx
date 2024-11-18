@@ -1,20 +1,20 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState } from "react";
 
 const useCurrentTime = () => {
-  const [currentTime, setCurrentTime] = useState(null)
+  const [currentTime, setCurrentTime] = useState(null);
 
   useEffect(() => {
     if (currentTime === null) {
-      const date = new Date()
+      const date = new Date();
       setCurrentTime({
         year: date.getFullYear(),
         month: date.getMonth() + 1,
         day: date.getDate(),
-      })
+      });
     }
-  }, [currentTime])
+  }, [currentTime]);
 
-  return currentTime
-}
+  return currentTime;
+};
 
-export default useCurrentTime
+export default useCurrentTime;

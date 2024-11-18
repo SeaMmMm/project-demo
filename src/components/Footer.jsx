@@ -1,42 +1,42 @@
 /* eslint-disable react/display-name */
-import PropTypes from 'prop-types'
-import { useRef, useState } from 'react'
-import styled from 'styled-components'
-import info from '../assets/icons/info.svg'
-import useClickOutside from '../hooks/useClickOutside'
-import useHrefTitle from '../hooks/useHrefTitle'
-import useLayer from '../store/layer'
-import getFilledNumber from '../utils/getFilledNumber'
+import PropTypes from "prop-types";
+import { useRef, useState } from "react";
+import { useHref } from "react-router-dom";
+import styled from "styled-components";
+import info from "../assets/icons/info.svg";
+import useClickOutside from "../hooks/useClickOutside";
+import useLayer from "../store/layer";
+import getFilledNumber from "../utils/getFilledNumber";
 
 const Footer = ({ index, data, children = null }) => {
-  const [showDialog, setShowDialog] = useState(false)
-  const [isInitial, setIsInitial] = useState(true)
-  const title = useHrefTitle()
-  const ref = useRef(null)
-  const infoRef = useRef(null)
+  const [showDialog, setShowDialog] = useState(false);
+  const [isInitial, setIsInitial] = useState(true);
+  const title = useHref().split("/").pop();
+  const ref = useRef(null);
+  const infoRef = useRef(null);
 
-  const isShowLayer = useLayer((state) => state.isShowLayer)
-  const toggleLayer = useLayer((state) => state.toggleLayer)
-  const setToHideLayer = useLayer((state) => state.setLayerToFalse)
+  const isShowLayer = useLayer((state) => state.isShowLayer);
+  const toggleLayer = useLayer((state) => state.toggleLayer);
+  const setToHideLayer = useLayer((state) => state.setLayerToFalse);
 
   useClickOutside(ref, (e) => {
-    if (e.target === infoRef.current) return
+    if (e.target === infoRef.current) return;
 
-    setShowDialog(false)
-    setToHideLayer()
-  })
+    setShowDialog(false);
+    setToHideLayer();
+  });
 
   const toggleDialog = () => {
-    setShowDialog(!showDialog)
-    toggleLayer()
-    setIsInitial(false)
-  }
+    setShowDialog(!showDialog);
+    toggleLayer();
+    setIsInitial(false);
+  };
 
   return (
     <>
       <Mosk $isShow={isShowLayer} $initial={isInitial} />
       <Wrapper>
-        <div className='current'>
+        <div className="current">
           <p>{index ? getFilledNumber(index, 3) : title}</p>
         </div>
         <Info src={info} onClick={toggleDialog} ref={infoRef} />
@@ -44,15 +44,17 @@ const Footer = ({ index, data, children = null }) => {
           <p>{data.description}</p>
           {children}
           {data.codeurl && (
-            <a href={data.codeurl} target='_blank'>
+            <a href={data.codeurl} target="_blank">
               source
             </a>
           )}
         </Content>
       </Wrapper>
     </>
-  )
-}
+  );
+};
+
+export default Footer;
 
 Footer.prototype = {
   index: PropTypes.number,
@@ -60,7 +62,7 @@ Footer.prototype = {
     description: PropTypes.string.isRequired,
     codeurl: PropTypes.string,
   },
-}
+};
 
 const Wrapper = styled.div`
   @keyframes moveUp {
@@ -98,7 +100,7 @@ const Wrapper = styled.div`
       font-weight: bold;
     }
   }
-`
+`;
 
 const Info = styled.img`
   position: fixed;
@@ -111,7 +113,7 @@ const Info = styled.img`
   padding: 5px;
   width: 30px;
   cursor: pointer;
-`
+`;
 
 const Content = styled.div`
   background: #ffffff;
@@ -147,9 +149,9 @@ const Content = styled.div`
 
   ${({ $isShow, $initial }) => {
     if ($isShow) {
-      return `animation: moveUp 0.3s forwards;`
+      return `animation: moveUp 0.3s forwards;`;
     } else if (!$initial) {
-      return `animation: moveDown 0.3s forwards;`
+      return `animation: moveDown 0.3s forwards;`;
     }
   }}
 
@@ -172,7 +174,7 @@ const Content = styled.div`
       }
     }
   }
-`
+`;
 
 const Mosk = styled.div`
   @keyframes showUp {
@@ -205,11 +207,9 @@ const Mosk = styled.div`
 
   ${({ $isShow, $initial }) => {
     if ($isShow) {
-      return 'animation: showUp 0.2s forwards; display: block;'
+      return "animation: showUp 0.2s forwards; display: block;";
     } else if (!$initial) {
-      return 'animation: showDown 0.2s forwards;'
+      return "animation: showDown 0.2s forwards;";
     }
   }}
-`
-
-export default Footer
+`;
