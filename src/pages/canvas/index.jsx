@@ -1,19 +1,14 @@
 import { useRef } from "react";
 import styled from "styled-components";
-import Footer from "../../components/Footer";
-import Header from "../../components/Header";
 import useDrawCanvas from "../../hooks/useDrawCanvas";
-import canvasInfo from "./description";
 
 const Canvas = () => {
-  const date = { year: 2024, month: 5, day: 15 };
   const canvasRef = useRef(null);
   const { size, handleMouseDown, handleMouseMove, handleMouseClear, reset } =
     useDrawCanvas(canvasRef);
 
   return (
     <>
-      <Header date={date} />
       <Canva
         ref={canvasRef}
         onMouseDown={handleMouseDown}
@@ -25,7 +20,6 @@ const Canvas = () => {
         $size={size}
       />
       <Reload onClick={reset}>⟲</Reload>
-      <Footer index={8} data={canvasInfo} />
     </>
   );
 };

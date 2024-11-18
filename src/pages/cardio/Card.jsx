@@ -1,10 +1,10 @@
-import PropTypes from 'prop-types'
-import styled from 'styled-components'
+import PropTypes from "prop-types";
+import styled from "styled-components";
 
 const Card = ({ inventor, num }) => {
   return (
     <Div $delay={num}>
-      <img src={inventor.avatar} alt='preson-image' />
+      <img src={inventor.avatar} alt="preson-image" />
       <h2>
         {inventor.first} {inventor.last}
       </h2>
@@ -12,8 +12,8 @@ const Card = ({ inventor, num }) => {
         {inventor.year} - {inventor.passed}
       </p>
     </Div>
-  )
-}
+  );
+};
 
 Card.propTypes = {
   inventor: PropTypes.shape({
@@ -24,7 +24,7 @@ Card.propTypes = {
     passed: PropTypes.number.isRequired,
   }),
   num: PropTypes.number.isRequired,
-}
+};
 
 const Div = styled.div`
   @keyframes show {
@@ -52,6 +52,10 @@ const Div = styled.div`
   animation: show 0.5s cubic-bezier(0.39, 0.575, 0.565, 1) forwards;
   animation-delay: ${({ $delay }) => `${$delay * 0.1}s`};
 
+  display: grid;
+  justify-items: center;
+  align-items: center;
+
   &:hover {
     background-color: #f3f4f6;
     border: 1px solid #f3f4f6;
@@ -61,6 +65,6 @@ const Div = styled.div`
     pointer-events: none;
     width: 60px;
   }
-`
+`;
 
-export default Card
+export default Card;

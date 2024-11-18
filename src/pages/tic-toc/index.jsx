@@ -11,9 +11,6 @@ import { Button } from "@/components/ui/button";
 import { ChevronLeftIcon } from "@radix-ui/react-icons";
 import { useState } from "react";
 import styled from "styled-components";
-import Footer from "../../components/Footer";
-import Header from "../../components/Header";
-import description from "./description";
 
 const winnerSets = [
   [0, 1, 2],
@@ -57,14 +54,10 @@ const TicToc = () => {
   };
 
   const isTie = (board) => !board.includes(null);
-
   const isWin = (user, board) =>
     winnerSets.some((set) => set.every((index) => board[index] === user));
-
   const toggleUser = (user) => (user === "X" ? "O" : "X");
-
   const showDialog = (tie) => handleGameStateUpdate({ isOpen: true, isTie: tie });
-
   const reset = () => setGameState({ ...initializeState() });
 
   const backStep = () => {
@@ -81,7 +74,6 @@ const TicToc = () => {
 
   return (
     <>
-      <Header />
       <Wrapper>
         <div className="box">
           {gameState.board.map((item, index) => (
@@ -109,7 +101,6 @@ const TicToc = () => {
           </AlertDialogContent>
         </AlertDialog>
       </Wrapper>
-      <Footer index={12} data={description} />
     </>
   );
 };

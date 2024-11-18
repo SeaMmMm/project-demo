@@ -1,17 +1,17 @@
 /* eslint-disable react/display-name */
 import PropTypes from "prop-types";
 import { useRef, useState } from "react";
+import { useHref } from "react-router-dom";
 import styled from "styled-components";
 import info from "../assets/icons/info.svg";
 import useClickOutside from "../hooks/useClickOutside";
-import useHrefTitle from "../hooks/useHrefTitle";
 import useLayer from "../store/layer";
 import getFilledNumber from "../utils/getFilledNumber";
 
 const Footer = ({ index, data, children = null }) => {
   const [showDialog, setShowDialog] = useState(false);
   const [isInitial, setIsInitial] = useState(true);
-  const title = useHrefTitle();
+  const title = useHref().split("/").pop();
   const ref = useRef(null);
   const infoRef = useRef(null);
 
@@ -53,6 +53,8 @@ const Footer = ({ index, data, children = null }) => {
     </>
   );
 };
+
+export default Footer;
 
 Footer.prototype = {
   index: PropTypes.number,
@@ -211,5 +213,3 @@ const Mosk = styled.div`
     }
   }}
 `;
-
-export default Footer;

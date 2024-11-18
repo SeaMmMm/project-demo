@@ -1,9 +1,42 @@
 import Lottie from "lottie-react";
-import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import Animation from "../assets/404.json";
 
 const NotFound = () => {
+  const [inputSequence, setInputSequence] = useState("");
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const handleKeyPress = (e) => {
+      const key = e.key;
+
+      if (key === "Enter") {
+        if (inputSequence === "cd ../") {
+          navigate("/");
+        } else {
+          setInputSequence("");
+        }
+      } else {
+        setInputSequence((prv) => {
+          const newSequence = prv + key;
+          if (newSequence.length > 6) {
+            return newSequence.slice(-6);
+          }
+
+          return newSequence;
+        });
+      }
+    };
+
+    window.addEventListener("keypress", handleKeyPress);
+
+    return () => {
+      window.removeEventListener("keypress", handleKeyPress);
+    };
+  }, [inputSequence, navigate]);
+
   return (
     <>
       <Wrapper>

@@ -2,14 +2,15 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import demo from "../assets/icons/demo.svg";
-import { projects } from "../routes";
+import { projects } from "@/routers";
 import getFilledNumber from "../utils/getFilledNumber";
 
 const HomePage = () => {
   const [elements, setElements] = useState(projects);
   const navigate = useNavigate();
   const changeMade = (project) => {
-    navigate(project.path);
+    const { name } = project;
+    navigate(`/content/${name}`);
   };
 
   useEffect(() => {

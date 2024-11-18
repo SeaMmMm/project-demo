@@ -1,15 +1,11 @@
 import "github-markdown-css";
 import { useEffect, useState } from "react";
 import styled from "styled-components";
-import Footer from "../../components/Footer";
-import Header from "../../components/Header";
 import getFilledNumber from "../../utils/getFilledNumber";
 import markdown from "./articals/001.md";
-import cssInfo from "./cssInfo";
 import MarkdownContent from "./Markdown";
 
 const CssTopicPage = () => {
-  const date = { year: 2024, month: 5, day: 11 };
   const [content, setContent] = useState(markdown);
   const [isError, setIsError] = useState(false);
   const [num, setNum] = useState(1);
@@ -43,9 +39,6 @@ const CssTopicPage = () => {
 
   return (
     <Wrapper $isError={isError} $num={num}>
-      <div className="header">
-        <Header date={date} />
-      </div>
       <Content className="markdown-body">
         <MarkdownContent markdown={content} />
       </Content>
@@ -58,7 +51,6 @@ const CssTopicPage = () => {
       <div className="delete" onClick={handleDelete}>
         {"<"}
       </div>
-      <Footer index={7} data={cssInfo} />
     </Wrapper>
   );
 };
@@ -113,8 +105,6 @@ const Wrapper = styled.div`
 const Content = styled.div`
   line-height: 1.5;
   color: #333;
-  max-width: 800px;
-  min-height: 100vh;
   padding: 1rem;
   margin: 0 auto;
 

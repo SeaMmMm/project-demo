@@ -1,14 +1,8 @@
-/* eslint-disable no-unused-vars */
-/* eslint-disable no-console */
 import { useEffect, useRef } from "react";
 import styled from "styled-components";
-import Footer from "../../components/Footer";
-import Header from "../../components/Header";
-import draftInfo from "./description";
 import { mouseEnterAndLeave } from "./mouseHover";
 
 const Draft = () => {
-  const date = { year: 2024, month: 5, day: 18 };
   const parentRef = useRef(null);
   const childRef = useRef(null);
 
@@ -25,7 +19,6 @@ const Draft = () => {
 
   return (
     <>
-      <Header date={date} />
       <Wrapper>
         <div className="parent" ref={parentRef}>
           parent
@@ -34,7 +27,6 @@ const Draft = () => {
           </div>
         </div>
       </Wrapper>
-      <Footer data={draftInfo} />
     </>
   );
 };

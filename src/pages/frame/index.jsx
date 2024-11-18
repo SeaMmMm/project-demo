@@ -1,14 +1,10 @@
 import { Suspense, useState } from "react";
 import styled from "styled-components";
-import Footer from "../../components/Footer";
-import Header from "../../components/Header";
 import useDebouncedFn from "../../hooks/useDebouncedFn";
 import Controler from "./Controler";
-import frameInfo from "./description";
 import Loading from "./Loading";
 
 const Frame = () => {
-  const date = { year: 2024, month: 5, day: 5 };
   const [spacing, setSpacing] = useState(0);
   const [blur, setBlur] = useState(0);
   const [color, setColor] = useState("#000000");
@@ -20,7 +16,6 @@ const Frame = () => {
 
   return (
     <>
-      <Header date={date} />
       <Wrapper $color={color} $spacing={spacing} $blur={blur}>
         <p>
           Update CSS Variables with <span>JS</span>
@@ -48,7 +43,6 @@ const Frame = () => {
           <img src="https://opendoodles.s3-us-west-1.amazonaws.com/running.svg" alt="woman-run" />
         </Suspense>
       </Wrapper>
-      <Footer index={4} data={frameInfo} />
     </>
   );
 };

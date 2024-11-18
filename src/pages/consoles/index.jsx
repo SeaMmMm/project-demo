@@ -1,14 +1,10 @@
 /* eslint-disable no-console */
 import { useEffect, useState } from "react";
 import styled from "styled-components";
-import Footer from "../../components/Footer";
-import Header from "../../components/Header";
 import useWindowSize from "../../hooks/useWindowSize";
-import consoleInfo from "./description";
 import logFunc from "./logFunc";
 
 const Console = () => {
-  const date = { year: 2024, month: 5, day: 16 };
   const [logs, setLogs] = useState([]);
   const [isPhone, setIsPhone] = useState(false);
   const { width } = useWindowSize();
@@ -35,12 +31,12 @@ const Console = () => {
 
     return () => {
       console.log = originalConsoleLog;
+      console.clear();
     };
   }, [width]);
 
   return (
     <>
-      <Header date={date} />
       <Content $isPhone={isPhone}>
         <span>CONSOLE.LOG</span>
         <p>{isPhone ? "" : "Open the console to view the output"}</p>
@@ -51,7 +47,6 @@ const Console = () => {
             </P>
           ))}
       </Content>
-      <Footer index={9} data={consoleInfo} />
     </>
   );
 };

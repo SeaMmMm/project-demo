@@ -1,15 +1,11 @@
 import { useRef } from "react";
 import { isMobile } from "react-device-detect";
 import styled from "styled-components";
-import Footer from "../../components/Footer";
-import Header from "../../components/Header";
 import useDragEvent from "../../hooks/useDragEvent";
 import useWindowSize from "../../hooks/useWindowSize";
-import scopeInfo from "./description";
 import txt from "./txt";
 
 const Scope = () => {
-  const date = { year: 2024, month: 5, day: 19 };
   const { width, height } = useWindowSize();
   const boxRef = useRef(null);
   const txtRef = useRef(null);
@@ -17,7 +13,6 @@ const Scope = () => {
 
   return (
     <>
-      <Header date={date} isFixed={true} />
       {!isMobile && (
         <Box ref={boxRef}>
           <Text $width={width} $height={height} ref={txtRef}>
@@ -26,7 +21,6 @@ const Scope = () => {
         </Box>
       )}
       {isMobile && <Error>Please view on your computer</Error>}
-      <Footer index={10} data={scopeInfo} />
     </>
   );
 };

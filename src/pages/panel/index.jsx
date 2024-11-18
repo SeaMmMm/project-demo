@@ -1,24 +1,18 @@
 import styled from "styled-components";
-import Footer from "../../components/Footer";
-import Header from "../../components/Header";
 import useWindowSize from "../../hooks/useWindowSize";
 import Card from "./Card";
 import cardsInfo from "./cards";
-import description from "./description";
 
 const Panel = () => {
-  const date = { year: 2024, month: 5, day: 8 };
   const { height } = useWindowSize();
 
   return (
     <>
-      <Header date={date} />
       <Wrapper $height={height}>
         {cardsInfo.map((info, index) => (
           <Card key={index} info={info} />
         ))}
       </Wrapper>
-      <Footer index={6} data={description} />
     </>
   );
 };

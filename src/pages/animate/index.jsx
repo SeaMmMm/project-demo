@@ -1,13 +1,9 @@
 import { useEffect, useState } from "react";
 import styled from "styled-components";
 import Vivus from "vivus";
-import Footer from "../../components/Footer";
-import Header from "../../components/Header";
-import svgInfo from "./description";
 import Svg from "./Svg";
 
 const Animate = () => {
-  const date = { year: 2024, month: 5, day: 22 };
   const [camera, setCamera] = useState(null);
 
   useEffect(() => {
@@ -25,11 +21,9 @@ const Animate = () => {
   };
   return (
     <>
-      <Header date={date} />
       <Content onClick={handleClick}>
         <Svg />
       </Content>
-      <Footer index={11} data={svgInfo} />
     </>
   );
 };

@@ -1,19 +1,14 @@
 import styled from "styled-components";
-import Footer from "../../components/Footer";
-import Header from "../../components/Header";
 import Dial from "./Dial";
-import clockInfo from "./description";
 
 const Clock = () => {
   const date = { year: 2024, month: 4, day: 30 };
 
   return (
     <>
-      <Header date={date} />
       <Wrapper>
         <Dial />
       </Wrapper>
-      <Footer index={2} data={clockInfo} />
     </>
   );
 };

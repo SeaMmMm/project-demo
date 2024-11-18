@@ -1,21 +1,21 @@
 import { useState } from "react";
 import styled from "styled-components";
-import Footer from "../../components/Footer";
-import Header from "../../components/Header";
 import useDebouncedFn from "../../hooks/useDebouncedFn";
 import Card from "./Card";
 import { inventors } from "./array-cardio";
-import description from "./description";
 
 const Cardio = () => {
-  const date = { year: 2024, month: 5, day: 6 };
   const [people, setPeople] = useState(inventors);
+  const [inputs, setInputs] = useState("");
+  const debouncedSetPeople = useDebouncedFn(setPeople, 500);
 
   const handleSearchName = (e) => {
     const name = e.target.value;
+    setInputs(name);
 
     if (name === "") {
       setPeople(inventors);
+
       return;
     }
 
@@ -27,19 +27,18 @@ const Cardio = () => {
       );
     });
 
-    setPeople(filteredPeople);
+    debouncedSetPeople(filteredPeople);
   };
-  const debouncedHandleSeearchName = useDebouncedFn(handleSearchName, 500);
 
   const reset = () => {
     setPeople(inventors);
+    setInputs("");
   };
 
   return (
     <>
-      <Header date={date} />
       <Wrapper>
-        <input type="text" placeholder="Search Name" onChange={debouncedHandleSeearchName} />
+        <input type="text" placeholder="Search Name" onChange={handleSearchName} value={inputs} />
         <Cards>
           {people.length ? (
             people.map((inventor, index) => <Card key={index} inventor={inventor} num={index} />)
@@ -52,7 +51,6 @@ const Cardio = () => {
           )}
         </Cards>
       </Wrapper>
-      <Footer index={5} data={description} />
     </>
   );
 };

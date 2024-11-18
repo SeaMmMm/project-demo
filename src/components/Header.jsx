@@ -1,14 +1,13 @@
 import back from "@/assets/svg/back.svg";
 import PropTypes from "prop-types";
 import { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useHref, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import useCurrentTime from "../hooks/useCurrentTime";
-import useHrefTitle from "../hooks/useHrefTitle";
 import getFormattedDate from "../utils/getFormatedDate";
 
 const Header = ({ date = null, isFixed }) => {
-  const title = useHrefTitle();
+  const title = useHref().split("/").pop();
   const navigate = useNavigate();
   const currentTime = useCurrentTime();
 
