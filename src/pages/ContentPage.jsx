@@ -1,7 +1,7 @@
 import Footer from "@/components/Footer";
 import Header from "@/components/Header";
 import { Outlet } from "react-router-dom";
-import pageData from "./pageData.json";
+import pageData from "./pageInfo";
 
 const ContentPage = () => {
   const pageInfo = pageData[location.pathname.split("/").pop()];
