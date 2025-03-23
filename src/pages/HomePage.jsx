@@ -1,21 +1,15 @@
-import { useEffect, useState } from "react";
+import projects from "@/routers/projects";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import demo from "../assets/icons/demo.svg";
-import { projects } from "@/routers";
 import getFilledNumber from "../utils/getFilledNumber";
 
 const HomePage = () => {
-  const [elements, setElements] = useState(projects);
   const navigate = useNavigate();
   const changeMade = (project) => {
     const { name } = project;
     navigate(`/content/${name}`);
   };
-
-  useEffect(() => {
-    setElements(projects);
-  }, []);
 
   return (
     <Wrapper>
@@ -25,7 +19,7 @@ const HomePage = () => {
           <img src={demo} alt="icon" />
         </p>
         <Projects>
-          {elements.map((project, idx) => (
+          {projects.map((project, idx) => (
             <div key={idx} className="project" onClick={() => changeMade(project)}>
               <span className="project-idx">{getFilledNumber(idx + 1, 3)}</span>
               <span className="project-name">{project.name}</span>

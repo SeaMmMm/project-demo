@@ -1,11 +1,9 @@
-import { useState } from "react";
 import { useRoutes } from "react-router-dom";
 import styled from "styled-components";
 import routes from "./routers";
 
 const App = () => {
-  const [routers] = useState(routes);
-  const elements = useRoutes(routers);
+  const elements = useRoutes(routes);
   document.title = "100 dm";
 
   return <Wrapper>{elements}</Wrapper>;

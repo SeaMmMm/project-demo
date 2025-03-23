@@ -2,9 +2,9 @@ import { Suspense, useState } from "react";
 import styled from "styled-components";
 import useDebouncedFn from "../../hooks/useDebouncedFn";
 import Controler from "./Controler";
-import Loading from "./Loading";
+import Loading from "@/components/Loading";
 
-const Frame = () => {
+const Frame = ({ children = null, ...props } = {}) => {
   const [spacing, setSpacing] = useState(0);
   const [blur, setBlur] = useState(0);
   const [color, setColor] = useState("#000000");
@@ -16,7 +16,7 @@ const Frame = () => {
 
   return (
     <>
-      <Wrapper $color={color} $spacing={spacing} $blur={blur}>
+      <Wrapper $color={color} $spacing={spacing} $blur={blur} {...props}>
         <p>
           Update CSS Variables with <span>JS</span>
         </p>
@@ -42,6 +42,7 @@ const Frame = () => {
         <Suspense fallback={<Loading />}>
           <img src="https://opendoodles.s3-us-west-1.amazonaws.com/running.svg" alt="woman-run" />
         </Suspense>
+        {children}
       </Wrapper>
     </>
   );

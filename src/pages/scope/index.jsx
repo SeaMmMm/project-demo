@@ -2,11 +2,9 @@ import { useRef } from "react";
 import { isMobile } from "react-device-detect";
 import styled from "styled-components";
 import useDragEvent from "../../hooks/useDragEvent";
-import useWindowSize from "../../hooks/useWindowSize";
 import txt from "./txt";
 
 const Scope = () => {
-  const { width, height } = useWindowSize();
   const boxRef = useRef(null);
   const txtRef = useRef(null);
   useDragEvent(boxRef, txtRef);
@@ -15,9 +13,7 @@ const Scope = () => {
     <>
       {!isMobile && (
         <Box ref={boxRef}>
-          <Text $width={width} $height={height} ref={txtRef}>
-            {txt}
-          </Text>
+          <Text ref={txtRef}>{txt}</Text>
         </Box>
       )}
       {isMobile && <Error>Please view on your computer</Error>}
@@ -52,14 +48,28 @@ const Error = styled.div`
 
 const Text = styled.div`
   position: absolute;
-  width: ${({ $width }) => $width}px;
-  height: ${({ $height }) => $height}px;
+  min-width: 100vw;
+  min-height: 100vh;
   font-family: "Input", sans-serif;
   line-height: 1.5;
-  font-size: 1.2rem;
-  padding: 2.5rem 2rem;
+  font-size: 1.5rem;
   text-align: justify;
-  overflow-y: hidden;
+
+  @media (min-width: 768px) {
+    font-size: 1rem;
+  }
+
+  @media (min-width: 1024px) {
+    font-size: 1.5rem;
+  }
+
+  @media (min-width: 1440px) {
+    font-size: 2rem;
+  }
+
+  @media (min-width: 1920px) {
+    font-size: 2.5rem;
+  }
 `;
 
 export default Scope;

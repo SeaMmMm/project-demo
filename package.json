@@ -13,13 +13,14 @@
   "dependencies": {
     "@radix-ui/react-alert-dialog": "^1.1.1",
     "@radix-ui/react-icons": "^1.3.0",
-    "@radix-ui/react-slot": "^1.1.0",
+    "@radix-ui/react-slot": "^1.1.1",
     "@testing-library/react-hooks": "^8.0.1",
     "babel-plugin-syntax-dynamic-import": "^6.18.0",
     "beanheads": "^0.3.3",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
     "github-markdown-css": "^5.6.1",
+    "input-otp": "^1.4.2",
     "lottie-react": "^2.4.0",
     "marked": "^12.0.2",
     "prop-types": "^15.8.1",
@@ -55,5 +56,6 @@
     "react-test-renderer": "^18.3.1",
     "tailwindcss": "^3.4.6",
     "vite": "^5.3.4"
-  }
+  },
+  "packageManager": "pnpm@10.5.2+sha512.da9dc28cd3ff40d0592188235ab25d3202add8a207afbedc682220e4a0029ffbff4562102b9e6e46b4e3f9e8bd53e6d05de48544b0c57d4b0179e22c76d1199b"
 }

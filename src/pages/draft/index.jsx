@@ -1,61 +1,73 @@
-import { useEffect, useRef } from "react";
-import styled from "styled-components";
-import { mouseEnterAndLeave } from "./mouseHover";
+/* eslint-disable no-console */
+import { useRef } from "react";
 
-const Draft = () => {
-  const parentRef = useRef(null);
-  const childRef = useRef(null);
+const FileUpload = () => {
+  const fileRef = useRef(null);
 
-  useEffect(() => {
-    // mouseenter和mouseleave事件不会冒泡，只有mouseover和mouseout事件会冒泡
-    // const removeLisener = mouseOverAndOut(parentRef, childRef)
-    const removeLisener2 = mouseEnterAndLeave(parentRef, childRef);
+  function handleChangeFile(event) {
+    if (event.target.files) {
+      const files = Array.from(event.target.files).filter(
+        (file) => file.name !== ".DS_Store"
+        // 省略其他文件类型的过滤
+      );
+      const tasks = []; // 任务队列
+      const folderMap = new Map(); // 文件夹映射表，避免重复创建文件夹 task
 
-    return () => {
-      // removeLisener()
-      removeLisener2();
+      files.forEach((file) => {
+        console.log("file webkitRelativePath: ", file.webkitRelativePath);
+        const [rootFolderName, ...fileLevel] = file.webkitRelativePath.split("/");
+
+        // 1. 创建根目录任务
+        if (tasks.length === 0) {
+          tasks.push(createTask("RootFolder", rootFolderName, null));
+        }
+
+        // 2. 为子目录和子文件创建任务
+        let parentFolder = tasks[0];
+        fileLevel.forEach((item, index) => {
+          const isFolder = index < fileLevel.length - 1; // 非最后一层级
+          const folderPath = fileLevel.slice(0, index + 1).join("/"); // 文件夹的路径
+
+          if (isFolder) {
+            let folderTask = folderMap.get(folderPath);
+            if (!folderTask) {
+              // 创建文件夹任务
+              folderTask = createTask("Folder", item, parentFolder);
+              folderMap.set(folderPath, folderTask);
+              tasks.push(folderTask); // 加入任务队列
+            }
+            parentFolder = folderTask;
+          } else {
+            // 创建文件任务
+            tasks.push(createTask("File", item, parentFolder)); // 加入任务队列
+          }
+        });
+      });
+
+      console.log("tasks", tasks);
+    }
+
+    event.target.value = "";
+  }
+
+  function createTask(type, name, parent) {
+    const task = {
+      type: type,
+      name: name,
+      parent: parent,
+      id: "", // 服务端的数据id，如在文件夹上传成功后，将数据 id 赋值到这里，为下面的文件上传提供父级 id
     };
-  }, []);
+    return task;
+  }
 
   return (
-    <>
-      <Wrapper>
-        <div className="parent" ref={parentRef}>
-          parent
-          <div className="child" ref={childRef}>
-            child
-          </div>
-        </div>
-      </Wrapper>
-    </>
+    <div>
+      <button onClick={() => fileRef.current.click()}>点击上传</button>
+      {/* 文件夹上传 */}
+
+      <input type="file" ref={fileRef} onChange={handleChangeFile} webkitdirectory="" />
+    </div>
   );
 };
 
-const Wrapper = styled.div`
-  position: absolute;
-  width: 400px;
-  height: 400px;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  border: 1px solid #000;
-
-  .parent {
-    width: 200px;
-    height: 200px;
-    border: 1px solid #f00;
-    position: relative;
-    margin: 20px;
-  }
-
-  .child {
-    width: 100px;
-    height: 100px;
-    border: 1px solid #0f0;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-  }
-`;
-export default Draft;
+export default FileUpload;
