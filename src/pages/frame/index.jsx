@@ -1,8 +1,9 @@
+import RunningMan from "@/assets/svg/running.svg";
+import Loading from "@/components/Loading";
 import { Suspense, useState } from "react";
 import styled from "styled-components";
 import useDebouncedFn from "../../hooks/useDebouncedFn";
 import Controler from "./Controler";
-import Loading from "@/components/Loading";
 
 const Frame = ({ children = null, ...props } = {}) => {
   const [spacing, setSpacing] = useState(0);
@@ -40,7 +41,7 @@ const Frame = ({ children = null, ...props } = {}) => {
           </div>
         </Content>
         <Suspense fallback={<Loading />}>
-          <img src="https://opendoodles.s3-us-west-1.amazonaws.com/running.svg" alt="woman-run" />
+          <img src={RunningMan} alt="woman-run" />
         </Suspense>
         {children}
       </Wrapper>

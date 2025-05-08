@@ -1,3 +1,4 @@
+/* eslint-disable react-refresh/only-export-components */
 import { lazy } from "react";
 
 const Drum = lazy(() => import("../pages/drum"));
@@ -13,6 +14,7 @@ const Scope = lazy(() => import("../pages/scope"));
 const Animate = lazy(() => import("../pages/animate"));
 const TicToc = lazy(() => import("../pages/tic-toc"));
 const VirtualDom = lazy(() => import("../pages/virtual-dom"));
+const Lyrics = lazy(() => import("../pages/lyric"));
 
 export default [
   { path: "drum", element: <Drum />, name: "drum" },
@@ -28,6 +30,5 @@ export default [
   { path: "svg", element: <Animate />, name: "svg" },
   { path: "tic-toc", element: <TicToc />, name: "tic-toc" },
   { path: "virtual-dom", element: <VirtualDom />, name: "virtual-dom" },
+  { path: "music", element: <Lyrics />, name: "music" },
 ];
-
-export const Draft = lazy(() => import("../pages/draft"));

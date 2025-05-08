@@ -1,11 +1,10 @@
 import ContentPage from "@/pages/ContentPage";
 import NotFound from "../pages/404";
 import HomePage from "../pages/HomePage";
-import projects, { Draft } from "./projects";
+import projects from "./projects";
 
 const routes = [
   { path: "/", element: <HomePage /> },
-  { path: "/test", element: <Draft /> },
   {
     path: "/content",
     element: <ContentPage />,
