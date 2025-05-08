@@ -1,17 +1,22 @@
-import music from "@/assets/sounds/music.mp3";
 import useLyricScrolling from "@/hooks/useLyricScrolling";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import styled from "styled-components";
-import lyric from "./data";
+import BottomControls from "./BottomControls";
+import LyricsContext from "./LyricsContext";
+import musicInfo from "./data";
 
 const Lyrics = () => {
   const player = useRef(null);
-  const { dom } = useLyricScrolling(lyric, player);
+  const [info, setInfo] = useState(musicInfo[0]);
+  const { dom, jumpToLyric, currentIdx } = useLyricScrolling(info.lyric, player);
 
   return (
     <Wrapper>
-      <audio src={music} controls ref={player} />
-      {dom}
+      <LyricsContext value={{ info, setInfo }}>
+        <audio src={info.music} controls ref={player} />
+        {dom}
+        <BottomControls jumpToLyric={jumpToLyric} currentIdx={currentIdx} />
+      </LyricsContext>
     </Wrapper>
   );
 };
