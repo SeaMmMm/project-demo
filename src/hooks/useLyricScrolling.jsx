@@ -163,6 +163,16 @@ const Wrapper = styled.section`
   height: 420px;
   width: 100vw;
   overflow: scroll;
+
+  @media (max-width: 500px) {
+    height: 300px;
+    width: 90vw;
+    overflow: scroll;
+    border-radius: 10px;
+    background-color: #fff;
+    padding: 10px 0;
+    margin: 0 auto;
+  }
 `;
 const Lyric = styled.div`
   transition: all 0.3s ease-in-out;
@@ -174,6 +184,19 @@ const Lyric = styled.div`
     $isActive
       ? `transform: scale(${$activeScale}); font-weight: bold; color: black`
       : `transform: scale(1); opacity: 0.9`};
+
+  @media (max-width: 500px) {
+    font-size: 16px;
+    line-height: 1.2;
+    color: #d1d5db;
+    ${({ $isActive, $activeScale }) =>
+      $isActive
+        ? `transform: scale(${$activeScale}); font-weight: bold; color: black`
+        : `transform: scale(1); opacity: 0.9`};
+    margin: 0 10px;
+    padding: 0 10px;
+    text-align: center;
+  }
 `;
 
 export default useLyricScrolling;

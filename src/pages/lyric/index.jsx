@@ -13,9 +13,9 @@ const Lyrics = () => {
   return (
     <Wrapper>
       <LyricsContext value={{ info, setInfo }}>
-        <audio src={info.music} controls ref={player} />
         {dom}
         <BottomControls jumpToLyric={jumpToLyric} currentIdx={currentIdx} />
+        <audio src={info.music} controls ref={player} />
       </LyricsContext>
     </Wrapper>
   );
@@ -39,6 +39,14 @@ const Wrapper = styled.div`
     height: 50px;
     background-color: #fff;
     border-radius: 10px;
+
+    @media (max-width: 500px) {
+      width: 90vw;
+      border-radius: 5px;
+      height: 40px;
+      font-size: 12px;
+      padding: 0 10px;
+    }
   }
 `;
 
