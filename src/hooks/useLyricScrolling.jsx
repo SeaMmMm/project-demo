@@ -3,6 +3,12 @@ import { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import { useToast } from "./use-toast";
 
+/**
+ * 解析歌词字符串，提取时间戳和歌词文本
+ * @param {string} lyric - 包含时间戳的歌词文本，格式应为 "[时间戳]歌词文本"
+ * @param {Function} toast - 显示通知的函数，用于显示解析错误
+ * @returns {Array<{time: string, lyric: string}>} 包含时间和歌词的对象数组
+ */
 function generateLyricList(lyric, toast) {
   const lines = lyric.split("\n");
   const result = [];
@@ -58,6 +64,35 @@ function findIdx(audio, lyricsGroup) {
   return lyricsGroup.length - 1;
 }
 
+/**
+ * @description 歌词滚动的自定义 Hook，实现歌词与音频同步、自动滚动到当前歌词位置等功能
+ * @param {string|object} lyric - 歌词数据，可以是 LRC 格式的字符串或已处理的歌词对象
+ * @param {React.RefObject} player - 音频播放器的 React ref 对象
+ * @param {object} [options] - 配置选项
+ * @param {string} [options.scrollBehavior="smooth"] - 滚动行为，可选值："smooth"(平滑)或"auto"(即时)
+ * @param {string} [options.scrollPosition="center"] - 当前歌词在可视区域的位置，可选值："start"、"center"、"end"、"nearest"
+ * @param {number} [options.activeScale=1.2] - 当前活跃歌词的缩放比例
+ *
+ * @returns {Object} 返回歌词相关状态和控制方法
+ * @returns {JSX.Element} returns.dom - 渲染的歌词 DOM 元素
+ * @returns {number} returns.currentIdx - 当前活跃歌词的索引
+ * @returns {React.RefObject} returns.lyricElementWrapper - 歌词容器的 ref 对象
+ * @returns {Array} returns.lyricsGroup - 处理后的歌词数组
+ * @returns {Function} returns.jumpToLyric - 跳转到指定歌词的函数，参数为歌词索引
+ *
+ * @example
+ * const { dom, currentIdx, lyricElementWrapper, jumpToLyric } = useLyricScrolling(
+ *   lyricData,
+ *   audioPlayerRef,
+ *   { scrollPosition: "center", activeScale: 1.5 }
+ * );
+ *
+ * return (
+ *   <div ref={lyricElementWrapper} className="lyrics-container">
+ *     {dom}
+ *   </div>
+ * );
+ */
 const useLyricScrolling = (lyric, player, options = {}) => {
   const { toast } = useToast();
   const [currentIdx, setCurrentIdx] = useState(-1);
@@ -95,12 +130,25 @@ const useLyricScrolling = (lyric, player, options = {}) => {
     });
   }, [currentIdx, scrollBehavior, scrollPosition]);
 
+  /**
+   * 跳转到指定索引的歌词位置
+   *
+   * @param {number} index - 要跳转到的歌词索引
+   * @returns {void}
+   * @description 将播放器的播放位置设置为指定索引歌词的时间点，并更新当前歌词索引。
+   * 如果索引无效或播放器引用不存在，则不执行任何操作。
+   */
   const jumpToLyric = (index) => {
-    if (index >= 0 && index < lyricsGroup.length && player.current) {
-      const timeInSeconds = parseTime(lyricsGroup[index].time);
-      player.current.currentTime = timeInSeconds;
-      setCurrentIdx(index);
-    }
+    const lyricElement = lyricElementWrapper.current.children;
+
+    if (index > lyricElement.length) index = lyricElement.length - 1;
+    const activeLyric = lyricElement[index < 0 ? 0 : index];
+
+    activeLyric.scrollIntoView({
+      behavior: scrollBehavior,
+      block: scrollPosition,
+      inline: "nearest",
+    });
   };
 
   return { dom, currentIdx, lyricElementWrapper, lyricsGroup, jumpToLyric };
@@ -114,7 +162,17 @@ const Wrapper = styled.section`
 
   height: 420px;
   width: 100vw;
-  overflow: hidden;
+  overflow: scroll;
+
+  @media (max-width: 500px) {
+    height: 300px;
+    width: 90vw;
+    overflow: scroll;
+    border-radius: 10px;
+    background-color: #fff;
+    padding: 10px 0;
+    margin: 0 auto;
+  }
 `;
 const Lyric = styled.div`
   transition: all 0.3s ease-in-out;
@@ -126,6 +184,19 @@ const Lyric = styled.div`
     $isActive
       ? `transform: scale(${$activeScale}); font-weight: bold; color: black`
       : `transform: scale(1); opacity: 0.9`};
+
+  @media (max-width: 500px) {
+    font-size: 16px;
+    line-height: 1.2;
+    color: #d1d5db;
+    ${({ $isActive, $activeScale }) =>
+      $isActive
+        ? `transform: scale(${$activeScale}); font-weight: bold; color: black`
+        : `transform: scale(1); opacity: 0.9`};
+    margin: 0 10px;
+    padding: 0 10px;
+    text-align: center;
+  }
 `;
 
 export default useLyricScrolling;
