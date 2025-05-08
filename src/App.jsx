@@ -4,7 +4,6 @@ import routes from "./routers";
 
 const App = () => {
   const elements = useRoutes(routes);
-  document.title = "100 dm";
 
   return <Wrapper>{elements}</Wrapper>;
 };
