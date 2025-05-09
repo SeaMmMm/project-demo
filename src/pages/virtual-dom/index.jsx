@@ -11,14 +11,7 @@ import { REGEXP_ONLY_DIGITS } from "input-otp";
 import { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 
-import {
-  appendNodesAsync,
-  appendNodesSync,
-  appendNodesWithWorker,
-  BATCH_SIZE,
-  createVirtualList,
-  NODE_NUMS_TO_APPEND,
-} from "./addVirtualDom";
+import { appendNodesSync, createVirtualList, NODE_NUMS_TO_APPEND } from "./addVirtualDom";
 
 const VirtualDom = () => {
   const containerRef = useRef(null);
@@ -67,14 +60,8 @@ const VirtualDom = () => {
       case "virtualList":
         handleVirtualList(count);
         break;
-      case "appendAsync":
-        handleAppendAsync(count);
-        break;
       case "appendSync":
         handleAppendSync(count);
-        break;
-      case "appendWorker":
-        handleAppendWorker(count);
         break;
       default:
         handleVirtualList(count);
@@ -97,61 +84,6 @@ const VirtualDom = () => {
     setIsProcessing(false);
   };
 
-  // 异步追加节点演示
-  const handleAppendAsync = (count) => {
-    const iterator = NODE_NUMS_TO_APPEND(1, count);
-
-    // 创建进度显示
-    const progressEl = document.createElement("div");
-    progressEl.className = "progress-info";
-    progressRef.current.appendChild(progressEl);
-
-    const startTime = performance.now();
-
-    // 显示初始状态
-    progressEl.textContent = "准备添加节点...";
-
-    // 添加中间处理进度回调函数
-    const processCallback = (processed, total) => {
-      progressEl.textContent = `处理中: ${processed}/${total || count} 项 (${Math.round(
-        (processed / count) * 100
-      )}%)`;
-    };
-
-    appendNodesAsync(
-      iterator,
-      BATCH_SIZE,
-      (vd) => {
-        const endTime = performance.now();
-        // 检查是否有节点被添加
-        if (vd && vd.childElementCount > 0) {
-          containerRef.current.appendChild(vd);
-          progressEl.textContent = `已添加 ${vd.childElementCount} 个元素，用时: ${(
-            endTime - startTime
-          ).toFixed(2)}ms`;
-        } else {
-          // 处理没有节点的情况
-          progressEl.textContent = `处理完成，但没有节点被添加。用时: ${(
-            endTime - startTime
-          ).toFixed(2)}ms`;
-          console.warn("虚拟DOM为空或不包含节点");
-        }
-        setIsProcessing(false);
-      },
-      // 添加新的进度回调参数
-      processCallback
-    );
-
-    // 添加错误处理
-    try {
-      // 现有代码...
-    } catch (error) {
-      console.error("异步添加节点时出错:", error);
-      progressEl.textContent = `处理出错: ${error.message}`;
-      setIsProcessing(false);
-    }
-  };
-
   // 同步追加节点演示
   const handleAppendSync = (count) => {
     const iterator = NODE_NUMS_TO_APPEND(1, count);
@@ -170,30 +102,6 @@ const VirtualDom = () => {
       ).toFixed(2)}ms`;
       setIsProcessing(false);
     });
-  };
-
-  // Web Worker 追加节点演示
-  const handleAppendWorker = (count) => {
-    const iterator = NODE_NUMS_TO_APPEND(1, count);
-
-    // 创建进度显示
-    const progressEl = document.createElement("div");
-    progressEl.className = "progress-info";
-    progressRef.current.appendChild(progressEl);
-
-    const startTime = performance.now();
-
-    appendNodesWithWorker(
-      iterator,
-      BATCH_SIZE,
-      (vd) => {
-        const endTime = performance.now();
-        containerRef.current.appendChild(vd);
-        progressEl.textContent += `，完成！总用时: ${(endTime - startTime).toFixed(2)}ms`;
-        setIsProcessing(false);
-      },
-      progressEl // 传入进度显示元素
-    );
   };
 
   return (
@@ -216,9 +124,7 @@ const VirtualDom = () => {
           </SelectTrigger>
           <SelectContent>
             <SelectItem value="virtualList">虚拟滚动列表</SelectItem>
-            <SelectItem value="appendAsync">异步追加节点</SelectItem>
             <SelectItem value="appendSync">同步追加节点</SelectItem>
-            <SelectItem value="appendWorker">Worker追加节点</SelectItem>
           </SelectContent>
         </Select>
 
