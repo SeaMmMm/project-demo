@@ -6,87 +6,14 @@ export const NODE_NUMS_TO_APPEND = (start = 0, end = 1e7) => ({
     return this;
   },
   next() {
-    if (this.current < this.end) {
-      this.current += 1;
-      return { value: this.current, done: false };
+    if (this.current <= this.end) {
+      return { value: this.current++, done: false };
     } else return { done: true };
   },
 });
 
 let virtualDom = new DocumentFragment(),
   batch = document.createDocumentFragment();
-
-/**
- * 异步追加节点到虚拟DOM中（优化版）。
- *
- * 优化点：
- * 1. 根据 deadline.timeRemaining() 动态判断本次批次可以处理的数据量，避免长时间占用主线程；
- * 2. 批量拼接 HTML 字符串，减少多次调用 document.createElement 的开销；
- * 3. 使用 DocumentFragment 进行 DOM 更新，减少回流重排。
- *
- * @param {Iterator<number>} [iterator=NODE_NUMS_TO_APPEND()] - 节点迭代器。
- * @param {number} [batchSize=BATCH_SIZE] - 每批次处理的节点最大数量（如果空闲时间太低，可能会提前结束）。
- * @param {(vd:DocumentFragment) => void} [callback=(vd) => { console.info(`已经添加元素个数:${vd.childElementCount}`); }] - 追加完成后的回调函数。
- */
-export function appendNodesAsync(
-  iterator = NODE_NUMS_TO_APPEND(),
-  batchSize = BATCH_SIZE,
-  callback = (vd) => {
-    // eslint-disable-next-line no-console
-    console.info(`已经添加元素个数:${vd.childElementCount}`);
-  }
-) {
-  let result = iterator.next();
-  let batch = document.createDocumentFragment();
-  let virtualDom = document.createDocumentFragment();
-
-  function processBatch(deadline) {
-    // 本次批次中构建 HTML 字符串
-    let htmlBatch = "";
-    let processedCount = 0;
-    // 当还有节点、未超出指定批次数量，并且剩余空闲时间充足时，拼接节点 HTML
-    // 注意：这里建议保留一些安全边际(例如 5ms)避免过度占用主线程
-    while (!result.done && processedCount < batchSize && deadline.timeRemaining() > 5) {
-      // 直接使用 innerHTML 拼接，若result.value为数字则相对安全
-      htmlBatch += `<div>${result.value}</div>`;
-      result = iterator.next();
-      processedCount++;
-    }
-
-    if (htmlBatch) {
-      // 利用临时容器将 HTML 字符串解析为 DOM 节点
-      const tempContainer = document.createElement("div");
-      tempContainer.innerHTML = htmlBatch;
-      while (tempContainer.firstChild) {
-        batch.appendChild(tempContainer.firstChild);
-      }
-      // 将当前批次的节点添加到虚拟 DOM 中
-      virtualDom.appendChild(batch);
-      // 重置 batch（注意这里重新声明 DocumentFragment 后 build 下一批次）
-      batch = document.createDocumentFragment();
-    }
-
-    if (!result.done) {
-      // 若还有节点未处理，则再次安排空闲回调进行批处理
-      requestIdleCallback(processBatch);
-    } else {
-      // 当所有节点处理完毕后，调用回调函数，并传入构建好的虚拟DOM
-      callback(virtualDom);
-      // 如有需要，可以在此处对 virtualDom 做后续处理，例如替换现有 DOM 部分
-      virtualDom = document.createDocumentFragment();
-    }
-  }
-
-  function startProcessing() {
-    // 利用 requestAnimationFrame 确保在下一个动画帧中开启批量处理，
-    // 避免首次调用时可能与其他同步任务冲突
-    requestAnimationFrame(() => {
-      requestIdleCallback(processBatch);
-    });
-  }
-
-  startProcessing();
-}
 
 /**
  * 同步追加节点到虚拟DOM中。
@@ -116,3 +43,103 @@ export function appendNodesSync(iterator, cb) {
 }
 
 export const BATCH_SIZE = 1000;
+
+/**
+ * 创建虚拟滚动列表 - 只渲染可见部分的DOM节点
+ * 适合展示大量数据但不需要一次性渲染所有节点的场景
+ *
+ * @param {number} totalItems - 总项目数
+ * @param {string|HTMLElement} container - 容器选择器或DOM元素
+ * @param {number} itemHeight - 每个项目的高度(px)
+ * @param {Function} renderItem - 渲染项目的函数
+ * @returns {Object} 虚拟列表控制对象
+ */
+export function createVirtualList(
+  totalItems,
+  container,
+  itemHeight = 30,
+  renderItem = (index) => `<div>项目 ${index}</div>`
+) {
+  const containerEl = typeof container === "string" ? document.querySelector(container) : container;
+
+  if (!containerEl) throw new Error("容器元素未找到");
+
+  // 设置容器样式
+  containerEl.style.position = "relative";
+  containerEl.style.overflow = "auto";
+
+  // 创建滚动占位元素
+  const scrollPlaceholder = document.createElement("div");
+  scrollPlaceholder.style.height = `${totalItems * itemHeight}px`;
+  scrollPlaceholder.style.width = "100%";
+  scrollPlaceholder.style.position = "absolute";
+  scrollPlaceholder.style.top = "0";
+  scrollPlaceholder.style.left = "0";
+  scrollPlaceholder.style.pointerEvents = "none";
+  containerEl.appendChild(scrollPlaceholder);
+
+  // 创建实际内容容器
+  const listContent = document.createElement("div");
+  listContent.style.position = "absolute";
+  listContent.style.top = "0";
+  listContent.style.left = "0";
+  listContent.style.width = "100%";
+  containerEl.appendChild(listContent);
+
+  // 状态变量
+  let visibleStartIndex = 0;
+  let visibleEndIndex = 0;
+  let visibleItems = Math.ceil(containerEl.clientHeight / itemHeight) + 2;
+
+  // 渲染可见项目
+  function renderVisibleItems() {
+    const scrollTop = containerEl.scrollTop;
+    visibleStartIndex = Math.floor(scrollTop / itemHeight);
+    visibleEndIndex = Math.min(visibleStartIndex + visibleItems, totalItems - 1);
+
+    // 设置内容容器位置
+    listContent.style.transform = `translateY(${visibleStartIndex * itemHeight}px)`;
+
+    // 生成可见项目的HTML
+    const visibleContent = [];
+    for (let i = visibleStartIndex; i <= visibleEndIndex; i++) {
+      const itemContent = typeof renderItem === "function" ? renderItem(i) : `项目 ${i}`;
+      visibleContent.push(
+        `<div style="height:${itemHeight}px;box-sizing:border-box;">${itemContent}</div>`
+      );
+    }
+
+    // 一次性更新DOM
+    listContent.innerHTML = visibleContent.join("");
+  }
+
+  // 监听滚动事件
+  containerEl.addEventListener("scroll", () => {
+    const newVisibleStartIndex = Math.floor(containerEl.scrollTop / itemHeight);
+    if (newVisibleStartIndex !== visibleStartIndex) {
+      requestAnimationFrame(renderVisibleItems);
+    }
+  });
+
+  // 监听容器大小变化
+  const resizeObserver = new ResizeObserver(() => {
+    visibleItems = Math.ceil(containerEl.clientHeight / itemHeight) + 2;
+    renderVisibleItems();
+  });
+  resizeObserver.observe(containerEl);
+
+  // 初始渲染
+  renderVisibleItems();
+
+  // 返回控制接口
+  return {
+    refresh: renderVisibleItems,
+    scrollToIndex: (index) => {
+      containerEl.scrollTop = index * itemHeight;
+    },
+    destroy: () => {
+      resizeObserver.disconnect();
+      containerEl.removeEventListener("scroll", renderVisibleItems);
+    },
+  };
+}
