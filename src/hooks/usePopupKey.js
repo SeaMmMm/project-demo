@@ -14,10 +14,12 @@ const usePopupKey = () => {
 
   const playDrum = (drum) => {
     const audio = audioMap.current[drum.letter];
-    if (audio) {
-      audio.currentTime = 0; // 重置播放时间到起点
-      audio.play();
-    }
+    if (!audio) return;
+
+    audio.currentTime = 0; // 重置播放时间到起点
+    audio.play();
+    setShowNum(drum.index);
+    setTimeout(() => setShowNum(-1), 100);
   };
 
   useEffect(() => {
@@ -27,8 +29,6 @@ const usePopupKey = () => {
 
       if (drum) {
         playDrum(drum);
-        setShowNum(drum.index);
-        setTimeout(() => setShowNum(-1), 100);
       }
     };
     // 预加载所有音频文件
@@ -45,7 +45,7 @@ const usePopupKey = () => {
     };
   }, []);
 
-  return { showNum };
+  return { showNum, playDrum, findDrum };
 };
 
 export default usePopupKey;

@@ -4,7 +4,7 @@ import DrumButton from "./DrumButton";
 import drumsData from "./drums";
 
 const Drum = () => {
-  const { showNum } = usePopupKey();
+  const { showNum, playDrum } = usePopupKey();
   return (
     <>
       <Wrapper>
@@ -15,6 +15,7 @@ const Drum = () => {
             showNum={showNum}
             letter={drum.letter}
             description={drum.description}
+            onClick={() => playDrum(drum)}
           />
         ))}
       </Wrapper>
