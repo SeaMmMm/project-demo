@@ -1,14 +1,11 @@
 import { useToast } from "@/hooks/use-toast";
-import { createContext, useContext } from "react";
+import { useContext } from "react";
+import { createContext } from "react";
 
-const Context = createContext();
-
-const LyricsContext = ({ value, children }) => (
-  <Context.Provider value={value}>{children}</Context.Provider>
-);
+const LyricsContext = createContext();
 
 export const useLyricsContext = () => {
-  const value = useContext(Context);
+  const value = useContext(LyricsContext);
   const { toast } = useToast();
 
   if (!value) {

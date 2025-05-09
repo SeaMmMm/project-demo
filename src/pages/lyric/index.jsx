@@ -2,21 +2,22 @@ import useLyricScrolling from "@/hooks/useLyricScrolling";
 import { useRef, useState } from "react";
 import styled from "styled-components";
 import BottomControls from "./BottomControls";
-import LyricsContext from "./LyricsContext";
+import LyricsProvider from "./LyricsProvider";
 import musicInfo from "./data";
 
 const Lyrics = () => {
   const player = useRef(null);
-  const [info, setInfo] = useState(musicInfo[0]);
+  const [idx, setIdx] = useState(1);
+  const [info, setInfo] = useState(musicInfo[idx]);
   const { dom, jumpToLyric, currentIdx } = useLyricScrolling(info.lyric, player);
 
   return (
     <Wrapper>
-      <LyricsContext value={{ info, setInfo }}>
+      <LyricsProvider value={{ info, setInfo, idx, setIdx }}>
         {dom}
         <BottomControls jumpToLyric={jumpToLyric} currentIdx={currentIdx} />
         <audio src={info.music} controls ref={player} />
-      </LyricsContext>
+      </LyricsProvider>
     </Wrapper>
   );
 };
