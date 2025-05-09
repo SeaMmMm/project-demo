@@ -1,8 +1,8 @@
 import styled from "styled-components";
 
-const DrumButton = ({ letter, description, showNum, index }) => {
+const DrumButton = ({ letter, description, showNum, index, ...props }) => {
   return (
-    <Wrapper>
+    <Wrapper {...props}>
       <h1 className={showNum === index ? "show" : ""}>{letter}</h1>
       <span className={showNum === index ? "show" : ""}>{description}</span>
     </Wrapper>
