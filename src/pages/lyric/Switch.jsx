@@ -15,8 +15,7 @@ import { useLyricsContext } from "./LyricsContext";
 
 const Switch = () => {
   const [open, setOpen] = useState(false);
-  const [idx, setIdx] = useState(0);
-  const { setInfo } = useLyricsContext();
+  const { setInfo, idx, setIdx } = useLyricsContext();
 
   const findIndex = (name) => {
     return musics.findIndex((itm) => itm.name === name);
