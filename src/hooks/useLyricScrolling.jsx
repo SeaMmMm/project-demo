@@ -166,7 +166,7 @@ const Wrapper = styled.section`
 
   @media (max-width: 500px) {
     height: 300px;
-    width: 90vw;
+    width: 80vw;
     overflow: scroll;
     border-radius: 10px;
     background-color: #fff;
@@ -189,9 +189,9 @@ const Lyric = styled.div`
     font-size: 16px;
     line-height: 1.2;
     color: #d1d5db;
-    ${({ $isActive, $activeScale }) =>
+    ${({ $isActive }) =>
       $isActive
-        ? `transform: scale(${$activeScale}); font-weight: bold; color: black`
+        ? `transform: scale(1.1); font-weight: bold; color: black`
         : `transform: scale(1); opacity: 0.9`};
     margin: 0 10px;
     padding: 0 10px;
