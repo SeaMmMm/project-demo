@@ -1,5 +1,4 @@
 import { useRef } from "react";
-import { isMobile } from "react-device-detect";
 import styled from "styled-components";
 import useDragEvent from "../../hooks/useDragEvent";
 import txt from "./txt";
@@ -10,14 +9,9 @@ const Scope = () => {
   useDragEvent(boxRef, txtRef);
 
   return (
-    <>
-      {!isMobile && (
-        <Box ref={boxRef}>
-          <Text ref={txtRef}>{txt}</Text>
-        </Box>
-      )}
-      {isMobile && <Error>Please view on your computer</Error>}
-    </>
+    <Box ref={boxRef}>
+      <Text ref={txtRef}>{txt}</Text>
+    </Box>
   );
 };
 
@@ -28,47 +22,29 @@ const Box = styled.div`
   border: 1px solid #000;
   overflow: hidden;
   background: white;
-`;
-
-const Error = styled.div`
-  position: absolute;
-  width: 300px;
-  height: 300px;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  font-family: "Input", sans-serif;
-  font-size: 1.5rem;
-  text-align: center;
-
-  @media (min-width: 768px) {
-    display: none;
-  }
+  cursor: grab;
+  touch-action: none;
 `;
 
 const Text = styled.div`
   position: absolute;
-  min-width: 100vw;
+  width: 100vw;
   min-height: 100vh;
-  font-family: "Input", sans-serif;
+  height: 100vh;
+  font-family: "Noto Serif", serif;
+  font-weight: 400;
+  font-size: calc(100vh / 40);
   line-height: 1.5;
-  font-size: 1.5rem;
+  letter-spacing: 1em;
   text-align: justify;
+  box-sizing: border-box;
+  display: flex;
+  align-items: stretch;
 
-  @media (min-width: 768px) {
-    font-size: 1rem;
-  }
-
-  @media (min-width: 1024px) {
-    font-size: 1.5rem;
-  }
-
-  @media (min-width: 1440px) {
-    font-size: 2rem;
-  }
-
-  @media (min-width: 1920px) {
-    font-size: 2.5rem;
+  @media (max-width: 768px) {
+    font-size: calc(100vh / 50);
+    line-height: 1.2;
+    letter-spacing: 0.4em;
   }
 `;
 

@@ -17,7 +17,7 @@ const useDragEvent = (draggableElemRef, contentElemRef = null) => {
     const draggableElem = draggableElemRef.current;
     let moveListener, upListener;
 
-    const onMouseDown = (event) => {
+    const onPointerDown = (event) => {
       const shiftX = event.clientX - draggableElem.getBoundingClientRect().left;
       const shiftY = event.clientY - draggableElem.getBoundingClientRect().top;
 
@@ -41,22 +41,22 @@ const useDragEvent = (draggableElemRef, contentElemRef = null) => {
         setEndY(calcTop);
       };
 
-      const onMouseMove = (e) => updateElementPosition(e.pageX, e.pageY);
+      const onPointerMove = (e) => updateElementPosition(e.pageX, e.pageY);
 
-      moveListener = document.addEventListener("mousemove", onMouseMove);
-      upListener = document.addEventListener("mouseup", () => {
-        document.removeEventListener("mousemove", onMouseMove);
-        document.removeEventListener("mouseup", upListener);
+      moveListener = document.addEventListener("pointermove", onPointerMove);
+      upListener = document.addEventListener("pointerup", () => {
+        document.removeEventListener("pointermove", onPointerMove);
+        document.removeEventListener("pointerup", upListener);
       });
     };
 
-    draggableElem.addEventListener("mousedown", onMouseDown);
+    draggableElem.addEventListener("pointerdown", onPointerDown);
     draggableElem.ondragstart = () => false;
 
     return () => {
-      draggableElem.removeEventListener("mousedown", onMouseDown);
-      document.removeEventListener("mousemove", moveListener);
-      document.removeEventListener("mouseup", upListener);
+      draggableElem.removeEventListener("pointerdown", onPointerDown);
+      document.removeEventListener("pointermove", moveListener);
+      document.removeEventListener("pointerup", upListener);
     };
   }, [windowWidth, windowHeight, draggableElemRef, contentElemRef]);
 
