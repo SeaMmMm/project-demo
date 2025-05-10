@@ -36,7 +36,7 @@ const Switch = () => {
           variant="outline"
           role="combobox"
           aria-expanded={open}
-          className="w-[160px] justify-between"
+          className="min-w-[160px] justify-between"
         >
           {musics[idx].name}
           <img src={fold} alt="fold" />
