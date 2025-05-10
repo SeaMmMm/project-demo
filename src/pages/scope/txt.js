@@ -1,50 +1,21 @@
-const txt = `Lorem ipsum dolor sit amet consectetur, adipisicing elit. Sint repellat labore esse
-reiciendis debitis perferendis minus molestias consequuntur laboriosam voluptatum,
-culpa distinctio! Eligendi unde laborum, libero vel soluta accusamus omnis? Corrupti
-delectus nemo quaerat nisi nobis impedit corporis expedita consectetur adipisci
-repudiandae autem, cumque explicabo sed tempore similique architecto ratione sequi
-magnam qui accusantium nostrum suscipit molestias temporibus! Dolorum, quibusdam.
-Esse quae at quisquam est minus laboriosam voluptates necessitatibus magnam ipsam
-nulla qui sint quidem placeat, veniam commodi nostrum ratione. Sunt nulla libero
-reiciendis porro ad molestias aut exercitationem minima? Sunt recusandae aliquam et.
-Libero aliquid ducimus odit molestiae. Commodi placeat facere eum. Dolore doloribus
-natus porro libero eius provident veritatis veniam eum, sapiente molestiae deserunt
-culpa accusantium ratione doloremque. Iusto aliquam quod molestias veniam animi
-assumenda alias qui fuga natus repellat illum, perferendis soluta minima mollitia
-possimus nobis expedita! Molestias ipsum rem exercitationem voluptate molestiae at
-velit laborum id. Lorem ipsum dolor sit amet consectetur adipisicing elit. Porro
-animi nulla sed magnam, possimus illo exercitationem modi et non. Placeat, inventore
-ipsum. Repellat saepe ullam rem, nihil dicta mollitia recusandae. Repudiandae
-reiciendis magni autem ipsam accusamus voluptatem veritatis rerum dolorum in
-aspernatur nostrum sunt tempore, dolores id soluta quaerat odit nisi, quo similique
-praesentium magnam explicabo. Expedita iusto ducimus mollitia. Nihil doloribus vel
-eligendi voluptas facere architecto possimus, voluptates minus repudiandae
-consequuntur, asperiores enim optio tempora perferendis illum esse, consectetur eos.
-Vitae id laudantium architecto quis eum laborum nulla voluptatum? Adipisci voluptatem
-autem incidunt fugiat, laboriosam, iusto, harum quasi ipsum quisquam impedit culpa
-laborum neque! Iste aperiam nobis minus fugiat nemo illo odit saepe, veniam atque
-reiciendis possimus provident consequatur? vel eligendi voluptas facere architecto
-possimus, voluptates minus repudiandae consequuntur, asperiores enim optio tempora
-perferendis illum esse, consectetur eos. Vitae id laudantium architecto quis eum
-laborum nulla voluptatum? Adipisci voluptatem autem incidunt fugiat, laboriosam,
-iusto, harum quasi ipsum quisquam impedit culpa laborum neque! Iste aperiam nobis
-minus fugiat nemo illo odit saepe, veniam atque reiciendis possimus provident
-consequatur? vel eligendi voluptas facere architecto possimus, voluptates minus
-repudiandae consequuntur, asperiores enim optio tempora perferendis illum esse,
-consectetur eos. Vitae id laudantium architecto quis eum laborum nulla voluptatum?
-Adipisci voluptatem autem incidunt fugiat, laboriosam, iusto, harum quasi ipsum
-quisquam impedit culpa laborum neque! Iste aperiam nobis minus fugiat nemo illo odit
-saepe, veniam atque reiciendis possimus provident consequatur? vel eligendi voluptas
-facere architecto possimus, voluptates minus repudiandae consequuntur, asperiores
-enim optio tempora perferendis illum esse, consectetur eos. Vitae id laudantium
-architecto quis eum laborum nulla voluptatum? Adipisci voluptatem autem incidunt
-fugiat, laboriosam, iusto, harum quasi ipsum quisquam impedit culpa laborum neque!
-Iste aperiam nobis minus fugiat nemo illo odit saepe, veniam atque reiciendis
-possimus provident consequatur? vel eligendi voluptas facere architecto possimus,
-voluptates minus repudiandae consequuntur, asperiores enim optio tempora perferendis
-illum esse, consectetur eos. Vitae id laudantium architecto quis eum laborum nulla
-voluptatum? Adipisci voluptatem autem incidunt fugiat, laboriosam, iusto, harum quasi
-ipsum quisquam impedit culpa laborum neque! Iste aperiam nobis minus fugiat nemo illo
-odit saepe, veniam atque reiciendis possimus provident consequatur?`;
+const txt = `
+即使在经历过十八载沧桑的今天，我仍可真切地记起那片草地的风景。连日温馨的霏霏轻雨，将夏日的尘埃冲洗无余。片片山坡叠青泻翠，抽穗的芒草在10月金风的吹拂下蜿蜒起伏，逶迤的薄云仿佛冻僵似的紧贴着湛蓝的天壁。凝眸远望，直觉双目隐隐作痛。
+
+清风拂过草地，微微卷起她满头秀发，旋即向杂木林吹去。树梢上的叶片簌簌低语，狗的吠声由远而近，若有若无，细微得如同从另一世界的入口处传来似的。此外便万籁俱寂了.耳畔不闻任何声响，身边没有任何人擦过。只见两只火团样的小鸟，受惊似的从草木从中蓦然腾起，朝杂木林方向飞去。
+
+实际身临其境的时候，几乎未曾意识到那片风景，未曾觉得它有什么撩人情怀之处，更没想到十八年后仍历历在目。那时心里想的，只是我自己，致使我身旁相伴而行的一个漂亮姑娘，只是我与她的关系，而后又转回我自己。在那个年龄，无论目睹什么感受什么还是思考什么，终归像回飞棒一样转回到自己身上。更何况我正怀着恋情，而那恋情又把我带到一处纷纭而微妙的境地，根本不容我有欣赏周围风景的闲情逸致。
+
+尽管如此，记忆到底还是一天天模糊起来。在如此追踪记忆的轨迹写这篇东西的时间里，我不时感到惴惴不安。我忘却的东西委实太多了。甚至不由怀疑自己：是不是连最关键的记忆都丧失了。说不定我体内有个叫记忆堆那样的昏暗场所，所有的宝贵记忆统统堆在那里而化为一滩烂泥。但不管怎样，它毕竟是我现在所能掌握的全部。于是我死命抓住这些已经模糊并且仍在时刻模糊下的记忆残片，敲骨吸髓地利用它来继续我这篇东西的创作。
+
+为了信守我对直子做出的诺言，舍此别无他路。很久以前，当我还年轻、记忆还清晰的时候，我就几次有过写一下直子的念头，却连一行也未能写成。虽然我明白只要写出第一行，往下就会文思泉涌。
+
+但就是死活写不出那第一行。一切都清晰得历历如昨的时候，反而不知从何处着手，就像一张详尽的地图，有时反倒因其过于详尽而不便于使用。
+
+但我现在明白了：归根结底，我想，文章这种不完整容器所能容纳的，只能是不完整的记忆和不完整的意念。并且发觉，关于直子的记忆愈是模糊，我才能更深入地理解她。
+
+时至今日，我才恍然领悟到直子之所以求我别忘掉她的原因。直子当然知道，知道她在我心目中的记忆迟早要被冲淡。也惟其如此，她才强调说：希望你能记住我，记住我曾这样存在过。想到这里，我就悲哀得难以自禁。因为，直子连爱都没爱过我的。
+
+他说我们到这里来不是矫正扭曲的，而是要来学习适应那种扭曲的。他又说我们的问题之一，就是无法承认并接受那种扭曲。就像每一个人都有他独特的走路方式一样，感觉、思考和看法也都有不同的地方，即使想改正也不是一蹴可及的，如果勉强修正，恐怕别的地方又会变得很奇怪。
+`;
 
 export default txt;
