@@ -2,7 +2,7 @@ import "github-markdown-css";
 import { useEffect, useState } from "react";
 import styled from "styled-components";
 import getFilledNumber from "../../utils/getFilledNumber";
-import markdown from "./articals/001.md";
+import markdown from "./articles/001.md";
 import MarkdownContent from "./Markdown";
 
 const CssTopicPage = () => {
@@ -26,7 +26,7 @@ const CssTopicPage = () => {
   };
 
   useEffect(() => {
-    import(`./articals/${getFilledNumber(num, 3)}.md`)
+    import(`./articles/${getFilledNumber(num, 3)}.md`)
       .then((res) => {
         setContent(res.default);
         setIsError(false);
@@ -57,6 +57,9 @@ const CssTopicPage = () => {
 
 const Wrapper = styled.div`
   position: relative;
+  max-width: 800px;
+  margin: 0 auto;
+
   .add,
   .error,
   .delete {

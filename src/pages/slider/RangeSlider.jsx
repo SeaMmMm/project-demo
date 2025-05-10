@@ -52,13 +52,13 @@ const RangeSlider = styled.input`
   --g: 8px; /* the gap */
   --l: 5px; /* line thickness*/
   --s: ${({ $thumbSize }) => $thumbSize}px; /* thumb size */
-
   /* width: 400px; input width */
   width: ${({ $width }) => $width}px;
   height: var(--s);
   appearance: none;
   background: none;
   cursor: pointer;
+  touch-action: none;
   overflow: hidden;
 
   @media (max-width: 768px) {
