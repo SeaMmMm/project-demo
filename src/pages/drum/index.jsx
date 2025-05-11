@@ -1,32 +1,11 @@
 import styled from "styled-components";
 import usePopupKey from "../../hooks/usePopupKey";
+import { loadAllAudios } from "./audioLoader";
 import DrumButton from "./DrumButton";
 import drumsData from "./drums";
 
-let audioPromise;
-let audioLoaded = false;
-
-function loadAllAudios() {
-  if (audioLoaded) return;
-
-  audioPromise = Promise.all(
-    drumsData.map((drum) => {
-      new Promise((resolve) => {
-        const audio = new Audio(drum.audio);
-        audio.addEventListener("canplaythrough", resolve, { once: true });
-      });
-    })
-  ).then(() => {
-    audioLoaded = true;
-  });
-
-  throw audioPromise;
-}
-
 function useAllAudioLoaded() {
-  if (!audioLoaded) {
-    loadAllAudios();
-  }
+  loadAllAudios();
 }
 
 const Drum = () => {
