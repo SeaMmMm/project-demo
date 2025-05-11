@@ -7,7 +7,7 @@ import musicInfo from "./data";
 
 const Lyrics = () => {
   const player = useRef(null);
-  const [idx, setIdx] = useState(1);
+  const [idx, setIdx] = useState(0);
   const [info, setInfo] = useState(musicInfo[idx]);
   const { dom, jumpToLyric, currentIdx } = useLyricScrolling(info.lyric, player);
 
