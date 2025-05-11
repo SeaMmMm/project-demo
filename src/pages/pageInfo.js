@@ -63,12 +63,13 @@ const info = {
     projectName: "virtual-dom",
     date: "2025-03-21",
     description: "append large nodes to document",
-    url: "https://github.com/SeaMmMm/project-demo/tree/main/src/pages/virtual-dom",
+    url: "https://github.com/SeaMmMm/project-demo/tree/main/src/pages/virtual-dom/index.jsx",
   },
   music: {
     projectName: "music",
     date: "2025-05-08",
     description: "Simulate lyrics scrolling effect",
+    url: "https://github.com/SeaMmMm/project-demo/blob/main/src/pages/lyric/index.jsx",
   },
 };
 
