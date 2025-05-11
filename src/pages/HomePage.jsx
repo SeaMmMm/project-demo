@@ -1,4 +1,4 @@
-import projects from "@/routers/projects";
+import projectRoutes from "@/routers/projectRoutes";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import demo from "../assets/icons/demo.svg";
@@ -19,7 +19,7 @@ const HomePage = () => {
           <img src={demo} alt="icon" />
         </p>
         <Projects>
-          {projects.map((project, idx) => (
+          {projectRoutes.map((project, idx) => (
             <div key={idx} className="project" onClick={() => changeMade(project)}>
               <span className="project-idx">{getFilledNumber(idx + 1, 3)}</span>
               <span className="project-name">{project.name}</span>

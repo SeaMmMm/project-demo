@@ -1,14 +1,14 @@
 import ContentPage from "@/pages/ContentPage";
 import NotFound from "../pages/404";
 import HomePage from "../pages/HomePage";
-import projects from "./projects";
+import projectRoutes from "./projectRoutes";
 
 const routes = [
   { path: "/", element: <HomePage /> },
   {
     path: "/content",
     element: <ContentPage />,
-    children: projects,
+    children: projectRoutes,
   },
   { path: "*", element: <NotFound /> },
 ];

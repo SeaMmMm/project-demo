@@ -41,12 +41,6 @@ const info = {
     description: "try to use markdown in react.(react-markdown)",
     url: "https://github.com/SeaMmMm/project-demo/blob/main/src/pages/css-topics/index.jsx",
   },
-  canvas: {
-    projectName: "canvas",
-    date: "2024-5-15",
-    description: "Drag mouse to draw on canvas. ",
-    url: "https://github.com/SeaMmMm/project-demo/blob/main/src/pages/canvas/index.jsx",
-  },
   console: {
     projectName: "console",
     date: "2024-5-16",
@@ -58,12 +52,6 @@ const info = {
     date: "2024-5-19",
     description: "drag the box to see the scope of the variable change",
     url: "https://github.com/SeaMmMm/project-demo/blob/main/src/pages/scope/index.jsx",
-  },
-  svg: {
-    projectName: "svg",
-    date: "2024-5-22",
-    description: "SVG Animation",
-    url: "https://github.com/SeaMmMm/project-demo/blob/main/src/pages/animate/index.jsx",
   },
   "tic-toc": {
     projectName: "tic-toc",
