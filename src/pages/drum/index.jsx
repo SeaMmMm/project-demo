@@ -1,30 +1,25 @@
 import styled from "styled-components";
 import usePopupKey from "../../hooks/usePopupKey";
-import { loadAllAudios } from "./audioLoader";
 import DrumButton from "./DrumButton";
 import drumsData from "./drums";
 
-function useAllAudioLoaded() {
-  loadAllAudios();
-}
-
 const Drum = () => {
-  useAllAudioLoaded();
-
   const { showNum, playDrum } = usePopupKey();
   return (
-    <Wrapper>
-      {drumsData.map((drum, idx) => (
-        <DrumButton
-          key={idx}
-          index={idx}
-          showNum={showNum}
-          letter={drum.letter}
-          description={drum.description}
-          onClick={() => playDrum(drum)}
-        />
-      ))}
-    </Wrapper>
+    <>
+      <Wrapper>
+        {drumsData.map((drum, idx) => (
+          <DrumButton
+            key={idx}
+            index={idx}
+            showNum={showNum}
+            letter={drum.letter}
+            description={drum.description}
+            onClick={() => playDrum(drum)}
+          />
+        ))}
+      </Wrapper>
+    </>
   );
 };
 

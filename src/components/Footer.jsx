@@ -9,7 +9,7 @@ import getFilledNumber from "../utils/getFilledNumber";
 
 const Footer = ({ index, data, children = null }) => {
   const [showDialog, setShowDialog] = useState(false);
-  const [isInitial, setIsInitial] = useState(true);
+  const isInitial = useRef(true);
   const title = useHref().split("/").pop();
   const dialogRef = useRef(null);
   const infoRef = useRef(null);
@@ -29,18 +29,18 @@ const Footer = ({ index, data, children = null }) => {
   const handleToggleDialog = () => {
     setShowDialog((prev) => !prev);
     toggleLayer();
-    setIsInitial(false);
+    isInitial.current = false;
   };
 
   return (
     <>
-      <Mask $isShow={isShowLayer} $initial={isInitial} />
+      <Mask $isShow={isShowLayer} $initial={isInitial.current} />
       <Wrapper>
         <div className="current">
           <p>{index ? getFilledNumber(index, 3) : title}</p>
         </div>
         <Info src={info} onClick={handleToggleDialog} ref={infoRef} />
-        <Content $isShow={showDialog} $initial={isInitial} ref={dialogRef}>
+        <Content $isShow={showDialog} $initial={isInitial.current} ref={dialogRef}>
           <p>{data.description}</p>
           {children}
           {data.codeurl && (
