@@ -22,7 +22,6 @@ const Box = styled.div`
   border: 1px solid #000;
   overflow: hidden;
   background: white;
-  cursor: grab;
   touch-action: none;
 `;
 
