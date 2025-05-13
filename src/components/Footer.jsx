@@ -126,7 +126,7 @@ const Content = styled.div`
   transform: translateX(-50%) translateY(100%);
   border: 1px solid #000;
   border-bottom: none;
-  z-index: 10;
+  z-index: 1000;
   padding: 40px 20px;
   min-width: 600px;
   min-height: 140px;
