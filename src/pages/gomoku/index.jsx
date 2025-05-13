@@ -1,6 +1,7 @@
 import { useState } from "react";
 import styled from "styled-components";
 import Board from "./Board";
+import { isMobile } from "react-device-detect";
 
 const initialState = (boardConfigs) => ({
   places: Array.from({ length: boardConfigs.BOARD_SIZE }, () =>
@@ -52,8 +53,8 @@ const checkIsWin = (board, { x, y }) => {
 
 const Gomoku = () => {
   const [boardConfigs, setBoardConfigs] = useState({
-    BOARD_SIZE: 20,
-    CELL_SIZE: 40,
+    BOARD_SIZE: isMobile ? 10 : 20,
+    CELL_SIZE: isMobile ? 34 : 40,
   });
   const [gameState, setGameState] = useState(initialState(boardConfigs));
 

@@ -74,6 +74,8 @@ const Wrapper = styled.div`
   width: ${(props) => props.$BOARD_SIZE * props.$CELL_SIZE}px;
   height: ${(props) => props.$BOARD_SIZE * props.$CELL_SIZE}px;
   border: 1px solid #333;
+  touch-action: none; /* 防止移动端浏览器默认行为 */
+  -webkit-tap-highlight-color: transparent; /* 移除iOS点击高亮 */
 `;
 
 const Line = styled.div`
@@ -94,7 +96,7 @@ const PointHotArea = styled.div.attrs(({ $p, $CELL_SIZE }) => ({
   border-radius: 50%;
   transform: translate(-50%, -50%);
   z-index: 2;
-  transition: background 0.3s ease;
+  transition: background 0.2s ease-in-out;
 
   &:hover {
     background: rgba(0, 0, 0, 0.1);
