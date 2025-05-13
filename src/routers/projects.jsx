@@ -9,3 +9,4 @@ export const Scope = lazy(() => import("../pages/scope"));
 export const TicToc = lazy(() => import("../pages/tic-toc"));
 export const VirtualDom = lazy(() => import("../pages/virtual-dom"));
 export const Lyrics = lazy(() => import("../pages/lyric"));
+export const Gomoku = lazy(() => import("../pages/gomoku"));

@@ -8,6 +8,7 @@ import {
   Slider,
   TicToc,
   VirtualDom,
+  Gomoku,
 } from "./projects";
 
 export default [
@@ -20,4 +21,5 @@ export default [
   { path: "tic-toc", element: <TicToc />, name: "tic-toc" },
   { path: "virtual-dom", element: <VirtualDom />, name: "virtual-dom" },
   { path: "music", element: <Lyrics />, name: "music" },
+  { path: "gomoku", element: <Gomoku />, name: "gomoku" },
 ];

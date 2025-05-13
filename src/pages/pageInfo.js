@@ -23,23 +23,11 @@ const info = {
     description: "Array Cardio Day 1",
     url: "https://github.com/SeaMmMm/project-demo/blob/main/src/pages/cardio/index.jsx",
   },
-  panel: {
-    projectName: "panel",
-    date: "2024-5-8",
-    description: "click each panel",
-    url: "https://github.com/SeaMmMm/project-demo/blob/main/src/pages/panel/index.jsx",
-  },
   md: {
     projectName: "md",
     date: "2024-5-11",
     description: "try to use markdown in react.(react-markdown)",
     url: "https://github.com/SeaMmMm/project-demo/blob/main/src/pages/css-topics/index.jsx",
-  },
-  console: {
-    projectName: "console",
-    date: "2024-5-16",
-    description: "Console with custom log messages & styles",
-    url: "https://github.com/SeaMmMm/project-demo/blob/main/src/pages/consoles/index.jsx",
   },
   scope: {
     projectName: "scope",
@@ -64,6 +52,11 @@ const info = {
     date: "2025-05-08",
     description: "Simulate lyrics scrolling effect",
     url: "https://github.com/SeaMmMm/project-demo/blob/main/src/pages/lyric/index.jsx",
+  },
+  gomoku: {
+    projectName: "gomoku",
+    date: "2025-05-13",
+    description: "Simple Gomoku game",
   },
 };
 
