@@ -1,22 +1,62 @@
+import Loading from "@/components/Loading";
 import useLyricScrolling from "@/hooks/useLyricScrolling";
-import { useRef, useState } from "react";
+import { gql, useQuery } from "@apollo/client";
+import { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import BottomControls from "./BottomControls";
 import LyricsProvider from "./LyricsProvider";
-import musicInfo from "./data";
+
+const GET_ALL_MUSICS = gql`
+  {
+    dmCollection {
+      items {
+        name
+        music {
+          description
+          url
+        }
+        lyric
+      }
+    }
+  }
+`;
 
 const Lyrics = () => {
+  const { loading, error, data } = useQuery(GET_ALL_MUSICS);
   const player = useRef(null);
   const [idx, setIdx] = useState(0);
-  const [info, setInfo] = useState(musicInfo[idx]);
-  const { dom, jumpToLyric, currentIdx } = useLyricScrolling(info.lyric, player);
+  const [musics, setMusics] = useState(null);
+  const { dom, jumpToLyric, currentIdx } = useLyricScrolling(musics?.[idx]?.lyric || "", player);
+
+  useEffect(() => {
+    if (!data) return;
+
+    try {
+      const {
+        dmCollection: { items },
+      } = data;
+
+      const musicsCopy = items.map((itm) => ({
+        name: itm.name,
+        music: itm.music.url,
+        lyric: itm.lyric,
+      }));
+
+      setMusics(musicsCopy);
+    } catch (e) {
+      console.error("数据处理出错:", e);
+    }
+  }, [data]);
+
+  if (loading || !musics) return <Loading />;
+  if (error) return <div>无法获取歌词信息</div>;
 
   return (
     <Wrapper>
-      <LyricsProvider value={{ info, setInfo, idx, setIdx }}>
+      <LyricsProvider value={{ idx, setIdx, musics }}>
         {dom}
         <BottomControls jumpToLyric={jumpToLyric} currentIdx={currentIdx} />
-        <audio src={info.music} controls ref={player} />
+        <audio src={musics[idx]?.music} controls ref={player} />
       </LyricsProvider>
     </Wrapper>
   );

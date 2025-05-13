@@ -10,12 +10,11 @@ import {
 } from "@/components/ui/command";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { useState } from "react";
-import musics from "./data";
 import { useLyricsContext } from "./LyricsContext";
 
 const Switch = () => {
   const [open, setOpen] = useState(false);
-  const { setInfo, idx, setIdx } = useLyricsContext();
+  const { idx, setIdx, musics } = useLyricsContext();
 
   const findIndex = (name) => {
     return musics.findIndex((itm) => itm.name === name);
@@ -25,7 +24,6 @@ const Switch = () => {
     const currentIdx = findIndex(currentValue);
 
     setIdx(currentIdx);
-    setInfo(musics[currentIdx]);
     setOpen(false);
   };
 

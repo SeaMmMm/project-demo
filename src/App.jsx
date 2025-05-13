@@ -1,18 +1,12 @@
 import { useRoutes } from "react-router-dom";
 import styled from "styled-components";
 import routes from "./routers";
-import { SmoothCursor } from "./components/ui/smooth-cursor";
-import { isMobile } from "react-device-detect";
 
 const App = () => {
-  const elements = useRoutes(routes);
+  document.title = "100 dm";
 
-  return (
-    <>
-      <Wrapper>{elements}</Wrapper>
-      {!isMobile && <SmoothCursor />}
-    </>
-  );
+  const elements = useRoutes(routes);
+  return <Wrapper>{elements}</Wrapper>;
 };
 
 const Wrapper = styled.div`

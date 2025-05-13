@@ -1,4 +1,6 @@
+import { SmoothCursor } from "@/components/ui/smooth-cursor";
 import { useRef } from "react";
+import { isMobile } from "react-device-detect";
 import styled from "styled-components";
 import useDragEvent from "../../hooks/useDragEvent";
 import txt from "./txt";
@@ -9,9 +11,12 @@ const Scope = () => {
   useDragEvent(boxRef, txtRef);
 
   return (
-    <Box ref={boxRef}>
-      <Text ref={txtRef}>{txt}</Text>
-    </Box>
+    <>
+      <Box ref={boxRef}>
+        <Text ref={txtRef}>{txt}</Text>
+      </Box>
+      {!isMobile && <SmoothCursor />}
+    </>
   );
 };
 

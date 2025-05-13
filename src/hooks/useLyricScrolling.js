@@ -17,7 +17,7 @@ function generateLyricList(lyric, toast) {
       const parts = str.split("]");
       if (parts.length < 2) return;
       const time = parts[0].slice(1);
-      result.push({ time, lyric: parts[1] });
+      result.push({ time, lyric: parts[1].slice(0, -2) });
     } catch (e) {
       toast({
         title: "Error parsing lyrics",

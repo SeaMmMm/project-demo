@@ -1,6 +1,5 @@
 import { useToast } from "@/hooks/use-toast";
-import { useContext } from "react";
-import { createContext } from "react";
+import { createContext, useContext } from "react";
 
 const LyricsContext = createContext();
 

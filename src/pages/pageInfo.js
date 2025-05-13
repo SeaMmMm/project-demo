@@ -17,12 +17,6 @@ const info = {
     description: "range slider with custom styles",
     url: "https://github.com/SeaMmMm/project-demo/blob/main/src/pages/slider/index.jsx",
   },
-  frame: {
-    projectName: "frame",
-    date: "2024-5-5",
-    description: "Update CSS Variables with JS",
-    url: "https://github.com/SeaMmMm/project-demo/blob/main/src/pages/frame/index.jsx",
-  },
   cardio: {
     projectName: "cardio",
     date: "2024-5-6",

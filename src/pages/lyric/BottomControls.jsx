@@ -3,13 +3,13 @@ import { Button } from "@/components/ui/button";
 import styled from "styled-components";
 import Switch from "./Switch";
 
-const BottomControls = ({ jumpToLyric, currentIdx }) => {
+const BottomControls = ({ jumpToLyric, currentIdx, ...props }) => {
   const jumpToCurrentLyrics = () => {
     jumpToLyric(currentIdx);
   };
 
   return (
-    <Wrapper>
+    <Wrapper {...props}>
       <Button variant="outline" size="icon">
         <img src={current} alt="currentIndex" onClick={jumpToCurrentLyrics} />
       </Button>

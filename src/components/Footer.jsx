@@ -195,7 +195,7 @@ const Mask = styled.div`
   top: 0;
   left: 0;
   width: 100vw;
-  height: 100vh;
+  height: 100%;
   background: rgba(0, 0, 0, 0.4);
   transition: opacity 0.2s;
   opacity: 0;
