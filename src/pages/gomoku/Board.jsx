@@ -74,6 +74,8 @@ const Wrapper = styled.div`
   width: ${(props) => props.$BOARD_SIZE * props.$CELL_SIZE}px;
   height: ${(props) => props.$BOARD_SIZE * props.$CELL_SIZE}px;
   border: 1px solid #333;
+  border-top: none;
+  border-left: none;
   touch-action: none; /* 防止移动端浏览器默认行为 */
   -webkit-tap-highlight-color: transparent; /* 移除iOS点击高亮 */
 `;

@@ -4,8 +4,8 @@ import Board from "./Board";
 import { isMobile } from "react-device-detect";
 
 const initialState = (boardConfigs) => ({
-  places: Array.from({ length: boardConfigs.BOARD_SIZE }, () =>
-    Array.from({ length: boardConfigs.BOARD_SIZE })
+  places: Array.from({ length: boardConfigs.BOARD_SIZE + 1 }, () =>
+    Array.from({ length: boardConfigs.BOARD_SIZE + 1 })
   ),
   isWin: false,
   activePlayer: 1,
