@@ -1,23 +1,23 @@
-import { useToast } from "@/hooks/use-toast";
-import { createContext, useContext } from "react";
+import { createContext, useContext } from 'react'
+import { useToast } from '@/hooks/use-toast'
 
-const LyricsContext = createContext();
+const LyricsContext = createContext()
 
-export const useLyricsContext = () => {
-  const value = useContext(LyricsContext);
-  const { toast } = useToast();
+export function useLyricsContext() {
+  const value = useContext(LyricsContext)
+  const { toast } = useToast()
 
   if (!value) {
     toast({
       title: `Should be used in LyricsContext`,
-      status: "error",
+      status: 'error',
       duration: 2000,
       isClosable: true,
-    });
-    return;
+    })
+    return
   }
 
-  return value;
-};
+  return value
+}
 
-export default LyricsContext;
+export default LyricsContext

@@ -1,3 +1,6 @@
+import { ChevronLeftIcon } from '@radix-ui/react-icons'
+import { useState } from 'react'
+import styled from 'styled-components'
 import {
   AlertDialog,
   AlertDialogAction,
@@ -6,11 +9,8 @@ import {
   AlertDialogFooter,
   AlertDialogHeader,
   AlertDialogTitle,
-} from "@/components/ui/alert-dialog";
-import { Button } from "@/components/ui/button";
-import { ChevronLeftIcon } from "@radix-ui/react-icons";
-import { useState } from "react";
-import styled from "styled-components";
+} from '@/components/ui/alert-dialog'
+import { Button } from '@/components/ui/button'
 
 const winnerSets = [
   [0, 1, 2],
@@ -21,66 +21,71 @@ const winnerSets = [
   [2, 5, 8],
   [0, 4, 8],
   [2, 4, 6],
-];
+]
 
-const initializeState = () => ({
-  board: Array(9).fill(null),
-  user: "X",
-  isTie: false,
-  isOpen: false,
-  isBegin: false,
-});
+function initializeState() {
+  return {
+    board: Array.from({ length: 9 }).fill(null),
+    user: 'X',
+    isTie: false,
+    isOpen: false,
+    isBegin: false,
+  }
+}
 
-const TicToc = () => {
-  const [gameState, setGameState] = useState(initializeState());
-  const [history, setHistory] = useState([]);
+function TicToc() {
+  const [gameState, setGameState] = useState(() => initializeState())
+  const [history, setHistory] = useState([])
 
-  const handleGameStateUpdate = (updates) =>
-    setGameState((prevState) => ({ ...prevState, ...updates }));
+  const handleGameStateUpdate = updates =>
+    setGameState(prevState => ({ ...prevState, ...updates }))
+  const isTie = board => !board.includes(null)
+  const isWin = (user, board) =>
+    winnerSets.some(set => set.every(index => board[index] === user))
+  const toggleUser = user => (user === 'X' ? 'O' : 'X')
+
+  const showDialog = tie => handleGameStateUpdate({ isOpen: true, isTie: tie })
 
   const handleBoardClick = (index) => {
-    if (gameState.board[index] !== null) return;
+    if (gameState.board[index] !== null)
+      return
 
-    const newBoard = [...gameState.board];
-    newBoard[index] = gameState.user;
-    handleGameStateUpdate({ board: newBoard });
-    setHistory([...history, newBoard]);
-
+    const newBoard = [...gameState.board]
+    newBoard[index] = gameState.user
+    handleGameStateUpdate({ board: newBoard })
+    setHistory([...history, newBoard])
     if (isWin(gameState.user, newBoard) || isTie(newBoard)) {
-      showDialog(isTie(newBoard));
-    } else {
-      handleGameStateUpdate({ user: toggleUser(gameState.user), isBegin: true });
+      showDialog(isTie(newBoard))
     }
-  };
+    else {
+      handleGameStateUpdate({ user: toggleUser(gameState.user), isBegin: true })
+    }
+  }
 
-  const isTie = (board) => !board.includes(null);
-  const isWin = (user, board) =>
-    winnerSets.some((set) => set.every((index) => board[index] === user));
-  const toggleUser = (user) => (user === "X" ? "O" : "X");
-  const showDialog = (tie) => handleGameStateUpdate({ isOpen: true, isTie: tie });
   const reset = () => {
-    setGameState({ ...initializeState() });
-    setHistory([]);
-  };
+    setGameState({ ...initializeState() })
+    setHistory([])
+  }
 
   const backStep = () => {
     if (history.length <= 1) {
-      reset();
-    } else {
-      history.pop();
+      reset()
+    }
+    else {
+      history.pop()
       handleGameStateUpdate({
         board: history[history.length - 1],
         user: toggleUser(gameState.user),
-      });
+      })
     }
-  };
+  }
 
   return (
     <>
       <Wrapper>
         <div className="box">
           {gameState.board.map((item, index) => (
-            <div key={index} className="cell" onClick={() => handleBoardClick(index)}>
+            <div key={crypto.randomUUID()} className="cell" onClick={() => handleBoardClick(index)}>
               {item}
             </div>
           ))}
@@ -92,10 +97,10 @@ const TicToc = () => {
           <AlertDialogContent>
             <AlertDialogHeader>
               <AlertDialogTitle>
-                {gameState.isTie ? "平局" : `玩家 ${gameState.user} 获胜`}
+                {gameState.isTie ? '平局' : `玩家 ${gameState.user} 获胜`}
               </AlertDialogTitle>
               <AlertDialogDescription>
-                {gameState.isTie ? "🤔" : "Congradulations!"}
+                {gameState.isTie ? '🤔' : 'Congratulations!'}
               </AlertDialogDescription>
             </AlertDialogHeader>
             <AlertDialogFooter>
@@ -105,8 +110,8 @@ const TicToc = () => {
         </AlertDialog>
       </Wrapper>
     </>
-  );
-};
+  )
+}
 
 const Wrapper = styled.div`
   position: absolute;
@@ -132,6 +137,6 @@ const Wrapper = styled.div`
     justify-items: center;
     align-content: center;
   }
-`;
+`
 
-export default TicToc;
+export default TicToc

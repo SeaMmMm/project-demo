@@ -1,10 +1,9 @@
-import { Skeleton } from "@/components/ui/skeleton";
-import PropTypes from "prop-types";
-import { useState } from "react";
-import styled from "styled-components";
+import { useState } from 'react'
+import styled from 'styled-components'
+import { Skeleton } from '@/components/ui/skeleton'
 
-const Card = ({ inventor, num }) => {
-  const [loaded, setLoaded] = useState(false);
+function Card({ inventor, num }) {
+  const [loaded, setLoaded] = useState(false)
 
   return (
     <Div $delay={num}>
@@ -12,29 +11,23 @@ const Card = ({ inventor, num }) => {
       <img
         src={inventor.avatar}
         alt="person-image"
-        style={{ display: loaded ? "block" : "none" }}
+        style={{ display: loaded ? 'block' : 'none' }}
         onLoad={() => setLoaded(true)}
       />
       <h2>
-        {inventor.first} {inventor.last}
+        {inventor.first}
+        {' '}
+        {inventor.last}
       </h2>
       <p>
-        {inventor.year} - {inventor.passed}
+        {inventor.year}
+        {' '}
+        -
+        {inventor.passed}
       </p>
     </Div>
-  );
-};
-
-Card.propTypes = {
-  inventor: PropTypes.shape({
-    avatar: PropTypes.string.isRequired,
-    first: PropTypes.string.isRequired,
-    last: PropTypes.string.isRequired,
-    year: PropTypes.number.isRequired,
-    passed: PropTypes.number.isRequired,
-  }),
-  num: PropTypes.number.isRequired,
-};
+  )
+}
 
 const Div = styled.div`
   @keyframes show {
@@ -75,6 +68,6 @@ const Div = styled.div`
     pointer-events: none;
     width: 60px;
   }
-`;
+`
 
-export default Card;
+export default Card

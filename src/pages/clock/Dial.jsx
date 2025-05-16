@@ -1,8 +1,8 @@
-import styled from "styled-components";
-import useTimeRotate from "@/hooks/useTimeRotate";
+import styled from 'styled-components'
+import useTimeRotate from '@/hooks/useTimeRotate'
 
 function Dial() {
-  const { timeRotate, shouldTransition } = useTimeRotate();
+  const { timeRotate, shouldTransition } = useTimeRotate()
 
   return (
     <Wrapper $timeRotate={timeRotate} $shouldTransition={shouldTransition}>
@@ -10,7 +10,7 @@ function Dial() {
       <MinuteHand className="minute" />
       <SecondHand className="second" />
     </Wrapper>
-  );
+  )
 }
 
 const Wrapper = styled.div`
@@ -36,14 +36,14 @@ const Wrapper = styled.div`
   }
 
   * {
-    ${({ $shouldTransition }) => ($shouldTransition ? "transition: all 0.3s ease-in-out;" : "")}
+    ${({ $shouldTransition }) => ($shouldTransition ? 'transition: all 0.3s ease-in-out;' : '')}
   }
 
   @media (max-width: 768px) {
     width: 300px;
     height: 300px;
   }
-`;
+`
 
 const HourHand = styled.div`
   position: absolute;
@@ -59,7 +59,7 @@ const HourHand = styled.div`
     width: 100px;
     height: 2px;
   }
-`;
+`
 
 const MinuteHand = styled.div`
   position: absolute;
@@ -75,7 +75,7 @@ const MinuteHand = styled.div`
     width: 120px;
     height: 1px;
   }
-`;
+`
 
 const SecondHand = styled.div`
   position: absolute;
@@ -91,6 +91,6 @@ const SecondHand = styled.div`
     width: 140px;
     height: 1px;
   }
-`;
+`
 
-export default Dial;
+export default Dial

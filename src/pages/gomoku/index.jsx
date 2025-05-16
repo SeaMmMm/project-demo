@@ -1,101 +1,80 @@
-import { useState } from "react";
-import styled from "styled-components";
-import Board from "./Board";
-import { isMobile } from "react-device-detect";
+import { useState } from 'react'
+import { isMobile } from 'react-device-detect'
+import styled from 'styled-components'
+import { Badge } from '@/components/ui/badge'
+import checkIsWin from '@/utils/checkIsWin'
+import Board from './Board'
+import History from './History'
 
-const initialState = (boardConfigs) => ({
-  places: Array.from({ length: boardConfigs.BOARD_SIZE + 1 }, () =>
-    Array.from({ length: boardConfigs.BOARD_SIZE + 1 })
-  ),
-  isWin: false,
-  activePlayer: 1,
-  pieces: [],
-});
+const WINNER = {
+  '1': '黑',
+  '-1': '白',
+}
 
-const checkIsWin = (board, { x, y }) => {
-  const current = board[y][x];
-  if (!current) return false;
-
-  const total = 5;
-  const directions = [
-    [1, 0], // 横向
-    [0, 1], // 纵向
-    [1, 1], // 左上-右下
-    [1, -1], // 右上-左下
-  ];
-  const size = board.length;
-
-  for (const [dx, dy] of directions) {
-    let count = 1;
-
-    // 正方向
-    let nx = x + dx,
-      ny = y + dy;
-    while (nx >= 0 && nx < size && ny >= 0 && ny < size && board[ny][nx] === current) {
-      count++;
-      nx += dx;
-      ny += dy;
-    }
-
-    // 反方向
-    nx = x - dx;
-    ny = y - dy;
-    while (nx >= 0 && nx < size && ny >= 0 && ny < size && board[ny][nx] === current) {
-      count++;
-      nx -= dx;
-      ny -= dy;
-    }
-
-    if (count >= total) return true;
+function initialState(boardConfigs) {
+  return {
+    places: Array.from({ length: boardConfigs.BOARD_SIZE }, () =>
+      Array.from({ length: boardConfigs.BOARD_SIZE })),
+    isWin: false,
+    activePlayer: 1,
+    pieces: [],
   }
-  return false;
-};
+}
 
-const Gomoku = () => {
+function Gomoku() {
   const [boardConfigs, setBoardConfigs] = useState({
     BOARD_SIZE: isMobile ? 10 : 20,
     CELL_SIZE: isMobile ? 34 : 40,
-  });
-  const [gameState, setGameState] = useState(initialState(boardConfigs));
+  })
+  const [gameState, setGameState] = useState(() => initialState(boardConfigs))
 
   const reset = () => {
-    setGameState(initialState(boardConfigs));
-  };
+    setGameState(initialState(boardConfigs))
+  }
 
   const handlePlace = (x, y) => {
-    if (gameState.isWin || gameState.places[y][x]) return;
+    if (gameState.isWin || gameState.places[y][x])
+      return
 
     setGameState((state) => {
-      const { places, activePlayer, pieces } = state;
+      const { places, activePlayer, pieces } = state
 
-      const newPlaces = updateBoard(places, x, y, activePlayer);
-      const newPieces = [...pieces, { x, y, player: activePlayer }];
+      const updateBoard = (places, x, y, player) => {
+        return places.map((row, rowIndex) =>
+          rowIndex === y ? row.map((cell, cellIndex) => (cellIndex === x ? player : cell)) : [...row],
+        )
+      }
 
-      const isWin = checkIsWin(newPlaces, { x, y });
-      const nextPlayer = newPlaces.flat().filter(Boolean).length % 2 === 0 ? 1 : -1;
+      const newPlaces = updateBoard(places, x, y, activePlayer)
+      const newPieces = [...pieces, { x, y, player: activePlayer }]
+      const isWin = checkIsWin(newPlaces, { x, y })
+      const nextPlayer = newPlaces.flat().filter(Boolean).length % 2 === 0 ? 1 : -1
 
-      return { ...state, isWin, places: newPlaces, activePlayer: nextPlayer, pieces: newPieces };
-    });
-  };
+      return { ...state, isWin, places: newPlaces, activePlayer: nextPlayer, pieces: newPieces }
+    })
+  }
 
-  const updateBoard = (places, x, y, player) => {
-    return places.map((row, rowIndex) =>
-      rowIndex === y ? row.map((cell, cellIndex) => (cellIndex === x ? player : cell)) : [...row]
-    );
-  };
+  const currentPlayer = WINNER[gameState.activePlayer]
+  const winner = WINNER[-gameState.activePlayer]
 
   return (
     <Wrapper>
       <Board {...boardConfigs} onPlace={handlePlace} pieces={gameState.pieces} />
+      <Badge onClick={reset}>
+        {!gameState.isWin ? `落子方: ${currentPlayer}` : `${winner}胜 <<`}
+      </Badge>
+      <History gameState={gameState} setGameState={setGameState} />
     </Wrapper>
-  );
-};
+  )
+}
 
 const Wrapper = styled.div`
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-`;
 
-export default Gomoku;
+  justify-items: center;
+`
+
+export default Gomoku

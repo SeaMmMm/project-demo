@@ -1,12 +1,12 @@
-import current from "@/assets/svg/current.svg";
-import { Button } from "@/components/ui/button";
-import styled from "styled-components";
-import Switch from "./Switch";
+import styled from 'styled-components'
+import current from '@/assets/svg/current.svg'
+import { Button } from '@/components/ui/button'
+import Switch from './Switch'
 
-const BottomControls = ({ jumpToLyric, currentIdx, ...props }) => {
+function BottomControls({ jumpToLyric, currentIdx, ...props }) {
   const jumpToCurrentLyrics = () => {
-    jumpToLyric(currentIdx);
-  };
+    jumpToLyric(currentIdx)
+  }
 
   return (
     <Wrapper {...props}>
@@ -15,8 +15,8 @@ const BottomControls = ({ jumpToLyric, currentIdx, ...props }) => {
       </Button>
       <Switch />
     </Wrapper>
-  );
-};
+  )
+}
 
 const Wrapper = styled.div`
   display: flex;
@@ -30,6 +30,6 @@ const Wrapper = styled.div`
   img {
     width: 20px;
   }
-`;
+`
 
-export default BottomControls;
+export default BottomControls

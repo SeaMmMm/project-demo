@@ -1,25 +1,24 @@
-import back from "@/assets/svg/back.svg";
-import PropTypes from "prop-types";
-import { useEffect } from "react";
-import { useHref, useNavigate } from "react-router-dom";
-import styled from "styled-components";
-import useCurrentTime from "../hooks/useCurrentTime";
-import getFormattedDate from "../utils/getFormatedDate";
+import { useEffect } from 'react'
+import { useHref, useNavigate } from 'react-router-dom'
+import styled from 'styled-components'
+import back from '@/assets/svg/back.svg'
+import useCurrentTime from '../hooks/useCurrentTime'
+import getFormattedDate from '../utils/getFormatedDate'
 
-const Header = ({ date = null, isFixed }) => {
-  const title = useHref().split("/").pop();
-  const navigate = useNavigate();
-  const currentTime = useCurrentTime();
+function Header({ date = null, isFixed }) {
+  const title = useHref().split('/').pop()
+  const navigate = useNavigate()
+  const currentTime = useCurrentTime()
 
-  const goHome = () => navigate("/");
+  const goHome = () => navigate('/')
 
   const formattedDate = date
     ? getFormattedDate(date.year, date.month, date.day)
-    : getFormattedDate(currentTime?.year, currentTime?.month, currentTime?.day);
+    : getFormattedDate(currentTime?.year, currentTime?.month, currentTime?.day)
 
   useEffect(() => {
-    document.title = title;
-  }, [title]);
+    document.title = title
+  }, [title])
 
   return (
     <Head $isFixed={isFixed}>
@@ -27,17 +26,8 @@ const Header = ({ date = null, isFixed }) => {
       <p>{title}</p>
       <h1>{formattedDate}</h1>
     </Head>
-  );
-};
-
-Header.propTypes = {
-  isFixed: PropTypes.bool,
-  date: PropTypes.shape({
-    year: PropTypes.number,
-    month: PropTypes.number,
-    day: PropTypes.number,
-  }),
-};
+  )
+}
 
 const Head = styled.header`
   padding: 20px;
@@ -45,7 +35,7 @@ const Head = styled.header`
   align-items: center;
   justify-content: space-between;
 
-  ${({ $isFixed }) => $isFixed && "position: fixed; top: 0; left: 0; width: 100%;"}
+  ${({ $isFixed }) => $isFixed && 'position: fixed; top: 0; left: 0; width: 100%;'}
 
   img {
     padding: 4px 8px;
@@ -67,6 +57,6 @@ const Head = styled.header`
       font-size: 12px;
     }
   }
-`;
+`
 
-export default Header;
+export default Header

@@ -158,4 +158,4 @@ const data = [
   'truck',
 ]
 
-export { inventors, people, data }
+export { data, inventors, people }

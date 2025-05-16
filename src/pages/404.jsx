@@ -1,41 +1,43 @@
-import Lottie from "lottie-react";
-import { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import styled from "styled-components";
-import Animation from "../assets/404.json";
+import Lottie from 'lottie-react'
+import { useEffect, useState } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
+import styled from 'styled-components'
+import Animation from '../assets/404.json'
 
-const NotFound = () => {
-  const [inputSequence, setInputSequence] = useState("");
-  const navigate = useNavigate();
+function NotFound() {
+  const [inputSequence, setInputSequence] = useState('')
+  const navigate = useNavigate()
 
   useEffect(() => {
     const handleKeyPress = (e) => {
-      const key = e.key;
+      const key = e.key
 
-      if (key === "Enter") {
-        if (inputSequence === "cd ../") {
-          navigate("/");
-        } else {
-          setInputSequence("");
+      if (key === 'Enter') {
+        if (inputSequence === 'cd ../') {
+          navigate('/')
         }
-      } else {
+        else {
+          setInputSequence('')
+        }
+      }
+      else {
         setInputSequence((prv) => {
-          const newSequence = prv + key;
+          const newSequence = prv + key
           if (newSequence.length > 6) {
-            return newSequence.slice(-6);
+            return newSequence.slice(-6)
           }
 
-          return newSequence;
-        });
+          return newSequence
+        })
       }
-    };
+    }
 
-    window.addEventListener("keypress", handleKeyPress);
+    window.addEventListener('keypress', handleKeyPress)
 
     return () => {
-      window.removeEventListener("keypress", handleKeyPress);
-    };
-  }, [inputSequence, navigate]);
+      window.removeEventListener('keypress', handleKeyPress)
+    }
+  }, [inputSequence, navigate])
 
   return (
     <>
@@ -44,8 +46,8 @@ const NotFound = () => {
       </Wrapper>
       <Back to="/">cd ../</Back>
     </>
-  );
-};
+  )
+}
 
 const Wrapper = styled.div`
   position: fixed;
@@ -53,7 +55,7 @@ const Wrapper = styled.div`
   left: 50%;
   transform: translate(-50%, -50%) scaleY(0.7);
   width: 100%;
-`;
+`
 
 const Back = styled(Link)`
   position: absolute;
@@ -70,6 +72,6 @@ const Back = styled(Link)`
   &:hover {
     color: #9ca3af;
   }
-`;
+`
 
-export default NotFound;
+export default NotFound

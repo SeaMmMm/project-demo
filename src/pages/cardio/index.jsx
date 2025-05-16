@@ -1,59 +1,61 @@
-import { useState } from "react";
-import styled from "styled-components";
-import useDebouncedFn from "../../hooks/useDebouncedFn";
-import Card from "./Card";
-import { inventors } from "./array-cardio";
+import { useState } from 'react'
+import styled from 'styled-components'
+import useDebouncedFn from '../../hooks/useDebouncedFn'
+import { inventors } from './array-cardio'
+import Card from './Card'
 
-const Cardio = () => {
-  const [people, setPeople] = useState(inventors);
-  const [inputs, setInputs] = useState("");
-  const debouncedSetPeople = useDebouncedFn(setPeople, 500);
+function Cardio() {
+  const [people, setPeople] = useState(inventors)
+  const [inputs, setInputs] = useState('')
+  const debouncedSetPeople = useDebouncedFn(setPeople, 500)
 
   const handleSearchName = (e) => {
-    const name = e.target.value;
-    setInputs(name);
+    const name = e.target.value
+    setInputs(name)
 
-    if (name === "") {
-      setPeople(inventors);
+    if (name === '') {
+      setPeople(inventors)
 
-      return;
+      return
     }
 
     const filteredPeople = inventors.filter((inventor) => {
-      const { first, last } = inventor;
+      const { first, last } = inventor
       return (
-        first.toLowerCase().includes(name.toLowerCase()) ||
-        last.toLowerCase().includes(name.toLowerCase())
-      );
-    });
+        first.toLowerCase().includes(name.toLowerCase())
+        || last.toLowerCase().includes(name.toLowerCase())
+      )
+    })
 
-    debouncedSetPeople(filteredPeople);
-  };
+    debouncedSetPeople(filteredPeople)
+  }
 
   const reset = () => {
-    setPeople(inventors);
-    setInputs("");
-  };
+    setPeople(inventors)
+    setInputs('')
+  }
 
   return (
     <>
       <Wrapper>
         <input type="text" placeholder="Search Name" onChange={handleSearchName} value={inputs} />
         <Cards>
-          {people.length ? (
-            people.map((inventor, index) => <Card key={index} inventor={inventor} num={index} />)
-          ) : (
-            <div className="not-found">
-              <p>No Inventor Found</p>
-              <h1 onClick={reset}>clear</h1>
-              <h2 onClick={reset}>clear</h2>
-            </div>
-          )}
+          {people.length
+            ? (
+                people.map((inventor, index) => <Card key={crypto.randomUUID()} inventor={inventor} num={index} />)
+              )
+            : (
+                <div className="not-found">
+                  <p>No Inventor Found</p>
+                  <h1 onClick={reset}>clear</h1>
+                  <h2 onClick={reset}>clear</h2>
+                </div>
+              )}
         </Cards>
       </Wrapper>
     </>
-  );
-};
+  )
+}
 
 const Wrapper = styled.div`
   padding: 50px 100px;
@@ -84,7 +86,7 @@ const Wrapper = styled.div`
       padding: 10px;
     }
   }
-`;
+`
 
 const Cards = styled.div`
   margin-top: 20px;
@@ -141,6 +143,6 @@ const Cards = styled.div`
       }
     }
   }
-`;
+`
 
-export default Cardio;
+export default Cardio

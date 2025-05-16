@@ -1,12 +1,12 @@
-import Footer from "@/components/Footer";
-import Header from "@/components/Header";
-import Loading from "@/components/Loading";
-import { Suspense } from "react";
-import { Outlet } from "react-router-dom";
-import pageData from "./pageInfo";
+import { Suspense } from 'react'
+import { Outlet } from 'react-router-dom'
+import Footer from '@/components/Footer'
+import Header from '@/components/Header'
+import Loading from '@/components/Loading'
+import pageData from './pageInfo'
 
-const ContentPage = () => {
-  const pageInfo = pageData[location.pathname.split("/").pop()];
+function ContentPage() {
+  const pageInfo = pageData[location.pathname.split('/').pop()]
 
   return (
     <Suspense fallback={<Loading />}>
@@ -17,7 +17,7 @@ const ContentPage = () => {
         index={pageInfo.number}
       />
     </Suspense>
-  );
-};
+  )
+}
 
-export default ContentPage;
+export default ContentPage

@@ -1,7 +1,7 @@
-import LyricsContext from "./LyricsContext";
+import LyricsContext from './LyricsContext'
 
-const LyricsProvider = ({ value, children }) => (
-  <LyricsContext.Provider value={value}>{children}</LyricsContext.Provider>
-);
+function LyricsProvider({ value, children }) {
+  return <LyricsContext.Provider value={value}>{children}</LyricsContext.Provider>
+}
 
-export default LyricsProvider;
+export default LyricsProvider

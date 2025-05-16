@@ -1,27 +1,22 @@
-import PropTypes from "prop-types";
-import { useEffect, useState } from "react";
-import styled from "styled-components";
+import { useState } from 'react'
+import styled from 'styled-components'
 
 const SIZE = {
   small: 10,
   medium: 20,
   large: 30,
-};
+}
 
-const RangeSlicer = ({
+function RangeSlicer({
   min = 0,
   max = 100,
   step = 1,
   value,
   callback,
   width = 300,
-  size = "medium",
-}) => {
-  const [thumbSize, setThumbSize] = useState(SIZE[size]);
-
-  useEffect(() => {
-    setThumbSize(SIZE[size]);
-  }, [size]);
+  size = 'medium',
+}) {
+  const [thumbSize] = useState(SIZE[size])
 
   return (
     <RangeSlider
@@ -34,18 +29,8 @@ const RangeSlicer = ({
       $width={width}
       $thumbSize={thumbSize}
     />
-  );
-};
-
-RangeSlicer.prototype = {
-  min: PropTypes.number,
-  max: PropTypes.number,
-  step: PropTypes.number,
-  value: PropTypes.number.isRequired,
-  callback: PropTypes.func.isRequired,
-  width: PropTypes.number,
-  size: PropTypes.oneOf(["small", "medium", "large"]),
-};
+  )
+}
 
 const RangeSlider = styled.input`
   --c: #9ca3af; /* active color */
@@ -92,6 +77,6 @@ const RangeSlider = styled.input`
       box-shadow: 0 0 0 var(--s) inset var(--c);
     }
   }
-`;
+`
 
-export default RangeSlicer;
+export default RangeSlicer

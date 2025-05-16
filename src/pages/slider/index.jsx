@@ -1,23 +1,26 @@
-import { useState } from "react";
-import styled from "styled-components";
-import RangeSlider from "./RangeSlider";
+import { useState } from 'react'
+import styled from 'styled-components'
+import RangeSlider from './RangeSlider'
 
-const Slider = () => {
-  const [value, setValue] = useState(0);
+function Slider() {
+  const [value, setValue] = useState(0)
 
   const handleChange = (e) => {
-    setValue(e.target.value);
-  };
+    setValue(e.target.value)
+  }
 
   return (
     <>
       <Wrapper>
         <RangeSlider value={value} max={200} callback={handleChange} width={400} size="medium" />
-        <p>value: {value}</p>
+        <p>
+          value:
+          {value}
+        </p>
       </Wrapper>
     </>
-  );
-};
+  )
+}
 
 const Wrapper = styled.div`
   position: absolute;
@@ -36,6 +39,6 @@ const Wrapper = styled.div`
   @media (max-width: 768px) {
     gap: 20px;
   }
-`;
+`
 
-export default Slider;
+export default Slider

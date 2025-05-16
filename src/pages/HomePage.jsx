@@ -1,15 +1,15 @@
-import projectRoutes from "@/routers/projectRoutes";
-import { useNavigate } from "react-router-dom";
-import styled from "styled-components";
-import demo from "../assets/icons/demo.svg";
-import getFilledNumber from "../utils/getFilledNumber";
+import { useNavigate } from 'react-router-dom'
+import styled from 'styled-components'
+import projectRoutes from '@/routers/projectRoutes'
+import demo from '../assets/icons/demo.svg'
+import getFilledNumber from '../utils/getFilledNumber'
 
-const HomePage = () => {
-  const navigate = useNavigate();
+function HomePage() {
+  const navigate = useNavigate()
   const changeMade = (project) => {
-    const { name } = project;
-    navigate(`/content/${name}`);
-  };
+    const { name } = project
+    navigate(`/content/${name}`)
+  }
 
   return (
     <Wrapper>
@@ -20,7 +20,7 @@ const HomePage = () => {
         </p>
         <Projects>
           {projectRoutes.map((project, idx) => (
-            <div key={idx} className="project" onClick={() => changeMade(project)}>
+            <div key={crypto.randomUUID()} className="project" onClick={() => changeMade(project)}>
               <span className="project-idx">{getFilledNumber(idx + 1, 3)}</span>
               <span className="project-name">{project.name}</span>
             </div>
@@ -28,8 +28,8 @@ const HomePage = () => {
         </Projects>
       </Content>
     </Wrapper>
-  );
-};
+  )
+}
 
 const Wrapper = styled.div`
   position: absolute;
@@ -42,7 +42,7 @@ const Wrapper = styled.div`
     left: 20%;
     transform: translate(-20%, -20%);
   }
-`;
+`
 
 const Content = styled.div`
   display: grid;
@@ -76,7 +76,7 @@ const Content = styled.div`
     right: -0.7rem;
     transform: translateY(-50%);
   }
-`;
+`
 
 const Projects = styled.div`
   display: grid;
@@ -113,6 +113,6 @@ const Projects = styled.div`
     grid-template-columns: auto;
     row-gap: 20px;
   }
-`;
+`
 
-export default HomePage;
+export default HomePage

@@ -1,5 +1,6 @@
-import fold from "@/assets/svg/fold.svg";
-import { Button } from "@/components/ui/button";
+import { useState } from 'react'
+import fold from '@/assets/svg/fold.svg'
+import { Button } from '@/components/ui/button'
 import {
   Command,
   CommandEmpty,
@@ -7,25 +8,24 @@ import {
   CommandInput,
   CommandItem,
   CommandList,
-} from "@/components/ui/command";
-import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
-import { useState } from "react";
-import { useLyricsContext } from "./LyricsContext";
+} from '@/components/ui/command'
+import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover'
+import { useLyricsContext } from './LyricsContext'
 
-const Switch = () => {
-  const [open, setOpen] = useState(false);
-  const { idx, setIdx, musics } = useLyricsContext();
+function Switch() {
+  const [open, setOpen] = useState(false)
+  const { idx, setIdx, musics } = useLyricsContext()
 
   const findIndex = (name) => {
-    return musics.findIndex((itm) => itm.name === name);
-  };
+    return musics.findIndex(itm => itm.name === name)
+  }
 
   const handleSelect = (currentValue) => {
-    const currentIdx = findIndex(currentValue);
+    const currentIdx = findIndex(currentValue)
 
-    setIdx(currentIdx);
-    setOpen(false);
-  };
+    setIdx(currentIdx)
+    setOpen(false)
+  }
 
   return (
     <Popover open={open} onOpenChange={setOpen}>
@@ -47,7 +47,7 @@ const Switch = () => {
             <CommandEmpty>No music found.</CommandEmpty>
             <CommandGroup>
               {musics.map((music, idx) => (
-                <CommandItem key={idx} value={idx} onSelect={handleSelect}>
+                <CommandItem key={crypto.randomUUID()} value={idx} onSelect={handleSelect}>
                   {music.name}
                 </CommandItem>
               ))}
@@ -56,7 +56,7 @@ const Switch = () => {
         </Command>
       </PopoverContent>
     </Popover>
-  );
-};
+  )
+}
 
-export default Switch;
+export default Switch

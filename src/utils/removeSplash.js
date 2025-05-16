@@ -3,16 +3,16 @@
  * @param {string} str
  * @return {string}
  */
-const removeSplash = (str) => {
-  if (typeof str !== "string") {
-    throw new Error("The argument must be a string");
+function removeSplash(str) {
+  if (typeof str !== 'string') {
+    throw new TypeError('The argument must be a string')
   }
 
-  if (str[0] !== "/") {
-    return str;
+  if (str[0] !== '/') {
+    return str
   }
 
-  return str.slice(1);
-};
+  return str.slice(1)
+}
 
-export default removeSplash;
+export default removeSplash

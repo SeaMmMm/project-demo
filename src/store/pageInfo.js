@@ -1,16 +1,16 @@
-import { create } from "zustand";
+import { create } from 'zustand'
 
 const info = {
-  projectName: "",
-  date: "",
+  projectName: '',
+  date: '',
   number: 0,
-  description: "",
-  url: "",
-};
+  description: '',
+  url: '',
+}
 
-const usePageInfo = create((set) => ({
-  info: info,
-  setInfo: (payload) => set({ info: payload }),
-}));
+const usePageInfo = create(set => ({
+  info,
+  setInfo: payload => set({ info: payload }),
+}))
 
-export default usePageInfo;
+export default usePageInfo

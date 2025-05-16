@@ -1,6 +1,6 @@
-import { useEffect, useRef, useState } from "react";
-import generateDom from "../components/LyricsList";
-import { useToast } from "./use-toast";
+import { useEffect, useRef, useState } from 'react'
+import generateDom from '../components/LyricsList'
+import { useToast } from './use-toast'
 
 /**
  * 解析歌词字符串，提取时间戳和歌词文本
@@ -9,46 +9,48 @@ import { useToast } from "./use-toast";
  * @returns {Array<{time: string, lyric: string}>} 包含时间和歌词的对象数组
  */
 function generateLyricList(lyric, toast) {
-  const lines = lyric.split("\n");
-  const result = [];
+  const lines = lyric.split('\n')
+  const result = []
 
   lines.forEach((str) => {
     try {
-      const parts = str.split("]");
-      if (parts.length < 2) return;
-      const time = parts[0].slice(1);
-      result.push({ time, lyric: parts[1].slice(0, -2) });
-    } catch (e) {
+      const parts = str.split(']')
+      if (parts.length < 2)
+        return
+      const time = parts[0].slice(1)
+      result.push({ time, lyric: parts[1].slice(0, -2) })
+    }
+    catch {
       toast({
-        title: "Error parsing lyrics",
+        title: 'Error parsing lyrics',
         description: `Invalid format: ${str}`,
-        status: "error",
+        status: 'error',
         duration: 2000,
         isClosable: true,
-      });
+      })
     }
-  });
+  })
 
-  return result;
+  return result
 }
 
 function parseTime(timeStr) {
-  var parts = timeStr.split(":");
-  return +parts[0] * 60 + +parts[1];
+  const parts = timeStr.split(':')
+  return +parts[0] * 60 + +parts[1]
 }
 
 function findIdx(audio, lyricsGroup) {
-  const currentTime = audio.currentTime;
+  const currentTime = audio.currentTime
 
   for (let i = 0; i < lyricsGroup.length; i++) {
-    const { time } = lyricsGroup[i];
-    const timeInSeconds = parseTime(time);
+    const { time } = lyricsGroup[i]
+    const timeInSeconds = parseTime(time)
     if (currentTime < timeInSeconds) {
-      return i - 1;
+      return i - 1
     }
   }
 
-  return lyricsGroup.length - 1;
+  return lyricsGroup.length - 1
 }
 
 /**
@@ -56,16 +58,16 @@ function findIdx(audio, lyricsGroup) {
  * @param {string|object} lyric - 歌词数据，可以是 LRC 格式的字符串或已处理的歌词对象
  * @param {React.RefObject} player - 音频播放器的 React ref 对象
  * @param {object} [options] - 配置选项
- * @param {string} [options.scrollBehavior="smooth"] - 滚动行为，可选值："smooth"(平滑)或"auto"(即时)
- * @param {string} [options.scrollPosition="center"] - 当前歌词在可视区域的位置，可选值："start"、"center"、"end"、"nearest"
- * @param {number} [options.activeScale=1.2] - 当前活跃歌词的缩放比例
+ * @param {string} [options.scrollBehavior] - 滚动行为，可选值："smooth"(平滑)或"auto"(即时)
+ * @param {string} [options.scrollPosition] - 当前歌词在可视区域的位置，可选值："start"、"center"、"end"、"nearest"
+ * @param {number} [options.activeScale] - 当前活跃歌词的缩放比例
  *
- * @returns {Object} 返回歌词相关状态和控制方法
- * @returns {JSX.Element} returns.dom - 渲染的歌词 DOM 元素
- * @returns {number} returns.currentIdx - 当前活跃歌词的索引
- * @returns {React.RefObject} returns.lyricElementWrapper - 歌词容器的 ref 对象
- * @returns {Array} returns.lyricsGroup - 处理后的歌词数组
- * @returns {Function} returns.jumpToLyric - 跳转到指定歌词的函数，参数为歌词索引
+ * @returns {object} 返回歌词相关状态和控制方法，包括：
+ *   {JSX.Element} dom - 渲染的歌词 DOM 元素
+ *   {number} currentIdx - 当前活跃歌词的索引
+ *   {React.RefObject} lyricElementWrapper - 歌词容器的 ref 对象
+ *   {Array} lyricsGroup - 处理后的歌词数组
+ *   {Function} jumpToLyric - 跳转到指定歌词的函数，参数为歌词索引
  *
  * @example
  * const { dom, currentIdx, lyricElementWrapper, jumpToLyric } = useLyricScrolling(
@@ -80,42 +82,44 @@ function findIdx(audio, lyricsGroup) {
  *   </div>
  * );
  */
-const useLyricScrolling = (lyric, player, options = {}) => {
-  const { toast } = useToast();
-  const [currentIdx, setCurrentIdx] = useState(-1);
-  const lyricElementWrapper = useRef(null);
+function useLyricScrolling(lyric, player, options = {}) {
+  const { toast } = useToast()
+  const [currentIdx, setCurrentIdx] = useState(-1)
+  const lyricElementWrapper = useRef(null)
 
-  const { scrollBehavior = "smooth", scrollPosition = "center", activeScale = 1.2 } = options;
-  const lyricsGroup = generateLyricList(lyric, toast);
-  const dom = generateDom(lyricsGroup, currentIdx, lyricElementWrapper, activeScale);
+  const { scrollBehavior = 'smooth', scrollPosition = 'center', activeScale = 1.2 } = options
+  const lyricsGroup = generateLyricList(lyric, toast)
+  const dom = generateDom(lyricsGroup, currentIdx, lyricElementWrapper, activeScale)
 
   useEffect(() => {
-    if (!player.current) return;
+    if (!player.current)
+      return
 
-    const audio = player.current;
+    const audio = player.current
     const handleTimeUpdate = () => {
-      const idx = findIdx(audio, lyricsGroup);
+      const idx = findIdx(audio, lyricsGroup)
       if (idx !== currentIdx) {
-        setCurrentIdx(idx);
+        setCurrentIdx(idx)
       }
-    };
-    audio.addEventListener("timeupdate", handleTimeUpdate);
+    }
+    audio.addEventListener('timeupdate', handleTimeUpdate)
     return () => {
-      audio.removeEventListener("timeupdate", handleTimeUpdate);
-    };
-  }, [currentIdx, lyricsGroup, player]);
+      audio.removeEventListener('timeupdate', handleTimeUpdate)
+    }
+  }, [currentIdx, lyricsGroup, player])
 
   useEffect(() => {
-    if (currentIdx === -1 || !lyricElementWrapper.current) return;
+    if (currentIdx === -1 || !lyricElementWrapper.current)
+      return
 
-    const lyricElement = lyricElementWrapper.current.children;
-    const activeLyric = lyricElement[currentIdx || 0];
+    const lyricElement = lyricElementWrapper.current.children
+    const activeLyric = lyricElement[currentIdx || 0]
     activeLyric.scrollIntoView({
       behavior: scrollBehavior,
       block: scrollPosition,
-      inline: "nearest",
-    });
-  }, [currentIdx, scrollBehavior, scrollPosition]);
+      inline: 'nearest',
+    })
+  }, [currentIdx, scrollBehavior, scrollPosition])
 
   /**
    * 跳转到指定索引的歌词位置
@@ -126,19 +130,20 @@ const useLyricScrolling = (lyric, player, options = {}) => {
    * 如果索引无效或播放器引用不存在，则不执行任何操作。
    */
   const jumpToLyric = (index) => {
-    const lyricElement = lyricElementWrapper.current.children;
+    const lyricElement = lyricElementWrapper.current.children
 
-    if (index > lyricElement.length) index = lyricElement.length - 1;
-    const activeLyric = lyricElement[index < 0 ? 0 : index];
+    if (index > lyricElement.length)
+      index = lyricElement.length - 1
+    const activeLyric = lyricElement[index < 0 ? 0 : index]
 
     activeLyric.scrollIntoView({
       behavior: scrollBehavior,
       block: scrollPosition,
-      inline: "nearest",
-    });
-  };
+      inline: 'nearest',
+    })
+  }
 
-  return { dom, currentIdx, lyricElementWrapper, lyricsGroup, jumpToLyric };
-};
+  return { dom, currentIdx, lyricElementWrapper, lyricsGroup, jumpToLyric }
+}
 
-export default useLyricScrolling;
+export default useLyricScrolling

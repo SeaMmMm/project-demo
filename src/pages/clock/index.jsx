@@ -1,17 +1,15 @@
-import styled from "styled-components";
-import Dial from "./Dial";
+import styled from 'styled-components'
+import Dial from './Dial'
 
-const Clock = () => {
-  const date = { year: 2024, month: 4, day: 30 };
-
+function Clock() {
   return (
     <>
       <Wrapper>
         <Dial />
       </Wrapper>
     </>
-  );
-};
+  )
+}
 
 const Wrapper = styled.div`
   position: absolute;
@@ -23,6 +21,6 @@ const Wrapper = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-evenly;
-`;
+`
 
-export default Clock;
+export default Clock

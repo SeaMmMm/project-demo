@@ -1,16 +1,16 @@
-import styled from "styled-components";
-import usePopupKey from "../../hooks/usePopupKey";
-import DrumButton from "./DrumButton";
-import drumsData from "./drums";
+import styled from 'styled-components'
+import usePopupKey from '../../hooks/usePopupKey'
+import DrumButton from './DrumButton'
+import drumsData from './drums'
 
-const Drum = () => {
-  const { showNum, playDrum } = usePopupKey();
+function Drum() {
+  const { showNum, playDrum } = usePopupKey()
   return (
     <>
       <Wrapper>
         {drumsData.map((drum, idx) => (
           <DrumButton
-            key={idx}
+            key={crypto.randomUUID()}
             index={idx}
             showNum={showNum}
             letter={drum.letter}
@@ -20,8 +20,8 @@ const Drum = () => {
         ))}
       </Wrapper>
     </>
-  );
-};
+  )
+}
 
 const Wrapper = styled.div`
   position: absolute;
@@ -43,6 +43,6 @@ const Wrapper = styled.div`
     justify-content: space-around;
     align-content: center;
   }
-`;
+`
 
-export default Drum;
+export default Drum

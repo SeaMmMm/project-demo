@@ -1,18 +1,18 @@
-import styled from "styled-components";
+import styled from 'styled-components'
 
-const LyricsList = (group, currentIdx, lyricElement, activeScale) => {
+function LyricsList(group, currentIdx, lyricElement, activeScale) {
   return (
     <Wrapper ref={lyricElement}>
       {group.map(({ lyric }, idx) => (
-        <Lyric $isActive={currentIdx === idx} $activeScale={activeScale} key={idx}>
+        <Lyric $isActive={currentIdx === idx} $activeScale={activeScale} key={crypto.randomUUID()}>
           {lyric}
         </Lyric>
       ))}
     </Wrapper>
-  );
-};
+  )
+}
 
-export default LyricsList;
+export default LyricsList
 
 const Wrapper = styled.section`
   display: flex;
@@ -33,7 +33,7 @@ const Wrapper = styled.section`
     padding: 10px 0;
     margin: 0 auto;
   }
-`;
+`
 const Lyric = styled.div`
   transition: all 0.3s ease-in-out;
   font-size: 20px;
@@ -57,4 +57,4 @@ const Lyric = styled.div`
     padding: 0 10px;
     text-align: center;
   }
-`;
+`

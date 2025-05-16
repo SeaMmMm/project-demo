@@ -1,36 +1,36 @@
-import PropTypes from "prop-types";
-import { useRef, useState } from "react";
-import { useHref } from "react-router-dom";
-import styled, { css, keyframes } from "styled-components";
-import info from "../assets/icons/info.svg";
-import useClickOutside from "../hooks/useClickOutside";
-import useLayer from "../store/layer";
-import getFilledNumber from "../utils/getFilledNumber";
+import { useRef, useState } from 'react'
+import { useHref } from 'react-router-dom'
+import styled, { css, keyframes } from 'styled-components'
+import info from '../assets/icons/info.svg'
+import useClickOutside from '../hooks/useClickOutside'
+import useLayer from '../store/layer'
+import getFilledNumber from '../utils/getFilledNumber'
 
-const Footer = ({ index, data, children = null }) => {
-  const [showDialog, setShowDialog] = useState(false);
-  const isInitial = useRef(true);
-  const title = useHref().split("/").pop();
-  const dialogRef = useRef(null);
-  const infoRef = useRef(null);
+function Footer({ index, data, children = null }) {
+  const [showDialog, setShowDialog] = useState(false)
+  const isInitial = useRef(true)
+  const title = useHref().split('/').pop()
+  const dialogRef = useRef(null)
+  const infoRef = useRef(null)
 
-  const { isShowLayer, toggleLayer, setLayerToFalse } = useLayer((state) => ({
+  const { isShowLayer, toggleLayer, setLayerToFalse } = useLayer(state => ({
     isShowLayer: state.isShowLayer,
     toggleLayer: state.toggleLayer,
     setLayerToFalse: state.setLayerToFalse,
-  }));
+  }))
 
   useClickOutside(dialogRef, (e) => {
-    if (e.target === infoRef.current) return;
-    setShowDialog(false);
-    setLayerToFalse();
-  });
+    if (e.target === infoRef.current)
+      return
+    setShowDialog(false)
+    setLayerToFalse()
+  })
 
   const handleToggleDialog = () => {
-    setShowDialog((prev) => !prev);
-    toggleLayer();
-    isInitial.current = false;
-  };
+    setShowDialog(prev => !prev)
+    toggleLayer()
+    isInitial.current = false
+  }
 
   return (
     <>
@@ -51,17 +51,8 @@ const Footer = ({ index, data, children = null }) => {
         </Content>
       </Wrapper>
     </>
-  );
-};
-
-Footer.propTypes = {
-  index: PropTypes.number,
-  data: PropTypes.shape({
-    description: PropTypes.string.isRequired,
-    codeurl: PropTypes.string,
-  }).isRequired,
-  children: PropTypes.node,
-};
+  )
+}
 
 const Wrapper = styled.div`
   position: fixed;
@@ -80,7 +71,7 @@ const Wrapper = styled.div`
       font-weight: bold;
     }
   }
-`;
+`
 
 const Info = styled.img`
   position: fixed;
@@ -93,7 +84,7 @@ const Info = styled.img`
   padding: 5px;
   width: 30px;
   cursor: pointer;
-`;
+`
 
 const moveUp = css`
   @keyframes moveUp {
@@ -104,7 +95,7 @@ const moveUp = css`
       transform: translateY(0) translateX(-50%);
     }
   }
-`;
+`
 
 const moveDown = css`
   @keyframes moveDown {
@@ -115,7 +106,7 @@ const moveDown = css`
       transform: translateY(100%) translateX(-50%);
     }
   }
-`;
+`
 
 const Content = styled.div`
   background: #fff;
@@ -151,8 +142,8 @@ const Content = styled.div`
           ${moveUp}
           animation: moveUp 0.3s forwards;
         `
-      : !$initial &&
-        css`
+      : !$initial
+        && css`
           ${moveDown}
           animation: moveDown 0.3s forwards;
         `}
@@ -170,7 +161,7 @@ const Content = styled.div`
       font-size: 1.2rem;
     }
   }
-`;
+`
 
 const showUp = keyframes`
   from {
@@ -179,7 +170,7 @@ const showUp = keyframes`
   to {
     opacity: 0.5;
   }
-`;
+`
 
 const showDown = keyframes`
   from {
@@ -188,7 +179,7 @@ const showDown = keyframes`
   to {
     opacity: 0;
   }
-`;
+`
 
 const Mask = styled.div`
   position: fixed;
@@ -209,12 +200,12 @@ const Mask = styled.div`
           opacity: 0.5;
           pointer-events: auto;
         `
-      : !$initial &&
-        css`
+      : !$initial
+        && css`
           animation: ${showDown} 0.2s forwards;
           opacity: 0;
           pointer-events: none;
         `}
-`;
+`
 
-export default Footer;
+export default Footer

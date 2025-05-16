@@ -1,14 +1,14 @@
-import { SmoothCursor } from "@/components/ui/smooth-cursor";
-import { useRef } from "react";
-import { isMobile } from "react-device-detect";
-import styled from "styled-components";
-import useDragEvent from "../../hooks/useDragEvent";
-import txt from "./txt";
+import { useRef } from 'react'
+import { isMobile } from 'react-device-detect'
+import styled from 'styled-components'
+import { SmoothCursor } from '@/components/ui/smooth-cursor'
+import useDragEvent from '../../hooks/useDragEvent'
+import txt from './txt'
 
-const Scope = () => {
-  const boxRef = useRef(null);
-  const txtRef = useRef(null);
-  useDragEvent(boxRef, txtRef);
+function Scope() {
+  const boxRef = useRef(null)
+  const txtRef = useRef(null)
+  useDragEvent(boxRef, txtRef)
 
   return (
     <>
@@ -17,8 +17,8 @@ const Scope = () => {
       </Box>
       {!isMobile && <SmoothCursor />}
     </>
-  );
-};
+  )
+}
 
 const Box = styled.div`
   position: fixed;
@@ -28,7 +28,7 @@ const Box = styled.div`
   overflow: hidden;
   background: white;
   touch-action: none;
-`;
+`
 
 const Text = styled.div`
   position: absolute;
@@ -50,6 +50,6 @@ const Text = styled.div`
     line-height: 1.2;
     letter-spacing: 0.4em;
   }
-`;
+`
 
-export default Scope;
+export default Scope

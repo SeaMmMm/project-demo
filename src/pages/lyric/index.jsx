@@ -1,10 +1,10 @@
-import Loading from "@/components/Loading";
-import useLyricScrolling from "@/hooks/useLyricScrolling";
-import { gql, useQuery } from "@apollo/client";
-import { useEffect, useRef, useState } from "react";
-import styled from "styled-components";
-import BottomControls from "./BottomControls";
-import LyricsProvider from "./LyricsProvider";
+import { gql, useQuery } from '@apollo/client'
+import { useEffect, useRef, useState } from 'react'
+import styled from 'styled-components'
+import Loading from '@/components/Loading'
+import useLyricScrolling from '@/hooks/useLyricScrolling'
+import BottomControls from './BottomControls'
+import LyricsProvider from './LyricsProvider'
 
 const GET_ALL_MUSICS = gql`
   {
@@ -19,37 +19,42 @@ const GET_ALL_MUSICS = gql`
       }
     }
   }
-`;
+`
 
-const Lyrics = () => {
-  const { loading, error, data } = useQuery(GET_ALL_MUSICS);
-  const player = useRef(null);
-  const [idx, setIdx] = useState(0);
-  const [musics, setMusics] = useState(null);
-  const { dom, jumpToLyric, currentIdx } = useLyricScrolling(musics?.[idx]?.lyric || "", player);
+function Lyrics() {
+  const { loading, error, data } = useQuery(GET_ALL_MUSICS)
+  const player = useRef(null)
+  const [idx, setIdx] = useState(0)
+  const [musics, setMusics] = useState(null)
+  const { dom, jumpToLyric, currentIdx } = useLyricScrolling(musics?.[idx]?.lyric || '', player)
 
   useEffect(() => {
-    if (!data) return;
+    if (!data)
+      return
 
     try {
       const {
         dmCollection: { items },
-      } = data;
+      } = data
 
-      const musicsCopy = items.map((itm) => ({
+      const musicsCopy = items.map(itm => ({
         name: itm.name,
         music: itm.music.url,
         lyric: itm.lyric,
-      }));
+      }))
 
-      setMusics(musicsCopy);
-    } catch (e) {
-      console.error("数据处理出错:", e);
+      // eslint-disable-next-line react-hooks-extra/no-direct-set-state-in-use-effect
+      setMusics(musicsCopy)
     }
-  }, [data]);
+    catch (e) {
+      console.error('数据处理出错:', e)
+    }
+  }, [data])
 
-  if (loading || !musics) return <Loading />;
-  if (error) return <div>无法获取歌词信息</div>;
+  if (loading || !musics)
+    return <Loading />
+  if (error)
+    return <div>无法获取歌词信息</div>
 
   return (
     <Wrapper>
@@ -59,8 +64,8 @@ const Lyrics = () => {
         <audio src={musics[idx]?.music} controls ref={player} />
       </LyricsProvider>
     </Wrapper>
-  );
-};
+  )
+}
 
 const Wrapper = styled.div`
   position: absolute;
@@ -89,6 +94,6 @@ const Wrapper = styled.div`
       padding: 0 10px;
     }
   }
-`;
+`
 
-export default Lyrics;
+export default Lyrics

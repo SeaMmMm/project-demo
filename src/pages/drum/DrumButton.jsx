@@ -1,13 +1,13 @@
-import styled from "styled-components";
+import styled from 'styled-components'
 
-const DrumButton = ({ letter, description, showNum, index, ...props }) => {
+function DrumButton({ letter, description, showNum, index, ...props }) {
   return (
     <Wrapper {...props}>
-      <h1 className={showNum === index ? "show" : ""}>{letter}</h1>
-      <span className={showNum === index ? "show" : ""}>{description}</span>
+      <h1 className={showNum === index ? 'show' : ''}>{letter}</h1>
+      <span className={showNum === index ? 'show' : ''}>{description}</span>
     </Wrapper>
-  );
-};
+  )
+}
 
 const Wrapper = styled.div`
   display: flex;
@@ -51,6 +51,6 @@ const Wrapper = styled.div`
       font-size: 12px;
     }
   }
-`;
+`
 
-export default DrumButton;
+export default DrumButton

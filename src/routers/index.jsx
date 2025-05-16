@@ -1,16 +1,16 @@
-import ContentPage from "@/pages/ContentPage";
-import NotFound from "../pages/404";
-import HomePage from "../pages/HomePage";
-import projectRoutes from "./projectRoutes";
+import ContentPage from '@/pages/ContentPage'
+import NotFound from '../pages/404'
+import HomePage from '../pages/HomePage'
+import projectRoutes from './projectRoutes'
 
 const routes = [
-  { path: "/", element: <HomePage /> },
+  { path: '/', element: <HomePage /> },
   {
-    path: "/content",
+    path: '/content',
     element: <ContentPage />,
     children: projectRoutes,
   },
-  { path: "*", element: <NotFound /> },
-];
+  { path: '*', element: <NotFound /> },
+]
 
-export default routes;
+export default routes
