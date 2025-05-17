@@ -10,6 +10,30 @@ const WINNER = {
   '1': '黑',
   '-1': '白',
 }
+const MiniatureBoardContainer = styled.div`
+  width: 500px;
+  height: 500px;
+  transform: scale(0.6); 
+  transform-origin: top left;
+  
+  @media (max-width: 768px) {
+    height: 350px; 
+    width: 100%;
+    transform: scale(1);
+    transform-origin: center;
+  }
+`
+function BoardWithCurrentPiece({ currentPiece, boardConfigs }) {
+  return (
+    <MiniatureBoardContainer>
+      <Board
+        pieces={currentPiece}
+        activePiece={currentPiece[currentPiece.length - 1]}
+        {...boardConfigs}
+      />
+    </MiniatureBoardContainer>
+  )
+}
 
 function initialState(boardConfigs) {
   return {
@@ -29,7 +53,7 @@ function Gomoku() {
   const [gameState, setGameState] = useState(() => initialState(boardConfigs))
 
   const reset = () => {
-    setGameState(initialState(boardConfigs))
+    gameState.isWin && setGameState(() => initialState(boardConfigs))
   }
 
   const handlePlace = (x, y) => {
@@ -41,12 +65,26 @@ function Gomoku() {
 
       const updateBoard = (places, x, y, player) => {
         return places.map((row, rowIndex) =>
-          rowIndex === y ? row.map((cell, cellIndex) => (cellIndex === x ? player : cell)) : [...row],
+          rowIndex === y
+            ? row.map((cell, cellIndex) => (cellIndex === x ? player : cell))
+            : [...row],
         )
       }
 
       const newPlaces = updateBoard(places, x, y, activePlayer)
-      const newPieces = [...pieces, { x, y, player: activePlayer }]
+      const currentPiece = { x, y, player: activePlayer }
+      const newPieces = [
+        ...pieces,
+        {
+          ...currentPiece,
+          Board: (
+            <BoardWithCurrentPiece
+              boardConfigs={boardConfigs}
+              currentPiece={[...pieces, currentPiece]}
+            />
+          ),
+        },
+      ]
       const isWin = checkIsWin(newPlaces, { x, y })
       const nextPlayer = newPlaces.flat().filter(Boolean).length % 2 === 0 ? 1 : -1
 
@@ -59,11 +97,15 @@ function Gomoku() {
 
   return (
     <Wrapper>
-      <Board {...boardConfigs} onPlace={handlePlace} pieces={gameState.pieces} />
-      <Badge onClick={reset}>
-        {!gameState.isWin ? `落子方: ${currentPlayer}` : `${winner}胜 <<`}
-      </Badge>
-      <History gameState={gameState} setGameState={setGameState} />
+      <Content $BOARD_SIZE={boardConfigs.BOARD_SIZE} $CELL_SIZE={boardConfigs.CELL_SIZE}>
+        <Board {...boardConfigs} onPlace={handlePlace} pieces={gameState.pieces} />
+      </Content>
+      <div className="footer">
+        <Badge onClick={reset}>
+          {!gameState.isWin ? `落子方: ${currentPlayer}` : `≮ ${winner}胜 ≯`}
+        </Badge>
+        <History gameState={gameState} setGameState={setGameState} />
+      </div>
     </Wrapper>
   )
 }
@@ -73,8 +115,21 @@ const Wrapper = styled.div`
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-
   justify-items: center;
+
+  .footer {
+    display: grid;
+    justify-items: center;
+    align-items: center;
+    gap: 16px;
+  }
+`
+const Content = styled.div`
+  position: relative;
+  width: ${props => (props.$BOARD_SIZE - 1) * props.$CELL_SIZE}px;
+  height: ${props => props.$BOARD_SIZE * props.$CELL_SIZE}px;
+  touch-action: none; /* 防止移动端浏览器默认行为 */
+  -webkit-tap-highlight-color: transparent; /* 移除iOS点击高亮 */
 `
 
 export default Gomoku

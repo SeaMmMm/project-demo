@@ -2,7 +2,14 @@ import styled from 'styled-components'
 
 const defaultPieces = []
 
-function Board({ BOARD_SIZE = 20, CELL_SIZE = 40, onPlace, pieces = defaultPieces }) {
+function Board({
+  BOARD_SIZE = 20,
+  CELL_SIZE = 40,
+  onPlace,
+  pieces = defaultPieces,
+  activePiece,
+  ...props
+}) {
   // 生成交点数组
   const points = []
   for (let x = 0; x < BOARD_SIZE; x++) {
@@ -18,7 +25,7 @@ function Board({ BOARD_SIZE = 20, CELL_SIZE = 40, onPlace, pieces = defaultPiece
   }
 
   return (
-    <Wrapper $BOARD_SIZE={BOARD_SIZE} $CELL_SIZE={CELL_SIZE}>
+    <div {...props}>
       {/* 横线 */}
       {Array.from({ length: BOARD_SIZE }).map((_, i) => (
         <Line
@@ -44,6 +51,29 @@ function Board({ BOARD_SIZE = 20, CELL_SIZE = 40, onPlace, pieces = defaultPiece
         />
       ))}
 
+      {activePiece && (
+        <>
+          {/* 横向高亮线 */}
+          <HighlightLine
+            style={{
+              top: activePiece.y * CELL_SIZE,
+              left: 0,
+              width: (BOARD_SIZE - 1) * CELL_SIZE,
+              height: 1,
+            }}
+          />
+          {/* 纵向高亮线 */}
+          <HighlightLine
+            style={{
+              left: activePiece.x * CELL_SIZE,
+              top: 0,
+              width: 1,
+              height: (BOARD_SIZE - 1) * CELL_SIZE,
+            }}
+          />
+        </>
+      )}
+
       {/* 棋子展示 */}
       {pieces.map(piece => (
         <Piece
@@ -68,17 +98,9 @@ function Board({ BOARD_SIZE = 20, CELL_SIZE = 40, onPlace, pieces = defaultPiece
           onClick={() => handleClick(p.x, p.y)}
         />
       ))}
-    </Wrapper>
+    </div>
   )
 }
-
-const Wrapper = styled.div`
-  position: relative;
-  width: ${props => (props.$BOARD_SIZE - 1) * props.$CELL_SIZE}px;
-  height: ${props => props.$BOARD_SIZE * props.$CELL_SIZE}px;
-  touch-action: none; /* 防止移动端浏览器默认行为 */
-  -webkit-tap-highlight-color: transparent; /* 移除iOS点击高亮 */
-`
 
 const Line = styled.div`
   position: absolute;
@@ -112,7 +134,19 @@ const Piece = styled.div`
   z-index: 3;
   box-sizing: border-box;
   border: 1px solid #333;
-  transform: "translate(-50%, -50%)";
+  
+  ${({ $isActive }) => $isActive && `
+    box-shadow: 0 0 6px 2px rgba(255, 215, 0, 0.7);
+    z-index: 4;
+  `}
+`
+
+const HighlightLine = styled.div`
+  position: absolute;
+  background: rgba(255, 215, 0, 0.6); /* 金色半透明 */
+  z-index: 1;
+  box-shadow: 0 0 5px rgba(255, 215, 0, 0.8);
+  pointer-events: none;
 `
 
 export default Board
