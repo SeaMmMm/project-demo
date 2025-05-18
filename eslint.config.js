@@ -1,12 +1,12 @@
-import antfu from "@antfu/eslint-config";
+import antfu from '@antfu/eslint-config'
 
 export default antfu({
   formatters: true,
   react: true,
-  ignores: ["src/components/ui/**/*"],
+  ignores: ['src/components/ui/**/*'],
   rules: {
-    "unused-imports/no-unused-vars": "warn",
-    "no-unused-vars": "warn",
-    "max-len": ["warn", { code: 100 }],
+    'unused-imports/no-unused-vars': 'warn',
+    'no-unused-vars': 'warn',
+    'max-len': ['warn', { code: 100 }],
   },
-});
+})

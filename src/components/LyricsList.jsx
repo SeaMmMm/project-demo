@@ -3,8 +3,8 @@ import styled from 'styled-components'
 function LyricsList(group, currentIdx, lyricElement, activeScale) {
   return (
     <Wrapper ref={lyricElement}>
-      {group.map(({ lyric }, idx) => (
-        <Lyric $isActive={currentIdx === idx} $activeScale={activeScale} key={crypto.randomUUID()}>
+      {group.map(({ lyric, time }, idx) => (
+        <Lyric $isActive={currentIdx === idx} $activeScale={activeScale} key={`${lyric}-${time}`}>
           {lyric}
         </Lyric>
       ))}
@@ -35,11 +35,11 @@ const Wrapper = styled.section`
   }
 `
 const Lyric = styled.div`
-  transition: all 0.3s ease-in-out;
   font-size: 20px;
   text-align: center;
   line-height: 1.5;
   color: #d1d5db;
+  transition: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
   ${({ $isActive, $activeScale }) =>
     $isActive
       ? `transform: scale(${$activeScale}); font-weight: bold; color: black`

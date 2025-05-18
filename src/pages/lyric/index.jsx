@@ -1,5 +1,5 @@
 import { gql, useQuery } from '@apollo/client'
-import { useEffect, useRef, useState } from 'react'
+import { useMemo, useRef, useState } from 'react'
 import styled from 'styled-components'
 import Loading from '@/components/Loading'
 import useLyricScrolling from '@/hooks/useLyricScrolling'
@@ -25,31 +25,25 @@ function Lyrics() {
   const { loading, error, data } = useQuery(GET_ALL_MUSICS)
   const player = useRef(null)
   const [idx, setIdx] = useState(0)
-  const [musics, setMusics] = useState(null)
-  const { dom, jumpToLyric, currentIdx } = useLyricScrolling(musics?.[idx]?.lyric || '', player)
 
-  useEffect(() => {
+  const musics = useMemo(() => {
     if (!data)
-      return
+      return null
 
     try {
-      const {
-        dmCollection: { items },
-      } = data
-
-      const musicsCopy = items.map(itm => ({
+      const { dmCollection: { items } } = data
+      return items.map(itm => ({
         name: itm.name,
         music: itm.music.url,
         lyric: itm.lyric,
       }))
-
-      // eslint-disable-next-line react-hooks-extra/no-direct-set-state-in-use-effect
-      setMusics(musicsCopy)
     }
     catch (e) {
       console.error('数据处理出错:', e)
+      return null
     }
   }, [data])
+  const { dom, jumpToLyric, currentIdx } = useLyricScrolling(musics?.[idx]?.lyric, player)
 
   if (loading || !musics)
     return <Loading />

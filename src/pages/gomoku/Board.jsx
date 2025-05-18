@@ -77,7 +77,7 @@ function Board({
       {/* 棋子展示 */}
       {pieces.map(piece => (
         <Piece
-          key={`${piece.x}-${piece.y}`}
+          key={crypto.randomUUID()}
           style={{
             left: `${piece.x * CELL_SIZE}px`,
             top: `${piece.y * CELL_SIZE}px`,

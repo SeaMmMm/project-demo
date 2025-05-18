@@ -83,6 +83,8 @@ function findIdx(audio, lyricsGroup) {
  * );
  */
 function useLyricScrolling(lyric, player, options = {}) {
+  if (!lyric)
+    lyric = ''
   const { toast } = useToast()
   const [currentIdx, setCurrentIdx] = useState(-1)
   const lyricElementWrapper = useRef(null)

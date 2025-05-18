@@ -19,7 +19,7 @@ const MiniatureBoardContainer = styled.div`
   @media (max-width: 768px) {
     height: 350px; 
     width: 100%;
-    transform: scale(1);
+    transform: scale(0.8);
     transform-origin: center;
   }
 `
@@ -47,8 +47,8 @@ function initialState(boardConfigs) {
 
 function Gomoku() {
   const [boardConfigs, setBoardConfigs] = useState({
-    BOARD_SIZE: isMobile ? 10 : 20,
-    CELL_SIZE: isMobile ? 34 : 40,
+    BOARD_SIZE: isMobile ? 14 : 20,
+    CELL_SIZE: isMobile ? 28 : 40,
   })
   const [gameState, setGameState] = useState(() => initialState(boardConfigs))
 
@@ -61,7 +61,7 @@ function Gomoku() {
       return
 
     setGameState((state) => {
-      const { places, activePlayer, pieces } = state
+      const { places, activePlayer, pieces, stepHistory } = state
 
       const updateBoard = (places, x, y, player) => {
         return places.map((row, rowIndex) =>
@@ -88,7 +88,13 @@ function Gomoku() {
       const isWin = checkIsWin(newPlaces, { x, y })
       const nextPlayer = newPlaces.flat().filter(Boolean).length % 2 === 0 ? 1 : -1
 
-      return { ...state, isWin, places: newPlaces, activePlayer: nextPlayer, pieces: newPieces }
+      return {
+        ...state,
+        isWin,
+        places: newPlaces,
+        activePlayer: nextPlayer,
+        pieces: newPieces,
+      }
     })
   }
 
