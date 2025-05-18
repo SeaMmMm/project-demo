@@ -64,45 +64,44 @@ function BoardHistory({ gameState, setGameState }) {
     }
   }
 
-const setToCurrentState = () => {
-  const currentViewIndex = boardIndex !== null ? boardIndex : activeIdx;
-  
-  if (currentViewIndex < pieces.length - 1) {
-    const newPieces = [...pieces].slice(0, currentViewIndex + 1);
-    
-    // 重建棋盘状态
-    const boardSize = gameState.places.length;
-    const newPlaces = Array.from({ length: boardSize }, () => 
-      Array.from({ length: boardSize }));
-    
-    // 只填充保留的棋子位置
-    newPieces.forEach(piece => {
-      const { x, y, player } = piece;
-      newPlaces[y][x] = player;
-    });
-    
-    setGameState(prevState => ({
-      ...prevState,
-      pieces: newPieces,
-      places: newPlaces, // 更新places二维数组
-      activePlayer: newPieces[newPieces.length - 1].player * -1,
-      isWin: false
-    }));
-    
-    setDialogOpen(false);
-    setBoardIndex(null);
+  const setToCurrentState = () => {
+    const currentViewIndex = boardIndex !== null ? boardIndex : activeIdx
+
+    if (currentViewIndex < pieces.length - 1) {
+      const newPieces = [...pieces].slice(0, currentViewIndex + 1)
+
+      // 重建棋盘状态
+      const boardSize = gameState.places.length
+      const newPlaces = Array.from({ length: boardSize }, () =>
+        Array.from({ length: boardSize }))
+
+      // 只填充保留的棋子位置
+      newPieces.forEach((piece) => {
+        const { x, y, player } = piece
+        newPlaces[y][x] = player
+      })
+
+      setGameState(prevState => ({
+        ...prevState,
+        pieces: newPieces,
+        places: newPlaces, // 更新places二维数组
+        activePlayer: newPieces[newPieces.length - 1].player * -1,
+        isWin: false,
+      }))
+
+      setDialogOpen(false)
+      setBoardIndex(null)
+    }
   }
-};
 
   return (
     <Sheet>
       <SheetTrigger asChild>
-        <Button variant="outline" size="sm">
-          <History className="mr-2 h-4 w-4" />
-          历史记录
+        <Button variant="outline" size="icon">
+          <History />
         </Button>
       </SheetTrigger>
-      <SheetContent>
+      <SheetContent className="overflow-auto">
         <SheetHeader>
           <SheetTitle>
             游戏历史
