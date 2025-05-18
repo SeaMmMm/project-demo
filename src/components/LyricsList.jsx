@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 
 function LyricsList(group, currentIdx, lyricElement, activeScale) {
   return (
@@ -26,7 +26,6 @@ const Wrapper = styled.section`
 
   @media (max-width: 500px) {
     height: 300px;
-    width: 80vw;
     overflow: scroll;
     border-radius: 10px;
     background-color: #fff;
@@ -34,25 +33,66 @@ const Wrapper = styled.section`
     margin: 0 auto;
   }
 `
+
 const Lyric = styled.div`
   font-size: 20px;
   text-align: center;
-  line-height: 1.5;
-  color: #d1d5db;
-  transition: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+  color: #888888;
+  padding: 10px 16px;
+  position: relative;
+  transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275); 
+  perspective: 800px;
+
   ${({ $isActive, $activeScale }) =>
     $isActive
-      ? `transform: scale(${$activeScale}); font-weight: bold; color: black`
-      : `transform: scale(1); opacity: 0.9`};
+      ? css`
+        transform: scale(${$activeScale}) translateY(-4px) translateZ(20px); 
+        font-weight: bolder;
+        color: #000000; // 高亮时为黑色
+        text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
+        
+        &::before {
+          width: 40%;
+          opacity: 1;
+          height: 2px;
+        }
+        
+        &::after {
+          width: 25%;
+          opacity: 0.8;
+          height: 1px;
+        }
+      `
+      : css`
+        transform: scale(1) translateZ(0px);
+        opacity: 0.7;
+        filter: blur(0.4px);
+        letter-spacing: 0px;
+      `}
 
   @media (max-width: 500px) {
     font-size: 16px;
-    line-height: 1.2;
-    color: #d1d5db;
+    
     ${({ $isActive }) =>
       $isActive
-        ? `transform: scale(1.1); font-weight: bold; color: black`
-        : `transform: scale(1); opacity: 0.9`};
+        ? css`
+          transform: scale(1.2) translateY(-2px) translateZ(20px);
+          font-weight: bolder; 
+          color: #000000;
+          text-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+          
+          &::before {
+            width: 30%;
+          }
+          
+          &::after {
+            width: 20%;
+          }
+        `
+        : css`
+          transform: scale(1);
+          opacity: 0.65;
+        `}
     margin: 0 10px;
     padding: 0 10px;
     text-align: center;
