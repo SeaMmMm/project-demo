@@ -42,7 +42,7 @@ function Cardio() {
         <Cards>
           {people.length
             ? (
-                people.map((inventor, index) => <Card key={crypto.randomUUID()} inventor={inventor} num={index} />)
+                people.map((inventor, index) => <Card key={`${inventor.first}-${inventor.last}`} inventor={inventor} num={index} />)
               )
             : (
                 <div className="not-found">

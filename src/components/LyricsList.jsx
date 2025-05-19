@@ -39,6 +39,9 @@ const Lyric = styled.div`
   text-align: center;
   color: #888888;
   padding: 10px 16px;
+  max-width: 85vw;
+  word-break: break-word;
+  overflow-wrap: break-word;
   position: relative;
   transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275); 
   perspective: 800px;
@@ -72,29 +75,9 @@ const Lyric = styled.div`
 
   @media (max-width: 500px) {
     font-size: 16px;
-    
-    ${({ $isActive }) =>
-      $isActive
-        ? css`
-          transform: scale(1.2) translateY(-2px) translateZ(20px);
-          font-weight: bolder; 
-          color: #000000;
-          text-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-          
-          &::before {
-            width: 30%;
-          }
-          
-          &::after {
-            width: 20%;
-          }
-        `
-        : css`
-          transform: scale(1);
-          opacity: 0.65;
-        `}
+    max-width: 80vw;
+    padding: 8px;
     margin: 0 10px;
-    padding: 0 10px;
     text-align: center;
   }
 `

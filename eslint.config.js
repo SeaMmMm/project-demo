@@ -7,6 +7,5 @@ export default antfu({
   rules: {
     'unused-imports/no-unused-vars': 'warn',
     'no-unused-vars': 'warn',
-    'max-len': ['warn', { code: 100 }],
   },
 })
