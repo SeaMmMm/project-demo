@@ -18,7 +18,7 @@ function generateLyricList(lyric, toast) {
       if (parts.length < 2)
         return
       const time = parts[0].slice(1)
-      result.push({ time, lyric: parts[1].slice(0, -2) })
+      result.push({ time, lyric: parts[1] })
     }
     catch {
       toast({
