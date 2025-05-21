@@ -8,7 +8,7 @@ import LyricsProvider from './LyricsProvider'
 
 const GET_ALL_MUSICS = gql`
   {
-    dmCollection {
+    dmCollection(order: name_ASC) {
       items {
         name
         music {
