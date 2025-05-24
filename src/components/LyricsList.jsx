@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components'
 
-function LyricsList(group, currentIdx, lyricElement, activeScale) {
+function LyricsList({ group, currentIdx, lyricElement, activeScale }) {
   return (
     <Wrapper ref={lyricElement}>
       {group.map(({ lyric, time }, idx) => (

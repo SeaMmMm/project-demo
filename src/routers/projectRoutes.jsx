@@ -1,6 +1,5 @@
 import {
   Cardio,
-  ChineseChess,
   Clock,
   CssTopicPage,
   Drum,
@@ -23,5 +22,4 @@ export default [
   { path: 'virtual-dom', element: <VirtualDom />, name: 'virtual-dom' },
   { path: 'music', element: <Lyrics />, name: 'music' },
   { path: 'gomoku', element: <Gomoku />, name: 'gomoku' },
-  { path: 'chinese-chess', element: <ChineseChess />, name: 'chinese-chess' },
 ]

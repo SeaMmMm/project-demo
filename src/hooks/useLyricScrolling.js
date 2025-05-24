@@ -91,7 +91,7 @@ function useLyricScrolling(lyric, player, options = {}) {
 
   const { scrollBehavior = 'smooth', scrollPosition = 'center', activeScale = 1.3 } = options
   const lyricsGroup = generateLyricList(lyric, toast)
-  const dom = generateDom(lyricsGroup, currentIdx, lyricElementWrapper, activeScale)
+  const dom = generateDom({ group: lyricsGroup, currentIdx, lyricElement: lyricElementWrapper, activeScale })
 
   useEffect(() => {
     if (!player.current)
