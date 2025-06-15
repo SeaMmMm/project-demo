@@ -1,4 +1,5 @@
 import {
+  Ball,
   Cardio,
   Clock,
   CssTopicPage,
@@ -22,4 +23,5 @@ export default [
   { path: 'virtual-dom', element: <VirtualDom />, name: 'virtual-dom' },
   { path: 'music', element: <Lyrics />, name: 'music' },
   { path: 'gomoku', element: <Gomoku />, name: 'gomoku' },
+  { path: 'drag-ball', element: <Ball />, name: 'drag-ball' },
 ]

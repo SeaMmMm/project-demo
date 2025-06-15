@@ -58,6 +58,11 @@ const info = {
     date: '2025-05-13',
     description: 'Simple Gomoku game',
   },
+  'drag-ball': {
+    projectName: 'drag-ball',
+    date: '2025-06-15',
+    description: 'Bouncy ball',
+  },
 }
 
 Object.keys(info).forEach((key, idx) => {
