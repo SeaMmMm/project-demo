@@ -15,6 +15,7 @@ function LyricsList({ group, currentIdx, lyricElement, activeScale }) {
 export default LyricsList
 
 const Wrapper = styled.section`
+  font-family: "Sour Gummy", sans-serif;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -43,14 +44,14 @@ const Lyric = styled.div`
   word-break: break-word;
   overflow-wrap: break-word;
   position: relative;
-  transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275); 
+  transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
   perspective: 800px;
 
   ${({ $isActive, $activeScale }) =>
     $isActive
       ? css`
         transform: scale(${$activeScale}) translateY(-4px) translateZ(20px); 
-        font-weight: bolder;
+        font-weight: 400;
         color: #000000; // 高亮时为黑色
         text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
         
