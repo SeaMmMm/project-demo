@@ -10,7 +10,7 @@ function ContentPage() {
 
   return (
     <Suspense fallback={<Loading />}>
-      <Header />
+      <Header date={new Date(pageInfo.date)} />
       <Outlet />
       <Footer
         data={{ description: pageInfo.description, codeurl: pageInfo.url }}

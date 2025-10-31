@@ -13,7 +13,7 @@ function Header({ date = null, isFixed }) {
   const goHome = () => navigate('/')
 
   const formattedDate = date
-    ? getFormattedDate(date.year, date.month, date.day)
+    ? getFormattedDate(date.getFullYear(), date.getMonth() + 1, date.getDate())
     : getFormattedDate(currentTime?.year, currentTime?.month, currentTime?.day)
 
   useEffect(() => {
